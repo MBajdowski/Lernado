@@ -1,4 +1,4 @@
-package com.Lernado.menagers;
+package com.Lernado.managers;
 
 import com.Lernado.model.Offer;
 import org.springframework.data.jpa.repository.JpaRepository;
