@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 
 @Entity
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
