@@ -8,17 +8,18 @@
 <title>Offers</title>
 </head>
 <body>
+<h1>List of Users</h1>
 	<table>
 		<tr>
 			<td>Name</td>
 			<td>Email</td>
-			<td>Text</td>
+			<td>Password</td>
 		</tr>
-		<c:forEach var="offer" items="${offerList}">
+		<c:forEach var="user" items="${userList}">
 			<tr>
-				<td><c:out value="${offer.name}" escapeXml="false"></c:out></td>
-				<td><c:out value="${offer.email}" escapeXml="false"></c:out></td>
-				<td><c:out value="${offer.text}" escapeXml="false"></c:out></td>
+				<td><c:out value="${user.name}" escapeXml="false"></c:out></td>
+				<td><c:out value="${user.email}" escapeXml="false"></c:out></td>
+				<td><c:out value="${user.password}" escapeXml="false"></c:out></td>
 			</tr>
 
 		</c:forEach>

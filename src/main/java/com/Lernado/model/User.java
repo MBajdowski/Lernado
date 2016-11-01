@@ -3,6 +3,7 @@ package com.Lernado.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Entity
@@ -16,7 +17,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idstudent;
+    private int iduser;
     @NonNull
     private String email;
     @NonNull

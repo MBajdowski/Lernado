@@ -1,7 +1,7 @@
 package com.Lernado.controllers;
 
-import com.Lernado.managers.OfferRepository;
-import com.Lernado.model.Offer;
+import com.Lernado.managers.UserRepository;
+import com.Lernado.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +14,13 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    private OfferRepository offerRepository;
+    private UserRepository userRepository;
 
     @RequestMapping("/")
     public String index(Model model){
-        List<Offer> list = offerRepository.findAll();
+        List<User> list = userRepository.findAll();
 
-        model.addAttribute("offerList", list);
+        model.addAttribute("userList", list);
         return "simple";
     }
 }

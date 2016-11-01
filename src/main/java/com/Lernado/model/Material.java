@@ -2,7 +2,10 @@ package com.Lernado.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 @Entity
@@ -19,10 +22,8 @@ public class Material {
     private int idmaterial;
     @NonNull
     private String title;
-    @NonNull
     private String type;
     private String description;
-    @NonNull
     private String path;
 
 }

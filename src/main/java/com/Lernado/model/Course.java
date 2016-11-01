@@ -3,7 +3,7 @@ package com.Lernado.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Arrays;
+import java.util.Collection;
 
 @Entity
 @Getter
@@ -25,9 +25,9 @@ public class Course {
     private String description;
     private String category;
     private String level;
-    private Boolean validated;
-    private Boolean highlighted;
+    private Byte validated;
+    private Byte highlighted;
     private byte[] photoBinary;
-    private Boolean isPrivate;
+    private Byte isPrivate;
 
 }

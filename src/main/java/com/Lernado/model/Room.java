@@ -5,6 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Arrays;
 
+/**
+ * Created by Bajdos on 2016-11-01.
+ */
 @Entity
 @Getter
 @Setter
@@ -13,15 +16,15 @@ import java.util.Arrays;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Group {
+public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idgroup;
+    private int idroom;
     @NonNull
     private String title;
     private String description;
-    @NonNull
-    private Boolean isPrivate;
+    private Byte isPrivate;
     private byte[] photoBinary;
+
 
 }
