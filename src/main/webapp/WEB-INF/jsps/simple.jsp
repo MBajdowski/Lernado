@@ -23,7 +23,9 @@
 				<td><c:out value="${user.password}" escapeXml="false"></c:out></td>
 				<td>
 					<c:forEach var="course" items="${user.attendedCourses}">
-						<c:out value="[${course.title} created by ${course.attendedUsers[0].name} and ${course.attendedUsers[1].name}]"></c:out>
+						<c:out value="[${course.title} attended by ${course.attendedUsers[0].name} and ${course.attendedUsers[1].name}]"></c:out>
+						<c:if test="${!empty user.coursesByIduser}"><c:out value=" author created also ${user.coursesByIduser[2].title}"></c:out></c:if>
+						<br>
 					</c:forEach>
 				</td>
 			</tr>
