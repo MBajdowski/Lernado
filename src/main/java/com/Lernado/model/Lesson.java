@@ -2,10 +2,8 @@ package com.Lernado.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,6 +20,10 @@ public class Lesson {
     @NonNull
     private String title;
     private Integer number;
-
+    @OneToMany(mappedBy = "lessonByLessonIdlesson")
+    private List<Material> materialsByIdlesson;
+    @ManyToOne
+    @JoinColumn(name = "course_idcourse", referencedColumnName = "idcourse")
+    private Course courseByCourseIdcourse;
 
 }

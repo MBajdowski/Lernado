@@ -2,11 +2,7 @@ package com.Lernado.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -25,5 +21,11 @@ public class Material {
     private String type;
     private String description;
     private String path;
+    @ManyToOne
+    @JoinColumn(name = "room_idroom", referencedColumnName = "idroom")
+    private Room roomByRoomIdroom;
+    @ManyToOne
+    @JoinColumn(name = "lesson_idlesson", referencedColumnName = "idlesson")
+    private Lesson lessonByLessonIdlesson;
 
 }

@@ -3,11 +3,8 @@ package com.Lernado.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Arrays;
+import java.util.List;
 
-/**
- * Created by Bajdos on 2016-11-01.
- */
 @Entity
 @Getter
 @Setter
@@ -23,8 +20,11 @@ public class Room {
     @NonNull
     private String title;
     private String description;
-    private Byte isPrivate;
+    private Boolean isPrivate;
     private byte[] photoBinary;
-
+    @OneToMany(mappedBy = "roomByRoomIdroom")
+    private List<Material> materialsByIdroom;
+    @ManyToMany(mappedBy = "joinedRooms")
+    private List<User> joinedUsers;
 
 }

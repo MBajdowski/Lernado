@@ -6,10 +6,10 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3306/lernadodb</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+      <mapping class="com.Lernado.model.User"/>
       <mapping class="com.Lernado.model.Course"/>
       <mapping class="com.Lernado.model.Lesson"/>
       <mapping class="com.Lernado.model.Material"/>
-      <mapping class="com.Lernado.model.User"/>
       <mapping class="com.Lernado.model.Room"/>
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->

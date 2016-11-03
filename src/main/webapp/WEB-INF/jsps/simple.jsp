@@ -14,12 +14,18 @@
 			<td>Name</td>
 			<td>Email</td>
 			<td>Password</td>
+			<td>Courses</td>
 		</tr>
 		<c:forEach var="user" items="${userList}">
 			<tr>
 				<td><c:out value="${user.name}" escapeXml="false"></c:out></td>
 				<td><c:out value="${user.email}" escapeXml="false"></c:out></td>
 				<td><c:out value="${user.password}" escapeXml="false"></c:out></td>
+				<td>
+					<c:forEach var="course" items="${user.attendedCourses}">
+						<c:out value="[${course.title} created by ${course.attendedUsers[0].name} and ${course.attendedUsers[1].name}]"></c:out>
+					</c:forEach>
+				</td>
 			</tr>
 
 		</c:forEach>

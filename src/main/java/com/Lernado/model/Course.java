@@ -3,7 +3,8 @@ package com.Lernado.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -25,9 +26,18 @@ public class Course {
     private String description;
     private String category;
     private String level;
-    private Byte validated;
-    private Byte highlighted;
+    private Boolean validated;
+    private Boolean highlighted;
     private byte[] photoBinary;
-    private Byte isPrivate;
+    private Boolean isPrivate;
+    @ManyToOne
+    @JoinColumn(name = "user_iduser", referencedColumnName = "iduser")
+    private User userByUserIduser;
+    @ManyToMany(mappedBy = "attendedCourses")
+    private List<User> attendedUsers;
+    @ManyToMany(mappedBy = "wishedCourses")
+    private List<User> wishedUsers;
+    @OneToMany(mappedBy = "courseByCourseIdcourse")
+    private List<Lesson> lessons;
 
 }
