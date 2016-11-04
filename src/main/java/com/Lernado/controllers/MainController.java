@@ -32,7 +32,20 @@ public class MainController {
         }
         List<User> list = userRepository.findAll();
 
-        model.addAttribute("userList", list);
-        return "simple";
+//        model.addAttribute("userList", list);
+//        return "simple";
+        model.addAttribute("offerList", list);
+        return "index";
     }
+
+    @RequestMapping("/homePage")
+    public String home(){
+        return "homePage";
+    }
+
+    @RequestMapping("/errorPage")
+    public String error(){
+        return "errorPage";
+    }
+
 }
