@@ -51,22 +51,22 @@
                 <h1 class="mainheader">
                     <a href="#" class="logo"><i class="fa fa-graduation-cap text-muted text-info"></i></a>Lernado</h1>
                 <p>Best e-learning portal EVER!</p>
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" action="/login" method="POST">
                     <div class="form-group text-right">
                         <div class="col-sm-3">
-                            <label for="inputEmail3" class="control-label">Email</label>
+                            <label for="username" class="control-label">Email</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email"
+                            <input type="email" class="form-control" name="username" id="username" placeholder="Email"
                                    style="max-width: 550px">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3 text-right">
-                            <label for="inputPassword3" class="control-label">Password</label>
+                            <label for="password" class="control-label">Password</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password"
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password"
                                    style="max-width: 550px">
                         </div>
                     </div>

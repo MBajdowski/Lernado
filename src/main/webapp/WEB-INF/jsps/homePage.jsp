@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
     <meta charset="utf-8">
@@ -20,7 +21,7 @@
                 <img src="images/computerTlo.jpg" class="img-responsive logo">
               </div>
             </div>
-            <h1 class="text-center text-primary header2">Welcome to Lernado Platform!</h1>
+            <h1 class="text-center text-primary header2">Welcome to Lernado Platform <sec:authentication property="principal.name"/>!</h1>
             <p class="text-center menuitems">Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
