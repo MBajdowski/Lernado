@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-2 col-sm-8">
                             <button type="submit" class="btn btn-default btn-lg">Log In</button>
                         </div>
                     </div>

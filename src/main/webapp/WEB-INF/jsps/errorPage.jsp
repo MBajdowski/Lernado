@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +17,7 @@
                 <h1 class="h1color">
                     <b>Ups!
                         <i class="fa fa-fw fa-lg fa-user-md"></i>
-                        <br>An error has occurred!</b>
+                        <br>An error <c:out value="${errorStatus}"></c:out> has occurred!</b>
                 </h1>
                 <p class="text-inverse">If you keep seeing this message, please contact the administrator</p>
                 <br>
