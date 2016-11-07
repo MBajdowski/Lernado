@@ -1,6 +1,7 @@
 package com.Lernado.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,22 +21,22 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/css/**", "bootstrapFiles/**", "/font-awesome-4.4.0/**", "/images/**").permitAll()
+                .antMatchers("/", "/signUp", "/css/**", "bootstrapFiles/**", "/font-awesome-4.4.0/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-            .formLogin()
+                .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/homePage", true)
                 .permitAll()
                 .and()
-            .logout()
+                .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .permitAll()
                 .and()
-            .httpBasic()
+                .httpBasic()
                 .and()
-            .csrf().disable();
+                .csrf().disable();
     }
 
     @Override

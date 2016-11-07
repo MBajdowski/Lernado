@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+         pageEncoding="ISO-8859-1" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head>
+<html>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lernado</title>
-</head><body>
+</head>
+<body>
 <div class="section footer">
     <div class="container">
         <div class="row">
@@ -31,7 +33,8 @@
                         <a href="#">Home</a>
                     </li>
                     <li class="active dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile<i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My
+                            Profile<i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="#">Information</a>
@@ -46,6 +49,7 @@
                             <li class="divider"></li>
                             <li>
                                 <a href="/logout">Log out</a>
+
                             </li>
                         </ul>
                     </li>

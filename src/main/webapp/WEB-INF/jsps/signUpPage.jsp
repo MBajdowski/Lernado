@@ -13,9 +13,8 @@
           type="text/css">
     <link href="css/index.css" rel="stylesheet" type="text/css">
 </head>
-
-<body class="">
-<div class="cover">
+<body>
+<div class="cover" id="home">
     <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -27,18 +26,18 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-                <ul class="nav navbar-nav navbar-right menuitems">
+                <ul class="nav navbar-nav navbar-right">
                     <li class="active">
-                        <a href="#">Home</a>
+                        <a href="#home">Home</a>
                     </li>
                     <li>
                         <a href="#AboutUsSection">About Us</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a href="#">Sign Up</a>
+                        <a href="#">Log in</a>
                     </li>
                 </ul>
             </div>
@@ -47,40 +46,89 @@
     <div class="cover-image" style="background-image : url('http://www.discovertextures.com/wp-content/uploads/2015/11/wood-texture0020-e1447163908131-1024x765.jpg')"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-11 text-center">
-                <h1 class="mainheader">
-                    <a href="#" class="logo"><i class="fa fa-graduation-cap text-muted text-info"></i></a>Lernado</h1>
-                <p>Best e-learning portal EVER!</p>
-                <form class="form-horizontal" role="form" action="/login" method="post">
-                    <div class="form-group text-right">
+            <div class="col-md-12 text-center">
+                <div class="col-md-11 text-center">
+                    <h1 class="mainheader">
+                        <a href="#" class="logo"><i class="fa fa-graduation-cap text-muted text-info"></i></a>Lernado</h1>
+                    <p>Best e-learning portal EVER!</p>
+                </div>
+                <form class="form-horizontal text-right" role="form">
+                    <div class="form-group">
                         <div class="col-sm-3">
-                            <label for="username" class="control-label">Email</label>
+                            <label for="name" class="control-label">First name</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control" name="username" id="username" placeholder="Email"
-                                   style="max-width: 550px">
+                            <input type="text" class="form-control input-sm" id="name" name="name" placeholder="First name"
+                                   required="" style="max-width: 550px">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-3 text-right">
+                        <div class="col-sm-3">
+                            <label for="surname" class="control-label">Last name</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control input-sm" id="surname" name="surname" placeholder="Last name"
+                                   required="" style="max-width: 550px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label for="email" class="control-label">Email</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                   required="" style="max-width: 550px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
                             <label for="password" class="control-label">Password</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password"
+                            <input type="password" class="form-control input-sm" id="password" name="password"
+                                   placeholder="Password" required="" style="max-width: 550px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label for="password2" class="control-label">Repeat password</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control input-sm" id="password2" name="password2"
+                                   placeholder="Repeat password" required="" onkeyup="checkPass(); return false;"
                                    style="max-width: 550px">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default btn-lg">Log In</button>
+                            <div class="checkbox left">
+                                <label class="checkbox">
+                                    <input type="checkbox" required="">I have read and agree to the Terms and Conditions and Privacy Policy.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <script>
+                                function checkPass(){
+                                    var pass1 = document.getElementById("inputPassword3");
+                                    var pass2 = document.getElementById("inputPassword3");
+                                    var button = document.getElementById("submitButton");
+                                    if(pass1.value!=pass2.value){
+                                        pass2.style.backgroudColor="red";
+                                        $('#submitButton').prop('disabled', true);
+                                    }
+                                    else{
+                                        pass2.style.backgroudColor="white";
+                                        $('#submitButton').removeAttr('disabled');
+                                    }
+                                }
+                            </script>
+                            <button id="submitButton" type="submit" class="btn btn-default btn-lg">Sign Up</button>
+                            <button type="reset" class="btn btn-default btn-lg">Clear form</button>
                         </div>
                     </div>
                 </form>
-                <h3 class="text-center">Doesn't have account?
-                    <b>
-                        <a class="signUp" href="/signUp">Sign Up!</a>
-                    </b>
-                </h3>
                 <br>
                 <br>
             </div>
