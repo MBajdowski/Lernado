@@ -7,11 +7,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="bootstrapFiles/jquery.min.js"></script>
-    <script type="text/javascript" src="bootstrapFiles/bootstrap.min.js"></script>
-    <link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet"
-          type="text/css">
-    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrapFiles/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrapFiles/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="cover" id="home">
@@ -52,7 +51,7 @@
                         <a href="#" class="logo"><i class="fa fa-graduation-cap text-muted text-info"></i></a>Lernado</h1>
                     <p>Best e-learning portal EVER!</p>
                 </div>
-                <form class="form-horizontal text-right" role="form">
+                <form class="form-horizontal text-right" role="form" action="/user/create" method="POST">
                     <div class="form-group">
                         <div class="col-sm-3">
                             <label for="name" class="control-label">First name</label>

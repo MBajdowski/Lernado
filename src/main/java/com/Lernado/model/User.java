@@ -18,6 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int iduser;
     @NonNull
+    @Column(unique=true)
     private String email;
     @NonNull
     private String password;
