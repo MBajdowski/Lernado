@@ -21,7 +21,7 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <img src="images/computerTlo.jpg" class="img-responsive logo">
+                        <img src="${pageContext.request.contextPath}/images/computerTlo.jpg" class="img-responsive logo">
                     </div>
                 </div>
                 <h1 class="text-center text-primary header2">Welcome to Lernado Platform <sec:authentication
