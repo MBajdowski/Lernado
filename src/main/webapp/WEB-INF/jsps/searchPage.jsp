@@ -6,16 +6,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="bootstrapFiles/jquery.min.js"></script>
-    <script type="text/javascript" src="bootstrapFiles/bootstrap.min.js"></script>
-    <link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="css/homePage.css" rel="stylesheet" type="text/css">
-
-    <link href="css/owl.carousel.css" rel="stylesheet">
-    <link href="css/owl.theme.css" rel="stylesheet">
-    <link href="css/carouselHighlited.css" rel="stylesheet">
-    <script src="js/owl.carousel.js"></script>
-    <script src="js/carouselHighlited.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrapFiles/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrapFiles/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/css/owl.carousel.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/owl.theme.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/carouselHighlited.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/js/owl.carousel.js"></script>
+    <script src="${pageContext.request.contextPath}/js/carouselHighlited.js"></script>
+    <link href="${pageContext.request.contextPath}/css/defaultStyles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <jsp:include page="common/header.jsp"></jsp:include>
@@ -85,7 +84,7 @@
     </div>
 </div>
 
-<div class="section" style="background-color:#ebebe0">
+<div class="section highlightedCarousel" >
     <div class="container">
         <div id="paragraph1" class="row">
             <div id="owl-demo" class="owl-carousel owl-theme">

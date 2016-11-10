@@ -6785,8 +6785,9 @@ body {
     padding: 0px;
 }
 .h2 {
-    background: #7CB342;
-    color: white;
+    background: #996633;
+    color: #FFF3E0;
+    font-size: 25;
 }
 .h4 {
     background: #7CB342;
@@ -6796,35 +6797,33 @@ body {
     padding: 20px;
 }
 .h3 {
-    background: #7CB342;
-    color: white;
+    background: url(http://www.discovertextures.com/wp-content/uploads/2015/11/wood-texture0020-e1447163908131-1024x765.jpg);
+    color: #424242;
 }
 .footer {
-    background: #43A047;
+    background: url(http://www.discovertextures.com/wp-content/uploads/2015/11/wood-texture0020-e1447163908131-1024x765.jpg);
     color: white;
 }
 .logo {
     color: #43A047;
 }
-.textfield {
-    padding: 30px;
+.tlo {
+    background: #F5F5F5;
 }
-.signUp {
-    color: #1B5E20;
-}
-.left {
-    float: left;
-}
-.mainheader {
-    color: white;
-}
-.stopka {
-    background: url(http://www.discovertextures.com/wp-content/uploads/2015/11/wood-texture0020-e1447163908131-1024x765.jpg);
-}
-.itemstyle {
-    background: #FFECB3;
-    color: black;
+.header2 {
+    color: #795548;
 }
 .menuitems {
     font-size: 20px;
 }
+.signUp {
+    color: #1B5E20;
+}
+
+.left {
+    float: left;
+}
+.highlightedCarousel{
+    background-color:#ebebe0;
+}
+

@@ -37,6 +37,11 @@ public class MainController {
         return "signUpPage";
     }
 
+    @RequestMapping("/profilePage")
+    public String profilePage() {
+        return "profilePage";
+    }
+
     @RequestMapping(value = "/login")
     public String login() {
 //    public String login(@RequestParam String error){
