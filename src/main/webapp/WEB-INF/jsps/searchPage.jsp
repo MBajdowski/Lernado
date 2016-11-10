@@ -6,77 +6,94 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="bootstrapFiles/jquery.min.js"></script>
-    <script type="text/javascript" src="bootstrapFiles/bootstrap.min.js"></script>
-    <link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="css/homePage.css" rel="stylesheet" type="text/css">
-
-    <link href="css/owl.carousel.css" rel="stylesheet">
-    <link href="css/owl.theme.css" rel="stylesheet">
-    <link href="css/carouselHighlited.css" rel="stylesheet">
-    <script src="js/owl.carousel.js"></script>
-    <script src="js/carouselHighlited.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrapFiles/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrapFiles/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="${pageContext.request.contextPath}/css/owl.carousel.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/owl.theme.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/carouselHighlited.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/js/owl.carousel.js"></script>
+    <script src="${pageContext.request.contextPath}/js/carouselHighlited.js"></script>
+    <link href="${pageContext.request.contextPath}/css/defaultStyles.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
-<body>
+<body ng-app="">
 <jsp:include page="common/header.jsp"></jsp:include>
-<div class="section">
+<div class="section tlo">
     <div class="container">
         <div class="row">
             <div class="col-md-9 text-center">
                 <div class="row">
                     <div class="col-md-4">
-                        <h1>Search Course:&nbsp;</h1>
+                        <h1>Search Course:</h1><br>
                     </div>
-                    <div class="col-md-8">
-                        <form class="form-horizontal" role="form" method="POST" action="doWordSearch">
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-7">
+                        <form class="form-horizontal" role="form" method="POST" action="doSearch">
                             <div class="form-group textfield">
                                 <div class="col-sm-10">
                                     <input type="text" name="word" class="form-control input-sm">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="submit" ng-show="!showMenu" class="btn btn-info">Search</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="text-muted">Advanced Searching:</h2>
-                        <form class="form-horizontal" role="form" method="POST" action="doAdvancedSearch">
-                            <div class="form-group">
-                                <div class="col-sm-2">
-                                    <label class="control-label">Category</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="category">
-                                        <option value="Any">Any</option>
-                                        <option value="Programming">Programming</option>
-                                        <option value="Economics">Economics</option>
-                                        <option value="Computer Networks">Computer Networks</option>
-                                        <option value="Telecommunication">Telecommunication</option>
-                                        <option value="Design">Design</option>
-                                        <option value="Data Bases">Data Bases</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-2">
-                                    <label class="control-label">Level</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="level">
-                                        <option value="Any">Any</option>
-                                        <option value="easy">Easy</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="hard">Hard</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-info">Search</button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="col-md-12"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-9"><h3 class="text-muted">Advanced Searching:</h3></div>
+                            <div class="col-md-2"><a href="" ng-click="showMenu = !showMenu"><i
+                                    class="fa fa-2x fa-fw fa-angle-double-down"></i></a></div>
+
+                        </div>
+                            <div ng-init="showMenu=false" ng-show="showMenu">
+                                <form class="form-horizontal" role="form" method="POST" action="doAdvancedSearch">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Category</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" name="category">
+                                                <option value="Any">Any</option>
+                                                <option value="Programming">Programming</option>
+                                                <option value="Economics">Economics</option>
+                                                <option value="Computer Networks">Computer Networks</option>
+                                                <option value="Telecommunication">Telecommunication</option>
+                                                <option value="Design">Design</option>
+                                                <option value="Data Bases">Data Bases</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Level</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" name="level">
+                                                <option value="Any">Any</option>
+                                                <option value="easy">Easy</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="hard">Hard</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-8 col-sm-3">
+                                            <button type="submit" class="btn btn-info">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,7 +102,7 @@
     </div>
 </div>
 
-<div class="section" style="background-color:#ebebe0">
+<div class="section highlightedCarousel">
     <div class="container">
         <div id="paragraph1" class="row">
             <div id="owl-demo" class="owl-carousel owl-theme">

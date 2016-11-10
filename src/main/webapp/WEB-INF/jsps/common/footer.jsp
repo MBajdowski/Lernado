@@ -10,16 +10,16 @@
                 <h1>Lernado</h1>
                 <ul class="nav nav-pills">
                     <li class="active">
-                        <a href="#">Home</a>
+                        <a href="/homePage">Home</a>
                     </li>
                     <li class="active">
-                        <a href="#">Profile</a>
+                        <a href="/profilePage">Profile</a>
                     </li>
                     <li class="active">
-                        <a href="#">Contact</a>
+                        <a href="/#contact">Contact</a>
                     </li>
                     <li class="active">
-                        <a href="#">Help</a>
+                        <a href="/#contact">Help</a>
                     </li>
                 </ul>
             </div>
