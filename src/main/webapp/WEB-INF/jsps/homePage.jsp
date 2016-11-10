@@ -71,16 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 tlo">
-                <ul class="kolumna list-group">
-                    <li class="h2 list-group-item">My Profile</li>
-                    <li class="h2 list-group-item">My Courses</li>
-                    <li class="h2 list-group-item">My Rooms</li>
-                    <li class="h2 list-group-item">Wishlist</li>
-                    <li class="h2 list-group-item">Create Course</li>
-                    <li class="h2 list-group-item">Create Room</li>
-                </ul>
-            </div>
+            <jsp:include page="common/leftPanel.jsp"></jsp:include>
         </div>
     </div>
 </div>
