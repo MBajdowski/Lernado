@@ -91,7 +91,7 @@
         </div>
         <div class="row">
             <div id="courses2" class="col-md-6">
-                <h1 contenteditable="true">Your Courses:</h1>
+                <h1 contenteditable="true">Your Courses:&nbsp;</h1>
                 <ul class="list-group">
                     <form id="myForm1" class="form-horizontal" role="form" method="POST" action="doShowCourse">
                         <a onclick="">
@@ -107,7 +107,7 @@
                 </ul>
             </div>
             <div id="rooms" class="col-md-6">
-                <h1 contenteditable="true">Your Rooms:</h1>
+                <h1 contenteditable="true">Your Rooms::&nbsp;</h1>
                 <ul class="list-group">
                     <form id="myForm2" class="form-horizontal" role="form" method="POST" action="doShowCourse">
                         <a onclick="">
