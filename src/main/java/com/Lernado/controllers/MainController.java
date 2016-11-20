@@ -47,6 +47,14 @@ public class MainController {
         return "profilePage";
     }
 
+    @RequestMapping("/coursePage")
+    public String coursePage() {
+        return "coursePage";
+    }
+
+    @RequestMapping("/enrollCoursePage")
+    public String enrollCoursePage() {return "enrollCoursePage";}
+
     @RequestMapping(value = "/login")
     public String login() {
 //    public String login(@RequestParam String error){
