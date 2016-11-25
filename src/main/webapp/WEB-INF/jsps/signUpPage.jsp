@@ -52,19 +52,19 @@
                 <form class="form-horizontal text-right" role="form" action="/user/create" method="POST">
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <label for="name" class="control-label">First name</label>
+                            <label for="firstName" class="control-label">First name</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control input-sm" id="name" name="name" placeholder="First name"
+                            <input type="text" class="form-control input-sm" id="firstName" name="firstName" placeholder="First name"
                                    required="" style="max-width: 550px">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <label for="surname" class="control-label">Last name</label>
+                            <label for="lastName" class="control-label">Last name</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control input-sm" id="surname" name="surname" placeholder="Last name"
+                            <input type="text" class="form-control input-sm" id="lastName" name="lastName" placeholder="Last name"
                                    required="" style="max-width: 550px">
                         </div>
                     </div>

@@ -3,8 +3,8 @@ package com.Lernado.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
-
 
 @Entity
 @Getter
@@ -18,7 +18,6 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idcourse;
-    @NonNull
     private String title;
     private String duration;
     private String syllabus;
@@ -26,18 +25,21 @@ public class Course {
     private String description;
     private String category;
     private String level;
-    private Boolean validated;
-    private Boolean highlighted;
+    private Byte validated;
+    private Byte highlighted;
     private byte[] photoBinary;
-    private Boolean isPrivate;
+    private Byte isPrivate;
     @ManyToOne
-    @JoinColumn(name = "user_iduser", referencedColumnName = "iduser")
-    private User userByUserIduser;
-    @ManyToMany(mappedBy = "attendedCourses")
-    private List<User> attendedUsers;
-    @ManyToMany(mappedBy = "wishedCourses")
-    private List<User> wishedUsers;
-    @OneToMany(mappedBy = "courseByCourseIdcourse")
+    @JoinColumn(name = "CreatorId", referencedColumnName = "iduser", nullable = false)
+    private User creator;
+    @ManyToOne
+    @JoinColumn(name = "AdminId", referencedColumnName = "idadmin", nullable = false)
+    private Admin admin;
+    @OneToMany(mappedBy = "course")
     private List<Lesson> lessons;
+    @ManyToMany(mappedBy = "attends")
+    private List<User> isAttendedBy;
+    @ManyToMany(mappedBy = "wishes")
+    private List<User> isWishedBy;
 
 }

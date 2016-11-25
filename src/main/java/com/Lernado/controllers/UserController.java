@@ -1,5 +1,6 @@
 package com.Lernado.controllers;
 
+import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.UserRepository;
 import com.Lernado.model.User;
 import com.Lernado.security.CurrentUser;
@@ -22,15 +23,18 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AdminRepository adminRepository;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createUser(@NonNull User  user, HttpServletResponse r){
+    public String createUser(@NonNull User user, HttpServletResponse r){
         try {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
+            user.setAdmin(adminRepository.getOne(1));
             User savedUser = userRepository.save(user);
 
-            UserDetails userDetails = new CurrentUser(savedUser);
+            UserDetails userDetails = new CurrentUser(savedUser.getEmail(), savedUser.getPassword(), savedUser.getFirstName(), savedUser.getLastName(), savedUser.getIduser());
             Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
         }catch (Exception e){

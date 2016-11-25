@@ -3,6 +3,7 @@ package com.Lernado.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -17,14 +18,18 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idroom;
-    @NonNull
     private String title;
     private String description;
-    private Boolean isPrivate;
+    private Byte isPrivate;
     private byte[] photoBinary;
-    @OneToMany(mappedBy = "roomByRoomIdroom")
-    private List<Material> materialsByIdroom;
-    @ManyToMany(mappedBy = "joinedRooms")
-    private List<User> joinedUsers;
-
+    @ManyToOne
+    @JoinColumn(name = "AdminId", referencedColumnName = "idadmin", nullable = false)
+    private Admin admin;
+    @ManyToMany(mappedBy = "rooms")
+    private List<User> users;
+    @ManyToMany
+    @JoinTable(name = "room_has_material", joinColumns =
+    @JoinColumn(name = "room_idroom", referencedColumnName = "idroom", nullable = false), inverseJoinColumns =
+    @JoinColumn(name = "material_idmaterial", referencedColumnName = "idmaterial", nullable = false))
+    private List<Material> materials;
 }

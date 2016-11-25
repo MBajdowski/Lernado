@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <h1 class="text-center text-primary header2">Welcome to Lernado Platform <sec:authentication
-                        property="principal.name"/>!</h1>
+                        property="principal.firstName"/>!</h1>
 
                 <p class="text-center menuitems">Lorem ipsum dolor sit amet, consectetur adipisici elit,
                     <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.

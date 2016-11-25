@@ -1,5 +1,6 @@
 package com.Lernado.initializers;
 
+import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.CourseRepository;
 import com.Lernado.managers.UserRepository;
 import com.Lernado.model.Course;
@@ -14,16 +15,19 @@ import java.util.stream.Stream;
 public class CourseInitializer {
 
     @Autowired
-    public CourseInitializer(CourseRepository courseRepository, UserRepository userRepository) {
+    public CourseInitializer(CourseRepository courseRepository, UserRepository userRepository, AdminRepository adminRepository) {
 
         Stream.of(Course.builder().title("Title1")
-                        .userByUserIduser(userRepository.getByIduser(1))
+                        .creator(userRepository.getByIduser(1))
+                        .admin(adminRepository.getOne(1))
                         .build(),
                 Course.builder().title("Title2")
-                        .userByUserIduser(userRepository.getByIduser(1))
+                        .creator(userRepository.getByIduser(1))
+                        .admin(adminRepository.getOne(1))
                         .build(),
                 Course.builder().title("Title3")
-                        .userByUserIduser(userRepository.getByIduser(1))
+                        .creator(userRepository.getByIduser(1))
+                        .admin(adminRepository.getOne(1))
                         .build()
         ).forEach(course -> courseRepository.save(course));
     }
