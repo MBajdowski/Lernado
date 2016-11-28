@@ -3,6 +3,7 @@ package com.Lernado.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +19,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int iduser;
+    @NotNull
+    @Column(unique=true)
     private String email;
+    @NotNull
     private String password;
     private String firstName;
     private String lastName;

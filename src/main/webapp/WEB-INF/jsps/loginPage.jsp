@@ -54,6 +54,7 @@
                             <label for="username" class="control-label">Email</label>
                         </div>
                         <div class="col-sm-8">
+                            <c:if test="${wrongCredentials==true}"><div class="errorMessage">Email or password are wrong</div></c:if>
                             <input type="email" class="form-control" name="username" id="username" placeholder="Email"
                                    style="max-width: 550px">
                         </div>

@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,7 +28,7 @@ public class UserController {
     private AdminRepository adminRepository;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createUser(@NonNull User user, HttpServletResponse r){
+    public String createUser(@NonNull User user, HttpServletResponse r, Model model){
         try {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
@@ -38,6 +39,7 @@ public class UserController {
             Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
         }catch (Exception e){
+            model.addAttribute("emailInUse", true);
             return "signUpPage";
         }
         return "homePage";

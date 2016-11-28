@@ -73,6 +73,7 @@
                             <label for="email" class="control-label">Email</label>
                         </div>
                         <div class="col-sm-8">
+                            <c:if test="${emailInUse==true}"><div class="errorMessage">This email is already in use :(</div></c:if>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Email"
                                    required="" style="max-width: 550px">
                         </div>

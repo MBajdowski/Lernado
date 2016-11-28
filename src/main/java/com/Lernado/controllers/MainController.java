@@ -1,19 +1,26 @@
 package com.Lernado.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 @Controller
 public class MainController {
 
     @RequestMapping("/")
-    public String index() {
-        return "loginPage";
-    }
+    public String index() {return "loginPage"; }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loggingPage() {
+    public String loggingPage(@RequestParam("error") String error, Model model){
+
+        if(error.compareTo("")==0){
+            model.addAttribute("wrongCredentials", true);
+        }
         return "loginPage";
     }
 
@@ -33,9 +40,7 @@ public class MainController {
     }
 
     @RequestMapping("/signUp")
-    public String signUp() {
-        return "signUpPage";
-    }
+    public String signUp() { return "signUpPage";}
 
     @RequestMapping("/createPage")
     public String create() {
@@ -54,14 +59,5 @@ public class MainController {
 
     @RequestMapping("/enrollCoursePage")
     public String enrollCoursePage() {return "enrollCoursePage";}
-
-    @RequestMapping(value = "/login")
-    public String login() {
-//    public String login(@RequestParam String error){
-//        System.out.println("Jestem w login get");
-//        if(error.compareTo("")==0)
-//            return "errorPage";
-        return "login";
-    }
 
 }

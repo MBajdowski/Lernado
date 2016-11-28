@@ -6832,3 +6832,9 @@ body {
     right: 0;
 }
 
+.errorMessage{
+    color: red;
+    text-align: left;
+    font-weight: bold;
+}
+
