@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -49,14 +50,14 @@
                         <a href="#" class="logo"><i class="fa fa-graduation-cap text-muted text-info"></i></a>Lernado</h1>
                     <p>Best e-learning portal EVER!</p>
                 </div>
-                <form class="form-horizontal text-right" role="form" action="/user/create" method="POST">
+                <form:form class="form-horizontal text-right" role="form" action="/user/create" method="POST" commandName="previousUser">
                     <div class="form-group">
                         <div class="col-sm-3">
                             <label for="firstName" class="control-label">First name</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control input-sm" id="firstName" name="firstName" placeholder="First name"
-                                   required="" style="max-width: 550px">
+                            <form:input type="text" class="form-control input-sm" id="firstName" name="firstName" placeholder="First name"
+                                   required="" style="max-width: 550px" path="firstName"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -64,8 +65,8 @@
                             <label for="lastName" class="control-label">Last name</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control input-sm" id="lastName" name="lastName" placeholder="Last name"
-                                   required="" style="max-width: 550px">
+                            <form:input type="text" class="form-control input-sm" id="lastName" name="lastName" placeholder="Last name"
+                                   required="" style="max-width: 550px" path="lastName"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -74,8 +75,8 @@
                         </div>
                         <div class="col-sm-8">
                             <c:if test="${emailInUse==true}"><div class="errorMessage">This email is already in use :(</div></c:if>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                                   required="" style="max-width: 550px">
+                            <form:input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                   required="" style="max-width: 550px" path="email"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -126,7 +127,7 @@
                             <button type="reset" class="btn btn-default btn-lg">Clear form</button>
                         </div>
                     </div>
-                </form>
+                </form:form>
                 <br>
                 <br>
             </div>

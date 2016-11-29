@@ -40,6 +40,7 @@ public class UserController {
             SecurityContextHolder.getContext().setAuthentication(auth);
         }catch (Exception e){
             model.addAttribute("emailInUse", true);
+            model.addAttribute("previousUser", user);
             return "signUpPage";
         }
         return "homePage";

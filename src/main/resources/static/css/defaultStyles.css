@@ -6833,7 +6833,7 @@ body {
 }
 
 .errorMessage{
-    color: red;
+    color: #264d00;
     text-align: left;
     font-weight: bold;
 }

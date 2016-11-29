@@ -1,13 +1,12 @@
 package com.Lernado.controllers;
 
+import com.Lernado.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -40,7 +39,10 @@ public class MainController {
     }
 
     @RequestMapping("/signUp")
-    public String signUp() { return "signUpPage";}
+    public String signUp(Model model) {
+        model.addAttribute("previousUser", new User());
+        return "signUpPage";
+    }
 
     @RequestMapping("/createPage")
     public String create() {
