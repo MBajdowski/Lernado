@@ -27,13 +27,22 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <img src="${pageContext.request.contextPath}/images/computerTlo.jpg"
-                             class="img-responsive logo">
+                        <c:choose>
+                            <c:when test="${filePath==null || filePath.length()==0}">
+                                <img src="${pageContext.request.contextPath}/images/computerTlo.jpg" class="img-responsive logo">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="${filePath}" class="img-responsive logo">
+                                <br />
+                            </c:otherwise>
+                        </c:choose>
+
+                        <br>
+                        <form action="/file" method="POST" enctype="multipart/form-data"><input type="file" name="file" id="file"/><button type="submit">Upload</button></form>
                     </div>
                 </div>
-                <jsp:include page="common/leftPanel.jsp"></jsp:include>
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <h1 class="text-center text-primary header2">Welcome to Lernado Platform <sec:authentication
                                 property="principal.firstName"/>!</h1>
 
@@ -56,73 +65,71 @@
                     </ul>
                     <br>
                     <h1>Popoular courses:</h1>
-                    <div class="section highlightedCarousel">
-                        <div class="container">
-                            <div id="paragraph1" class="row">
-                                <div id="owl-demo" class="owl-carousel owl-theme">
+                        <div class="section highlightedCarousel">
+                            <div class="container">
+                                <div id="paragraph1" class="row">
+                                    <div id="owl-demo" class="owl-carousel owl-theme">
 
 
-                                    <div class='item'>
-                                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                                            <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                                 class='img-responsive'>
-                                            <h2>Title</h2>
-                                            <p>Description</p>
-                                            <input type='hidden' name='idCourse' value="courseId">
-                                            <button type='submit' class='btn btn-primary'>More info</button>
-                                        </form>
+                                        <div class='item'>
+                                            <form class='form-horizontal' role='form' method='POST' action='doSearch'>
+                                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
+                                                     class='img-responsive'>
+                                                <h2>Title</h2>
+                                                <p>Description</p>
+                                                <input type='hidden' name='idCourse' value="courseId">
+                                                <button type='submit' class='btn btn-primary'>More info</button>
+                                            </form>
+                                        </div>
+                                        <div class='item'>
+                                            <form class='form-horizontal' role='form' method='POST' action='doSearch'>
+                                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
+                                                     class='img-responsive'>
+                                                <h2>Title</h2>
+                                                <p>Description</p>
+                                                <input type='hidden' name='idCourse' value="courseId">
+                                                <button type='submit' class='btn btn-primary'>More info</button>
+                                            </form>
+                                        </div>
+                                        <div class='item'>
+                                            <form class='form-horizontal' role='form' method='POST' action='doSearch'>
+                                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
+                                                     class='img-responsive'>
+                                                <h2>Title</h2>
+                                                <p>Description</p>
+                                                <input type='hidden' name='idCourse' value="courseId">
+                                                <button type='submit' class='btn btn-primary'>More info</button>
+                                            </form>
+                                        </div>
+                                        <div class='item'>
+                                            <form class='form-horizontal' role='form' method='POST' action='doSearch'>
+                                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
+                                                     class='img-responsive'>
+                                                <h2>Title</h2>
+                                                <p>Description</p>
+                                                <input type='hidden' name='idCourse' value="courseId">
+                                                <button type='submit' class='btn btn-primary'>More info</button>
+                                            </form>
+                                        </div>
+                                        <div class='item'>
+                                            <form class='form-horizontal' role='form' method='POST' action='doSearch'>
+                                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
+                                                     class='img-responsive'>
+                                                <h2>Title</h2>
+                                                <p>Description</p>
+                                                <input type='hidden' name='idCourse' value="courseId">
+                                                <button type='submit' class='btn btn-primary'>More info</button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class='item'>
-                                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                                            <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                                 class='img-responsive'>
-                                            <h2>Title</h2>
-                                            <p>Description</p>
-                                            <input type='hidden' name='idCourse' value="courseId">
-                                            <button type='submit' class='btn btn-primary'>More info</button>
-                                        </form>
-                                    </div>
-                                    <div class='item'>
-                                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                                            <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                                 class='img-responsive'>
-                                            <h2>Title</h2>
-                                            <p>Description</p>
-                                            <input type='hidden' name='idCourse' value="courseId">
-                                            <button type='submit' class='btn btn-primary'>More info</button>
-                                        </form>
-                                    </div>
-                                    <div class='item'>
-                                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                                            <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                                 class='img-responsive'>
-                                            <h2>Title</h2>
-                                            <p>Description</p>
-                                            <input type='hidden' name='idCourse' value="courseId">
-                                            <button type='submit' class='btn btn-primary'>More info</button>
-                                        </form>
-                                    </div>
-                                    <div class='item'>
-                                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                                            <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                                 class='img-responsive'>
-                                            <h2>Title</h2>
-                                            <p>Description</p>
-                                            <input type='hidden' name='idCourse' value="courseId">
-                                            <button type='submit' class='btn btn-primary'>More info</button>
-                                        </form>
-                                    </div>
-
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
+            <jsp:include page="common/leftPanel.jsp"></jsp:include>
+         </div>
     </div>
 </div>
 <jsp:include page="common/footer.jsp"></jsp:include>

@@ -20,14 +20,27 @@ public class CourseInitializer {
         Stream.of(Course.builder().title("Title1")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
+                        .description("Description1")
                         .build(),
                 Course.builder().title("Title2")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
+                        .description("Description2")
                         .build(),
                 Course.builder().title("Title3")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
+                        .description("Description3")
+                        .build(),
+                Course.builder().title("Title4")
+                        .creator(userRepository.getByIduser(1))
+                        .admin(adminRepository.getOne(1))
+                        .description("Description4")
+                        .build(),
+                Course.builder().title("Title5")
+                        .creator(userRepository.getByIduser(1))
+                        .admin(adminRepository.getOne(1))
+                        .description("Description5")
                         .build()
         ).forEach(course -> courseRepository.save(course));
     }

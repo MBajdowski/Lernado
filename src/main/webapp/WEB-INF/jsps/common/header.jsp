@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                <form class="navbar-form navbar-left menuitems" role="search" action="doSearch" method="POST">
+                <form class="navbar-form navbar-left menuitems" role="search" action="/search" method="POST">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search courses and rooms">
                     </div>

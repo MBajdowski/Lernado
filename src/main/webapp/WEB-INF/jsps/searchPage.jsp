@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.*" %>
 <%@page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -155,78 +156,27 @@
 </div>
 
 <div class='section'>
-    <div class='container'>
-        <div class='row'>
+    <c:forEach var="i" begin="0" end="${courseList.size()-1}">
+        <c:if test="${i%3==0}">
+            <div class='container'>
+                <div class='row'>
+        </c:if>
             <div class='col-md-4'>
                 <form class='form-horizontal' role='form' method='POST' action='doSearch'>
                     <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
                          class='img-responsive'>
-                    <h2>Title1</h2>
-                    <p>Description1</p>
+                    <h2>${courseList.get(i).title}</h2>
+                    <p>${courseList.get(i).description}</p>
                     <input type='hidden' name='idCourse' value='courseId'>
                     <button type='submit' class='btn btn-primary'>More info</button>
                 </form>
             </div>
+         <c:if test="${(i%3==2&&i>0)||(i==courseList.size()-1)}">
+                 </div>
+             </div>
+         </c:if>
+    </c:forEach>
 
-            <div class='col-md-4'>
-                <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                    <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                         class='img-responsive'>
-                    <h2>Title2</h2>
-                    <p>Description2</p>
-                    <input type='hidden' name='idCourse' value='courseId'>
-                    <button type='submit' class='btn btn-primary'>More info</button>
-                </form>
-            </div>
-
-            <div class='col-md-4'>
-                <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                    <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                         class='img-responsive'>
-                    <h2>Title3</h2>
-                    <p>Description3</p>
-                    <input type='hidden' name='idCourse' value='courseId'>
-                    <button type='submit' class='btn btn-primary'>More info</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class='container'>
-        <div class='row'>
-            <div class='col-md-4'>
-                <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                    <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                         class='img-responsive'>
-                    <h2>Title1</h2>
-                    <p>Description1</p>
-                    <input type='hidden' name='idCourse' value='courseId'>
-                    <button type='submit' class='btn btn-primary'>More info</button>
-                </form>
-            </div>
-
-            <div class='col-md-4'>
-                <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                    <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                         class='img-responsive'>
-                    <h2>Title2</h2>
-                    <p>Description2</p>
-                    <input type='hidden' name='idCourse' value='courseId'>
-                    <button type='submit' class='btn btn-primary'>More info</button>
-                </form>
-            </div>
-
-            <div class='col-md-4'>
-                <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                    <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                         class='img-responsive'>
-                    <h2>Title3</h2>
-                    <p>Description3</p>
-                    <input type='hidden' name='idCourse' value='courseId'>
-                    <button type='submit' class='btn btn-primary'>More info</button>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 
 <jsp:include page="common/footer.jsp"></jsp:include>
