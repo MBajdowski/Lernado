@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                 <ul class="nav navbar-nav navbar-right menuitems">
                     <li class="active">
-                        <a href="#">Home</a>
+                        <a href="/homePage">Home</a>
                     </li>
                     <li>
                         <a href="#AboutUsSection">About Us</a>
@@ -35,7 +35,7 @@
                         <a href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a href="/signUp">Sign Up</a>
+                        <a href="/signUpPage">Sign Up</a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-8 col-sm-4">
+                        <div class="col-sm-offset-7 col-sm-3">
                             <button type="submit" class="btn btn-default btn-lg">Log In</button>
                         </div>
                     </div>

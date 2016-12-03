@@ -6825,6 +6825,7 @@ body {
 }
 .highlightedCarousel{
     background-color:#ebebe0;
+    color: black;
 }
 .bottom-align {
     position: absolute;

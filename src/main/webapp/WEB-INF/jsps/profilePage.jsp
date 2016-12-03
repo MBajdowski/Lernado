@@ -46,7 +46,7 @@
                             <div class="col-sm-8">
                             <input class="form-control" id="name" name="name" placeholder="Name" type="text">
                                 </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="nameEdit"><i class="fa fa-3x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a href="#" ng-hide="nameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
                         <div class="form-group"  ng-mouseover="surnameEdit=false" ng-mouseleave="surnameEdit=true" ng-init="surnameEdit=true">
                             <div class="col-sm-2">
@@ -55,7 +55,7 @@
                             <div class="col-sm-8">
                                 <input class="form-control" id="surname" name="surname" placeholder="Surname" type="text">
                             </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="surnameEdit"><i class="fa fa-3x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a href="#" ng-hide="surnameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
                         <div class="form-group" ng-mouseover="nicknameEdit=false" ng-mouseleave="nicknameEdit=true" ng-init="nicknameEdit=true">
                             <div class="col-sm-2">
@@ -64,7 +64,7 @@
                             <div class="col-sm-8">
                                 <input class="form-control" id="nickname" name="nickname" placeholder="Nick-name" type="text">
                             </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="nicknameEdit"><i class="fa fa-3x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a href="#" ng-hide="nicknameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
                         <div class="form-group" ng-mouseover="emailEdit=false" ng-mouseleave="emailEdit=true" ng-init="emailEdit=true">
                             <div class="col-sm-2">
@@ -73,7 +73,7 @@
                             <div class="col-sm-8">
                                 <input class="form-control" id="emai" name="email" placeholder="Email" type="email">
                             </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="emailEdit"><i class="fa fa-3x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a href="#" ng-hide="emailEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
                         <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true" ng-init="telEdit=true">
                             <div class="col-sm-2">
@@ -82,7 +82,7 @@
                             <div class="col-sm-8">
                                 <input class="form-control" id="telephone" name="telephone" placeholder="Telephone number" type="text">
                             </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="telEdit"><i class="fa fa-3x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a href="#" ng-hide="telEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
                         </form>
                     </div>
@@ -91,7 +91,7 @@
         </div>
         <div class="row">
             <div id="courses2" class="col-md-6">
-                <h1 contenteditable="true">Your Courses:&nbsp;</h1>
+                <h1>Your Courses:&nbsp;</h1>
                 <ul class="list-group">
                     <form id="myForm1" class="form-horizontal" role="form" method="POST" action="doShowCourse">
                         <a onclick="">
@@ -107,7 +107,7 @@
                 </ul>
             </div>
             <div id="rooms" class="col-md-6">
-                <h1 contenteditable="true">Your Rooms::&nbsp;</h1>
+                <h1>Your Rooms:</h1>
                 <ul class="list-group">
                     <form id="myForm2" class="form-horizontal" role="form" method="POST" action="doShowCourse">
                         <a onclick="">
@@ -126,7 +126,7 @@
 
         <div class="row">
             <div id="courses" class="col-md-12">
-                <h1 contenteditable="true">Suggested Courses:&nbsp;</h1>
+                <h1>Suggested Courses:&nbsp;</h1>
                 <div id="owl-demo" class="owl-carousel owl-theme highlightedCarousel">
                     <div class='item'>
                         <form class='form-horizontal' role='form' method='POST' action='doSearch'>
@@ -166,21 +166,60 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <h1>Wishlist:</h1>
-                <ul class="list-group">
-                    <form id="myForm3" class='form-horizontal' role='form' method='POST' action='wishlist'>
-                        <a onclick="">
-                            <li class='h3 list-group-item list-group-item-success'>Tytuł1</li>
-                        </a>
-                        <a onclick="">
-                            <li class='h3 list-group-item list-group-item-success'>Tytuł2</li>
-                        </a>
-                        <a onclick="">
-                            <li class='h3 list-group-item list-group-item-success'>Tytuł3</li>
-                        </a>
-                    </form>
-                </ul>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
+                                 class="img-responsive">
+                            <div class="caption">
+                                <h3>Basic Programming</h3>
+                                <p>Price: 20 $
+                                    <br>
+                                    <br>Category: Programming
+                                    <br>Level: Easy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
+                                 class="img-responsive">
+                            <div class="caption">
+                                <h3>Basic Programming</h3>
+                                <p>Price: 20 $
+                                    <br>
+                                    <br>Category: Programming
+                                    <br>Level: Easy</p>
+                            </div>
+                        </div></div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
+                                 class="img-responsive">
+                            <div class="caption">
+                                <h3>Basic Programming</h3>
+                                <p>Price: 20 $
+                                    <br>
+                                    <br>Category: Programming
+                                    <br>Level: Easy</p>
+                            </div>
+                        </div></div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
+                                 class="img-responsive">
+                            <div class="caption">
+                                <h3>Basic Programming</h3>
+                                <p>Price: 20 $
+                                    <br>
+                                    <br>Category: Programming
+                                    <br>Level: Easy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

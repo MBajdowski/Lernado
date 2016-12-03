@@ -24,7 +24,7 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right menuitems">
                     <li class="active">
                         <a href="/homePage">Home</a>
                     </li>
@@ -35,7 +35,7 @@
                         <a href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a href="#">Log in</a>
+                        <a href="/signUpPage">Log in</a>
                     </li>
                 </ul>
             </div>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-4 col-sm-5">
                             <script>
                                 function checkPass(){
                                     var pass1 = document.getElementById("inputPassword3");
@@ -123,8 +123,8 @@
                                     }
                                 }
                             </script>
-                            <button id="submitButton" type="submit" class="btn btn-default btn-lg">Sign Up</button>
-                            <button type="reset" class="btn btn-default btn-lg">Clear form</button>
+                            <button id="submitButton" type="submit" class="btn btn-default btn-md">Sign Up</button>
+                            <button type="reset" class="btn btn-default btn-md">Clear form</button>
                         </div>
                     </div>
                 </form:form>

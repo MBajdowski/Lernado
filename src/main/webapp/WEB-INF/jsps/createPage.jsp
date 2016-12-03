@@ -104,14 +104,14 @@
                         </div>
                     </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-11 text-right">
+                            <a class="btn btn-primary">Create</a>
+                        </div>
+                    </div>
                 </form>
             </div>
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
-        </div>
-        <div class="row">
-            <div class="col-md-9 text-right">
-                <a class="btn btn-primary">Create</a>
-            </div>
         </div>
     </div>
 </div>

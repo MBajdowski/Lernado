@@ -30,6 +30,11 @@
                 </div>
                 <h1 class="text-center">Titile</h1>
                 <p class="text-center">Description</p>
+                </div>
+
+            <jsp:include page="common/leftPanel.jsp"></jsp:include>
+            <div class="row">
+                <div class="col-md-9">
 
                 <div class="row">
                     <div class="col-md-10">
@@ -77,14 +82,12 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <div class="col-md-11">
-                                <h3 class="text-right">Add new material</h3>
-                            </div>
-                            <div class="col-md-1">
-                                <a href="#"><i class="fa fa-3x fa-file fa-fw pull-right"></i></a>
+                            <div class="col-md-12">
+                                <a href="#"><h3 class="text-right">Add new material<i class="fa fa-1x fa-file fa-fw pull-right"></i></h3></a>
                             </div>
                         </div>
                     </div>
+                <br>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-1">
@@ -128,26 +131,19 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <div class="col-md-11">
-                                <h3 class="text-right">Add new material</h3>
-                            </div>
-                            <div class="col-md-1">
-                                <a href="#"><i class="fa fa-3x fa-file fa-fw pull-right"></i></a>
+                            <div class="col-md-12">
+                                <a href="#"><h3 class="text-right">Add new material<i class="fa fa-1x fa-file fa-fw pull-right"></i></h3></a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-1">
-                            <a href="#"><i class="fa fa-3x fa-fw fa-university pull-left"></i></a>
-                        </div>
-                        <div class="col-md-11">
-                            <h2 contenteditable="true">New Lesson</h2>
+                        <div class="col-md-12">
+                            <a href="#"><h2><i class="fa fa-1x fa-fw fa-university pull-left"></i>New Lesson</h2></a>
                         </div>
                     </div>
                 </div>
-            <jsp:include page="common/leftPanel.jsp"></jsp:include>
             </div>
-
+</div>
         </div>
     </div>
 <jsp:include page="common/footer.jsp"></jsp:include>

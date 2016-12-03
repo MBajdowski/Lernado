@@ -62,4 +62,19 @@ public class MainController {
     @RequestMapping("/enrollCoursePage")
     public String enrollCoursePage() {return "enrollCoursePage";}
 
+    @RequestMapping("/wishlistPage")
+    public String wishlistPage() {return "wishlistPage";}
+
+    @RequestMapping("/roomsPage")
+    public String roomsPage() {return "roomsPage";}
+
+    @RequestMapping(value = "/login")
+    public String login() {
+//    public String login(@RequestParam String error){
+//        System.out.println("Jestem w login get");
+//        if(error.compareTo("")==0)
+//            return "errorPage";
+        return "login";
+    }
+
 }
