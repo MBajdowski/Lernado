@@ -25,12 +25,12 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="images/courseDefault.jpg" class="img-responsive">
+                        <img src="${pageContext.request.contextPath}/images/courseDefault.jpg" class="img-responsive">
                     </div>
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-9">
-                                <h1>Title</h1>
+                                <h1>${currentCourse.title}</h1>
                             </div>
                             <div class="col-md-3 text-center">
                                 <form id="myForm" class="form-horizontal" role="form" method="POST" action="">
@@ -43,7 +43,7 @@
                             <form class="form-horizontal" role="form" method="POST" action="">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-lg btn-success">Enroll for the course for
-                                        100Euro
+                                        ${currentCourse.price}
                                     </button>
                                 </div>
                             </form>
@@ -54,10 +54,10 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Category: Programming</h2>
+                        <h2>Category: ${currentCourse.category}</h2>
                         <h2>Description:</h2>
-                        <p>Course Description</p>
-                        <h2>Level: Medium</h2>
+                        <p>${currentCourse.description}</p>
+                        <h2>Level: ${currentCourse.level}</h2>
                     </div>
                 </div>
                 <hr>
@@ -68,15 +68,15 @@
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-2">
-                            <img src="images/defaultProfile.jpg" class="img-responsive logo">
+                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class="img-responsive logo">
                         </div>
                         <div class="col-md-10">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>TeacherName TeacherSurname</h2>
-                                    <h3>Telephone number: </h3>
-                                    <h3>About Teacher: </h3>
-                                    <p>Teacher Description</p>
+                                    <h2>${currentTeacher.firstName} ${currentTeacher.lastName}</h2>
+                                    <h3>Telephone number: ${currentTeacher.phoneNumber}</h3>
+                                    <h3>About Teacher:</h3>
+                                    <p> ${currentTeacher.description}</p>
                                 </div>
                             </div>
                         </div>

@@ -28,7 +28,7 @@ public class UserController {
     private AdminRepository adminRepository;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createUser(@NonNull User user, HttpServletResponse r, Model model){
+    public String createUser(@NonNull User user, Model model){
         try {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));

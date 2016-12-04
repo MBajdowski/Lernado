@@ -162,12 +162,11 @@
                 <div class='row'>
         </c:if>
             <div class='col-md-4'>
-                <form class='form-horizontal' role='form' method='POST' action='doSearch'>
+                <form class='form-horizontal' role='form' method='GET' action='${pageContext.request.contextPath}/course/${courseList.get(i).idcourse}'>
                     <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
                          class='img-responsive'>
                     <h2>${courseList.get(i).title}</h2>
                     <p>${courseList.get(i).description}</p>
-                    <input type='hidden' name='idCourse' value='courseId'>
                     <button type='submit' class='btn btn-primary'>More info</button>
                 </form>
             </div>
@@ -176,7 +175,6 @@
              </div>
          </c:if>
     </c:forEach>
-
 </div>
 
 <jsp:include page="common/footer.jsp"></jsp:include>

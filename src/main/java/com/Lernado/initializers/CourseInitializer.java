@@ -21,26 +21,33 @@ public class CourseInitializer {
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description1")
+                        .category("Programming")
+                        .level("Medium")
+                        .price(100.0)
                         .build(),
                 Course.builder().title("Title2")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description2")
+                        .price(100.0)
                         .build(),
                 Course.builder().title("Title3")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description3")
+                        .price(100.0)
                         .build(),
                 Course.builder().title("Title4")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description4")
+                        .price(100.0)
                         .build(),
                 Course.builder().title("Title5")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description5")
+                        .price(100.0)
                         .build()
         ).forEach(course -> courseRepository.save(course));
     }

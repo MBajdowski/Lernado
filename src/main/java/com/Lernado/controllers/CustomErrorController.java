@@ -12,6 +12,8 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleNotFound(HttpServletResponse res, Model model) {
+        if(res.getStatus()==400)
+            return "loginPage";
         model.addAttribute("errorStatus", res.getStatus());
         return "errorPage";
     }

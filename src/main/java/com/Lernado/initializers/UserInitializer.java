@@ -23,6 +23,9 @@ public class UserInitializer {
 
         Stream.of(User.builder().email("mbaj@lernado.pl")
                         .firstName("Maciej")
+                        .lastName("Bajdowski")
+                        .description("I am super teacher, but I am learning all the time!")
+                        .phoneNumber(123123123)
                         .password(encoder.encode("mbaj"))
                         .admin(adminRepository.getOne(1))
                         .build(),

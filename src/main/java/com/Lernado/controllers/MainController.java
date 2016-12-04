@@ -83,14 +83,6 @@ public class MainController {
     @RequestMapping("/roomsPage")
     public String roomsPage() {return "roomsPage";}
 
-    @RequestMapping(value = "/login")
-    public String login() {
-//    public String login(@RequestParam String error){
-//        System.out.println("Jestem w login get");
-//        if(error.compareTo("")==0)
-//            return "errorPage";
-        return "login";
-    }
     @RequestMapping(value="/file", method = RequestMethod.POST)
     public String uploadFile(Model model, MultipartFile file){
         try {
