@@ -8,6 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 @Service
@@ -15,7 +22,10 @@ import java.util.stream.Stream;
 public class CourseInitializer {
 
     @Autowired
-    public CourseInitializer(CourseRepository courseRepository, UserRepository userRepository, AdminRepository adminRepository) {
+    public CourseInitializer(CourseRepository courseRepository, UserRepository userRepository, AdminRepository adminRepository) throws IOException, URISyntaxException {
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("static/images/defaultProfile.jpg").getFile());
 
         Stream.of(Course.builder().title("Title1")
                         .creator(userRepository.getByIduser(1))
@@ -29,6 +39,7 @@ public class CourseInitializer {
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description2")
+                        .photoBinary(Files.readAllBytes(Paths.get(file.toURI())))
                         .price(100.0)
                         .build(),
                 Course.builder().title("Title3")

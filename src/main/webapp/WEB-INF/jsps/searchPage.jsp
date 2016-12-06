@@ -156,21 +156,21 @@
 </div>
 
 <div class='section'>
-    <c:forEach var="i" begin="0" end="${courseList.size()-1}">
+    <c:forEach var="i" begin="0" end="${pairs.size()-1}">
         <c:if test="${i%3==0}">
             <div class='container'>
                 <div class='row'>
         </c:if>
             <div class='col-md-4'>
-                <form class='form-horizontal' role='form' method='GET' action='${pageContext.request.contextPath}/course/${courseList.get(i).idcourse}'>
-                    <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
+                <div style="margin-bottom: 15px">
+                    <img src="${pairs.get(i).getValue()}"
                          class='img-responsive'>
-                    <h2>${courseList.get(i).title}</h2>
-                    <p>${courseList.get(i).description}</p>
-                    <button type='submit' class='btn btn-primary'>More info</button>
-                </form>
+                    <h2>${pairs.get(i).getKey().title}</h2>
+                    <p>${pairs.get(i).getKey().description}</p>
+                    <a href='${pageContext.request.contextPath}/course/${pairs.get(i).getKey().idcourse}'><button class='btn btn-primary'>More info</button></a>
+                </div>
             </div>
-         <c:if test="${(i%3==2&&i>0)||(i==courseList.size()-1)}">
+         <c:if test="${(i%3==2&&i>0)||(i==pairs.size()-1)}">
                  </div>
              </div>
          </c:if>

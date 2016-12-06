@@ -25,7 +25,7 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="${pageContext.request.contextPath}/images/courseDefault.jpg" class="img-responsive">
+                        <img src="${currentPhoto}" class="img-responsive">
                     </div>
                     <div class="col-md-8">
                         <div class="row">

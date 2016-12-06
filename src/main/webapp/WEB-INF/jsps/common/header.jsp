@@ -20,12 +20,13 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                <form class="navbar-form navbar-left menuitems" role="search" action="/search" method="POST">
+                <form class="navbar-form navbar-left menuitems" role="search" action="" method="POST">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search courses and rooms">
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>
+                <a href="/course/search">Pusty search</a>
             </div>
             <div class="col-md-3">
                 <ul class="nav navbar-nav navbar-right menuitems">

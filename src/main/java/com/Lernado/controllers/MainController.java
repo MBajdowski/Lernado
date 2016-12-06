@@ -46,13 +46,6 @@ public class MainController {
         return "errorPage";
     }
 
-    @RequestMapping("/search")
-    public String search(Model model) {
-
-        model.addAttribute("courseList", courseRepository.findAll());
-        return "searchPage";
-    }
-
     @RequestMapping("/signUp")
     public String signUp(Model model) {
         model.addAttribute("previousUser", new User());
