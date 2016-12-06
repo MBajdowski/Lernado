@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-1">
-                <a href="#" class="logo"><i class="fa fa-4x fa-fw fa-graduation-cap text-info"></i></a>
+                <a class="logo"><i class="fa fa-4x fa-fw fa-graduation-cap text-info"></i></a>
             </div>
             <div class="col-md-2" style="color:#3d3d29">
                 <h1>Lernado</h1>
@@ -31,24 +31,24 @@
             <div class="col-md-3">
                 <ul class="nav navbar-nav navbar-right menuitems">
                     <li class="active">
-                        <a href="/homePage">Home</a>
+                        <a href="/home">Home</a>
                     </li>
                     <li class="active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My
                             Profile<i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="/profilePage">Information</a>
+                                <a href="/user/profile">Information</a>
                             </li>
                             <li class="divider"></li>
                             <li>
                                 <a href="/coursesPage">My Courses</a>
                             </li>
                             <li>
-                                <a href="/roomsPage">My Rooms</a>
+                                <a href="/room/">My Rooms</a>
                             </li>
                             <li>
-                                <a href="/wishlistPage">Wishlist</a>
+                                <a href="/course/wishlist">Wishlist</a>
                             </li>
                             <li class="divider"></li>
                             <li>

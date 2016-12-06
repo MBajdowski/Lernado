@@ -25,7 +25,7 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="images/defaultProfile.jpg" class="img-responsive logo">
+                        <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class="img-responsive logo">
                     </div>
                     <div class="col-md-7">
                         <h1>Name Surname</h1>
@@ -130,7 +130,7 @@
                 <div id="owl-demo" class="owl-carousel owl-theme highlightedCarousel">
                     <div class='item'>
                         <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                            <img src="images/defaultProfile.jpg" class='img-responsive'>
+                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class='img-responsive'>
                             <h2>Tytuł</h2>
                             <p>Opis</p>
                             <button type='submit' class='btn btn-primary'>More info</button>
@@ -139,7 +139,7 @@
 
                     <div class='item'>
                         <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                            <img src="images/defaultProfile.jpg" class='img-responsive'>
+                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class='img-responsive'>
                             <h2>Tytuł2</h2>
                             <p>Opis2</p>
                             <button type='submit' class='btn btn-primary'>More info</button>
@@ -148,7 +148,7 @@
 
                     <div class='item'>
                         <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                            <img src="images/defaultProfile.jpg" class='img-responsive'>
+                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class='img-responsive'>
                             <h2>Tytuł3</h2>
                             <p>Opis3</p>
                             <button type='submit' class='btn btn-primary'>More info</button>
@@ -156,7 +156,7 @@
                     </div>
                     <div class='item'>
                         <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                            <img src="images/defaultProfile.jpg" class='img-responsive'>
+                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class='img-responsive'>
                             <h2>Tytuł4</h2>
                             <p>Opis4</p>
                             <button type='submit' class='btn btn-primary'>More info</button>

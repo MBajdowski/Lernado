@@ -27,18 +27,7 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <c:choose>
-                            <c:when test="${filePath==null || filePath.length()==0}">
-                                <img src="${pageContext.request.contextPath}/images/computerTlo.jpg" class="img-responsive logo">
-                            </c:when>
-                            <c:otherwise>
-                                <img src="${filePath}" class="img-responsive logo">
-                                <br />
-                            </c:otherwise>
-                        </c:choose>
-
-                        <br>
-                        <form action="/file" method="POST" enctype="multipart/form-data"><input type="file" name="file" id="file"/><button type="submit">Upload</button></form>
+                        <img src="${pageContext.request.contextPath}/images/computerTlo.jpg" class="img-responsive logo">
                     </div>
                 </div>
                 <div class="row">

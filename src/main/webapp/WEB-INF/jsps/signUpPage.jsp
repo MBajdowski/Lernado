@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                 <ul class="nav navbar-nav navbar-right menuitems">
                     <li class="active">
-                        <a href="/homePage">Home</a>
+                        <a href="/">Home</a>
                     </li>
                     <li>
                         <a href="#AboutUsSection">About Us</a>
@@ -35,7 +35,7 @@
                         <a href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a href="/signUpPage">Log in</a>
+                        <a href="/">Log in</a>
                     </li>
                 </ul>
             </div>

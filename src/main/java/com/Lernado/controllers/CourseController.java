@@ -21,6 +21,10 @@ public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
 
+
+    @RequestMapping("/wishlist")
+    public String wishlistPage() {return "wishlistPage";}
+
     @RequestMapping("/search")
     public String search(Model model) {
         List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();

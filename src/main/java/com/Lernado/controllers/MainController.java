@@ -27,6 +27,19 @@ public class MainController {
     @RequestMapping("/")
     public String index() {return "loginPage"; }
 
+    @RequestMapping("/createPage")
+    public String create() {return "createPage";}
+
+    @RequestMapping("/coursePage")
+    public String coursePage() {
+        return "coursePage";
+    }
+
+    @RequestMapping("/home")
+    public String home() {
+        return "homePage";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loggingPage(@RequestParam("error") String error, Model model){
 
@@ -36,56 +49,9 @@ public class MainController {
         return "loginPage";
     }
 
-    @RequestMapping("/homePage")
-    public String home() {
-        return "homePage";
-    }
-
-    @RequestMapping("/errorPage")
-    public String error() {
-        return "errorPage";
-    }
-
     @RequestMapping("/signUp")
     public String signUp(Model model) {
         model.addAttribute("previousUser", new User());
         return "signUpPage";
     }
-
-    @RequestMapping("/createPage")
-    public String create() {
-        return "createPage";
-    }
-
-    @RequestMapping("/profilePage")
-    public String profilePage() {
-        return "profilePage";
-    }
-
-    @RequestMapping("/coursePage")
-    public String coursePage() {
-        return "coursePage";
-    }
-
-    @RequestMapping("/enrollCoursePage")
-    public String enrollCoursePage() {return "enrollCoursePage";}
-
-    @RequestMapping("/wishlistPage")
-    public String wishlistPage() {return "wishlistPage";}
-
-    @RequestMapping("/roomsPage")
-    public String roomsPage() {return "roomsPage";}
-
-    @RequestMapping(value="/file", method = RequestMethod.POST)
-    public String uploadFile(Model model, MultipartFile file){
-        try {
-            byte[] photoBinary = file.getBytes();
-            String base64 = "data:image/jpg;base64,"+Base64.getEncoder().encodeToString(photoBinary);
-            model.addAttribute("filePath", base64);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "homePage";
-    }
-
 }

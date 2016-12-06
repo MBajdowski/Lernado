@@ -27,6 +27,11 @@ public class UserController {
     @Autowired
     private AdminRepository adminRepository;
 
+    @RequestMapping("/profile")
+    public String profilePage() {
+        return "profilePage";
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createUser(@NonNull User user, Model model){
         try {

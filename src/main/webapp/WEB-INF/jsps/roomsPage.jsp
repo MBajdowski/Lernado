@@ -8,6 +8,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrapFiles/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrapFiles/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
     <link href="${pageContext.request.contextPath}/css/defaultStyles.css" rel="stylesheet" type="text/css">
@@ -46,7 +48,7 @@
                         <div style="background-color: white; border: solid grey">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <img src="images/defaultProfile.jpg"
+                                    <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
                                          class="img-responsive img-circle">
                                 </div>
                                 <div class="col-md-10">
@@ -67,7 +69,7 @@
                         <div style="background-color: white; border: solid grey">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <img src="images/defaultProfile.jpg"
+                                    <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
                                          class="img-responsive img-circle" >
                                 </div>
                                 <div class="col-md-10">

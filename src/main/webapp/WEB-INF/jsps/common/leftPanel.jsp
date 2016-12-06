@@ -5,27 +5,27 @@
 <html><body>
     <div class="col-md-3">
     <ul class="kolumna list-group">
-        <a href="profilePage">
+        <a href="/user/profile">
             <li class="list-group-item h2">
                 My Profile
             </li>
         </a>
-        <a href="coursesPage">
+        <a href="/coursesPage">
             <li class="list-group-item h2">
                 My Courses
             </li>
         </a>
-        <a href="roomsPage">
+        <a href="/room/">
             <li class="list-group-item h2">
                 My Rooms
             </li>
         </a>
-        <a href="wishlistPage">
+        <a href="/course/wishlist">
             <li class="list-group-item h2">
                 Wishlist
             </li>
         </a>
-        <a href="createPage">
+        <a href="/createPage">
             <li class="list-group-item h2">
                 Create Course/Room
             </li>
