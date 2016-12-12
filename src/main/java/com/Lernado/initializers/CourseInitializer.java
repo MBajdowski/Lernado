@@ -22,10 +22,11 @@ import java.util.stream.Stream;
 public class CourseInitializer {
 
     @Autowired
-    public CourseInitializer(CourseRepository courseRepository, UserRepository userRepository, AdminRepository adminRepository) throws IOException, URISyntaxException {
+    public CourseInitializer(CourseRepository courseRepository, UserRepository userRepository, AdminRepository adminRepository) throws IOException{
 
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("static/images/defaultProfile.jpg").getFile());
+        File file = new File(classLoader.getResource("static/images/courseDefault.jpg").getFile());
+        byte[] photoBinary = Files.readAllBytes(Paths.get(file.toURI()));
 
         Stream.of(Course.builder().title("Title1")
                         .creator(userRepository.getByIduser(1))
@@ -33,32 +34,40 @@ public class CourseInitializer {
                         .description("Description1")
                         .category("Programming")
                         .level("Medium")
+                        .photoBinary(photoBinary)
                         .price(100.0)
                         .build(),
                 Course.builder().title("Title2")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description2")
-                        .photoBinary(Files.readAllBytes(Paths.get(file.toURI())))
-                        .price(100.0)
+                        .category("Electronic")
+                        .level("Hard")
+                        .photoBinary(photoBinary)
+                        .price(90.0)
                         .build(),
                 Course.builder().title("Title3")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description3")
-                        .price(100.0)
+                        .category("Cooking")
+                        .level("Beginer")
+                        .photoBinary(photoBinary)
+                        .price(80.0)
                         .build(),
                 Course.builder().title("Title4")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description4")
-                        .price(100.0)
+                        .photoBinary(photoBinary)
+                        .price(110.0)
                         .build(),
                 Course.builder().title("Title5")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
                         .description("Description5")
-                        .price(100.0)
+                        .photoBinary(photoBinary)
+                        .price(120.0)
                         .build()
         ).forEach(course -> courseRepository.save(course));
     }

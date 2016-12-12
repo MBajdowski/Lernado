@@ -31,8 +31,7 @@ public class CourseController {
         List<Course> courses = courseRepository.findAll();
 
         for(Course course : courses){
-            String base64 = course.getPhotoBinary()==null?
-                    "/images/courseDefault.jpg":"data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
+            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
             pairs.add(new AbstractMap.SimpleEntry(course, base64));
         }
         model.addAttribute("pairs", pairs);
@@ -43,12 +42,16 @@ public class CourseController {
     private String showCoursePage(@PathVariable("id") int courseId, Model model){
 
         Course currentCourse = courseRepository.getOne(courseId);
-        String base64 = currentCourse.getPhotoBinary()==null?
-                "/images/courseDefault.jpg":
+        String base64 =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getPhotoBinary());
+        String base64Teacher =
+                "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getCreator().getPhotoBinary());
         model.addAttribute("currentPhoto", base64);
         model.addAttribute("currentCourse", currentCourse);
         model.addAttribute("currentTeacher",currentCourse.getCreator());
+        model.addAttribute("currentTeacherPhoto", base64Teacher);
+
+
         return "enrollCoursePage";
     }
 }

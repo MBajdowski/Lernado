@@ -9,6 +9,10 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 @Service
@@ -17,9 +21,13 @@ public class UserInitializer {
 
 
     @Autowired
-    public UserInitializer(UserRepository userRepository, AdminRepository adminRepository) {
+    public UserInitializer(UserRepository userRepository, AdminRepository adminRepository) throws IOException {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("static/images/defaultProfile.jpg").getFile());
+        byte[] photoBinary = Files.readAllBytes(Paths.get(file.toURI()));
 
         Stream.of(User.builder().email("mbaj@lernado.pl")
                         .firstName("Maciej")
@@ -28,11 +36,15 @@ public class UserInitializer {
                         .phoneNumber(123123123)
                         .password(encoder.encode("mbaj"))
                         .admin(adminRepository.getOne(1))
+                        .photoBinary(photoBinary)
                         .build(),
                 User.builder().email("jste@lernado.pl")
                         .firstName("Joanna")
+                        .lastName("Stępińska")
+                        .description("I am currently working on my thesis")
                         .password(encoder.encode("jste"))
                         .admin(adminRepository.getOne(1))
+                        .photoBinary(photoBinary)
                         .build()
         ).forEach(user -> userRepository.save(user));
     }

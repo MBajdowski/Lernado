@@ -30,6 +30,7 @@ public class User {
     private String interest;
     private String description;
     private Integer phoneNumber;
+    @Column(length = 1_000_000)
     private byte[] photoBinary;
     @ManyToOne
     @JoinColumn(name = "AdminId", referencedColumnName = "idadmin", nullable = false)

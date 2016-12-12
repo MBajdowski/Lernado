@@ -27,7 +27,7 @@ public class Course {
     private String level;
     private Byte validated;
     private Byte highlighted;
-    @Column(length = 10_000_000)
+    @Column(length = 1_000_000)
     private byte[] photoBinary;
     private Byte isPrivate;
     @ManyToOne
