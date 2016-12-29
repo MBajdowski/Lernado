@@ -16,6 +16,9 @@ public class CurrentUser implements UserDetails {
     private String password;
     private String firstName;
     private String lastName;
+    private String nickName;
+    private String description;
+    private Integer phoneNumber;
     private int id;
 
     @Override

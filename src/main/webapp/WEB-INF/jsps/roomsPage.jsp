@@ -22,70 +22,181 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-md-3" style="height:500px;overflow:scroll;">
-                        <ul class="list-group">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                        </ul>
+                    <div class="col-md-4" style="height:400px;overflow:scroll;">
+                        <div class="row roomPanelBorder">
+                            <div class="col-md-4">
+                                <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
+                                     class="img-responsive img-circle">
+                            </div>
+                            <div class="col-md-8">
+                                <a>Computer Science Group 2013</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row roomPanelBorder">
+                            <div class="col-md-4">
+                                <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
+                                     class="img-responsive img-circle">
+                            </div>
+                            <div class="col-md-8">
+                                <a>Warsaw University of Warsaw Students</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row roomPanelBorder">
+                            <div class="col-md-4">
+                                <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
+                                     class="img-responsive img-circle">
+                            </div>
+                            <div class="col-md-8">
+                                <a>Computer Graphics Room</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row roomPanelBorder">
+                            <div class="col-md-4">
+                                <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
+                                     class="img-responsive img-circle">
+                            </div>
+                            <div class="col-md-8">
+                                <a>2016/2017 Biomedical semester 1</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row roomPanelBorder">
+                            <div class="col-md-4">
+                                <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
+                                     class="img-responsive img-circle">
+                            </div>
+                            <div class="col-md-8">
+                                <a>2016/2017 Telecommunication semester</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row roomPanelBorder">
+                            <div class="col-md-4">
+                                <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
+                                     class="img-responsive img-circle">
+                            </div>
+                            <div class="col-md-8">
+                                <a>2016/2017 Electronics semester</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-9">
-                        <div style="background-color: white; border: solid grey">
+
+                    <div class="col-md-8">
+                        <h1>Computer Science Group 2013</h1>
+                        <div class="roomBorder">
                             <div class="row">
                                 <div class="col-md-9">
-                                    <p>Write your post here:</p>
-                                <input type="text" placeholder="Your post...">
-                                    </div>
+                                    <p>Write your post here: &emsp;  <a>Add material<i class="fa fa-paperclip" aria-hidden="true"></i></a></p>
+                                    <input type="text" placeholder="Your post...">
                                 </div>
                             </div>
+                        </div>
                         <br>
-
-
-                        <div style="background-color: white; border: solid grey">
+                        <br>
+                        <div class="roomBorder">
                             <div class="row">
                                 <div class="col-md-2">
                                     <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
                                          class="img-responsive img-circle">
                                 </div>
                                 <div class="col-md-10">
-                                    <h1>Tom Hanks</h1>
+                                    <h3>Tom Hanks</h3>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
                                         <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                                        <br>Ut enim ad minim veniam, quis nostrud</p>Comment
+                                        <br>Ut enim ad minim veniam, quis nostrud</p>
+                                    <hr>
+                                    <a>See more comments</a>
+                                    <br>
                                     <i class="fa fa-comment fa-fw fa-lg pull-left"></i>
                                     <input type="text" placeholder="Comment here">
                                 </div>
                             </div>
                         </div>
-                        <hr>
-                        <div style="background-color: white; border: solid grey">
+
+                        <br>
+
+                        <div class="roomBorder">
                             <div class="row">
                                 <div class="col-md-2">
                                     <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
-                                         class="img-responsive img-circle" >
+                                         class="img-responsive img-circle">
                                 </div>
                                 <div class="col-md-10">
-                                    <h1>John Smith</h1>
+                                    <h3>Tom Hanks</h3>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
                                         <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                                        <br>Ut enim ad minim veniam, quis nostrud</p>Comment
+                                        <br>Ut enim ad minim veniam, quis nostrud</p>
+                                    <hr>
+                                    <a>See more comments</a>
+                                    <br>
                                     <i class="fa fa-comment fa-fw fa-lg pull-left"></i>
                                     <input type="text" placeholder="Comment here">
                                 </div>
                             </div>
+                        </div>
+
+                        <br>
+
+                        <div class="roomBorder">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
+                                         class="img-responsive img-circle">
+                                </div>
+                                <div class="col-md-10">
+                                    <h3>Tom Hanks</h3>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
+                                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                                        <br>Ut enim ad minim veniam, quis nostrud</p>
+                                    <hr>
+                                    <a>See more comments</a>
+                                    <br>
+                                    <i class="fa fa-comment fa-fw fa-lg pull-left"></i>
+                                    <input type="text" placeholder="Comment here">
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="roomBorder">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
+                                         class="img-responsive img-circle">
+                                </div>
+                                <div class="col-md-10">
+                                    <h3>Tom Hanks</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
+                                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                                        <br>Ut enim ad minim veniam, quis nostrud</p>
+                                    <hr>
+                                    <a>See more comments</a>
+                                    <br>
+                                    <i class="fa fa-comment fa-fw fa-lg pull-left"></i>
+                                    <input type="text" placeholder="Comment here">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

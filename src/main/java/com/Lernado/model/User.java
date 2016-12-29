@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -55,4 +54,19 @@ public class User {
     @JoinColumn(name = "course_idcourse", referencedColumnName = "idcourse", nullable = false))
     private List<Course> wishes;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "iduser=" + iduser +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", interest='" + interest + '\'' +
+                ", description='" + description + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", photoBinary=" + Arrays.toString(photoBinary) +
+                '}';
+    }
 }

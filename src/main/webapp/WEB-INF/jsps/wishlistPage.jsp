@@ -25,124 +25,33 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1> Your Wishlist:</h1>
-                        <br>
+                <h1> Your Wishlist:</h1>
+                <br>
+                <c:forEach var="i" begin="0" end="${wishlist.size()-1}">
+                    <c:if test="${i%4==0}">
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-                                         class="img-responsive">
-                                    <div class="caption">
-                                        <h3>Basic Programming</h3>
-                                        <p>Price: 20 $
-                                            <br>
-                                            <br>Category: Programming
-                                            <br>Level: Easy</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-                                         class="img-responsive">
-                                    <div class="caption">
-                                        <h3>Basic Programming</h3>
-                                        <p>Price: 20 $
-                                            <br>
-                                            <br>Category: Programming
-                                            <br>Level: Easy</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-                                         class="img-responsive">
-                                    <div class="caption">
-                                        <h3>Basic Programming</h3>
-                                        <p>Price: 20 $
-                                            <br>
-                                            <br>Category: Programming
-                                            <br>Level: Easy</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-                                         class="img-responsive">
-                                    <div class="caption">
-                                        <h3>Basic Programming</h3>
-                                        <p>Price: 20 $
-                                            <br>
-                                            <br>Category: Programming
-                                            <br>Level: Easy</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
+                    </c:if>
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
                                  class="img-responsive">
                             <div class="caption">
-                                <h3>Basic Programming</h3>
-                                <p>Price: 20 $
+                                <h3>${wishlist.get(i).getKey().title}</h3>
+                                <p>Price: ${wishlist.get(i).getKey().price} $
                                     <br>
-                                    <br>Category: Programming
-                                    <br>Level: Easy</p>
+                                    <br>Category: ${wishlist.get(i).getKey().category}
+                                    <br>Level: ${wishlist.get(i).getKey().level}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-                                 class="img-responsive">
-                            <div class="caption">
-                                <h3>Basic Programming</h3>
-                                <p>Price: 20 $
-                                    <br>
-                                    <br>Category: Programming
-                                    <br>Level: Easy</p>
-                            </div>
+                    <c:if test="${(i%4==3&&i>0)||(i==wishlist.size()-1)}">
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-                                 class="img-responsive">
-                            <div class="caption">
-                                <h3>Basic Programming</h3>
-                                <p>Price: 20 $
-                                    <br>
-                                    <br>Category: Programming
-                                    <br>Level: Easy</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-                                 class="img-responsive">
-                            <div class="caption">
-                                <h3>Basic Programming</h3>
-                                <p>Price: 20 $
-                                    <br>
-                                    <br>Category: Programming
-                                    <br>Level: Easy</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                     </c:if>
+                </c:forEach>
             </div>
-            <jsp:include page="common/leftPanel.jsp"></jsp:include>
-        </div>
-    </div>
+<jsp:include page="common/leftPanel.jsp"></jsp:include>
+</div>
+</div>
 </div>
 <jsp:include page="common/footer.jsp"></jsp:include>
 </body>

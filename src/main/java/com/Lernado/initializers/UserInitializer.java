@@ -40,10 +40,12 @@ public class UserInitializer {
                         .build(),
                 User.builder().email("jste@lernado.pl")
                         .firstName("Joanna")
-                        .lastName("Stępińska")
-                        .description("I am currently working on my thesis")
+                        .lastName("Stępińśka")
+                        .description("I am super student and I am learning all the time!")
+                        .phoneNumber(456456456)
                         .password(encoder.encode("jste"))
                         .admin(adminRepository.getOne(1))
+                        .nickName("jste")
                         .photoBinary(photoBinary)
                         .build()
         ).forEach(user -> userRepository.save(user));

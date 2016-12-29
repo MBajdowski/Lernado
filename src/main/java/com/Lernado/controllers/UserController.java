@@ -40,7 +40,7 @@ public class UserController {
             user.setAdmin(adminRepository.getOne(1));
             User savedUser = userRepository.save(user);
 
-            UserDetails userDetails = new CurrentUser(savedUser.getEmail(), savedUser.getPassword(), savedUser.getFirstName(), savedUser.getLastName(), savedUser.getIduser());
+            UserDetails userDetails = new CurrentUser(savedUser.getEmail(), savedUser.getPassword(), savedUser.getFirstName(), savedUser.getLastName(), savedUser.getNickName(), savedUser.getDescription(), savedUser.getPhoneNumber(), savedUser.getIduser());
             Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
         }catch (Exception e){
@@ -49,5 +49,27 @@ public class UserController {
             return "signUpPage";
         }
         return "homePage";
+    }
+    @RequestMapping("/edit")
+    public String editProfile(@NonNull User user){
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            CurrentUser currentUser = (CurrentUser)authentication.getPrincipal();
+            User existingUser = userRepository.getByIduser(currentUser.getId());
+            existingUser.setFirstName(user.getFirstName());
+            existingUser.setLastName(user.getLastName());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setDescription(user.getDescription());
+            existingUser.setPhoneNumber(user.getPhoneNumber());
+            existingUser.setNickName(user.getNickName());
+            User savedUser = userRepository.save(existingUser);
+            UserDetails userDetails = new CurrentUser(savedUser.getEmail(), savedUser.getPassword(), savedUser.getFirstName(), savedUser.getLastName(), savedUser.getNickName(), savedUser.getDescription(), savedUser.getPhoneNumber(), savedUser.getIduser());
+            Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(auth);
+
+
+        }catch (Exception e) {
+        }
+        return "profilePage";
     }
 }

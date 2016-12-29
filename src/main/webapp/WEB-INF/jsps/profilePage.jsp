@@ -1,5 +1,6 @@
 <%@page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -38,52 +39,61 @@
                 </div>
                 <div class="col-md-12">
                     <h1>Personal Information:</h1>
-                    <form class="form-horizontal" role="form" method="POST" action="doEdit" enctype="multipart/form-data">
-                        <div class="form-group" ng-mouseover="nameEdit=false" ng-mouseleave="nameEdit=true" ng-init="nameEdit=true">
+                    <form class="form-horizontal" role="form" method="POST" action="/user/edit" ng-init="notChanged=true">
+                        <div class="form-group" ng-mouseover="nameEdit=false" ng-mouseleave="nameEdit=true" ng-init="nameEdit=true; nameInputEnable=true">
                             <div class="col-sm-2">
                             <label class="control-label">Name:</label>
                                 </div>
                             <div class="col-sm-8">
-                            <input class="form-control" id="name" name="name" placeholder="Name" type="text">
+                            <input class="form-control" id="firstName" name="firstName" value="<sec:authentication
+                                property="principal.firstName"/>" type="text" ng-readonly="nameInputEnable" ng-blur="nameInputEnable=true" required>
                                 </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="nameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-hide="nameEdit" ng-click="nameInputEnable=false; notChanged= false"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
-                        <div class="form-group"  ng-mouseover="surnameEdit=false" ng-mouseleave="surnameEdit=true" ng-init="surnameEdit=true">
+                        <div class="form-group"  ng-mouseover="surnameEdit=false" ng-mouseleave="surnameEdit=true" ng-init="surnameEdit=true; surnameInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Surname:</label>
                             </div>
                             <div class="col-sm-8">
-                                <input class="form-control" id="surname" name="surname" placeholder="Surname" type="text">
+                                <input class="form-control" id="lastName" name="lastName" value="<sec:authentication
+                                property="principal.lastName"/>" type="text" ng-readonly="surnameInputEnable" ng-blur="surnameInputEnable=true" required>
                             </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="surnameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-hide="surnameEdit" ng-click="surnameInputEnable=false; notChanged= false"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
-                        <div class="form-group" ng-mouseover="nicknameEdit=false" ng-mouseleave="nicknameEdit=true" ng-init="nicknameEdit=true">
+                        <div class="form-group" ng-mouseover="nicknameEdit=false" ng-mouseleave="nicknameEdit=true" ng-init="nicknameEdit=true; nicknameInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Nick-name:</label>
                             </div>
                             <div class="col-sm-8">
-                                <input class="form-control" id="nickname" name="nickname" placeholder="Nick-name" type="text">
+                                <input class="form-control" id="nickName" name="nickName" value="<sec:authentication
+                                property="principal.nickName"/>" type="text" ng-readonly="nicknameInputEnable" ng-blur="nicknameInputEnable=true">
                             </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="nicknameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-click="nicknameInputEnable=false; notChanged= false" ng-hide="nicknameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
-                        <div class="form-group" ng-mouseover="emailEdit=false" ng-mouseleave="emailEdit=true" ng-init="emailEdit=true">
+                        <div class="form-group" ng-mouseover="emailEdit=false" ng-mouseleave="emailEdit=true" ng-init="emailEdit=true; emailInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Email:</label>
                             </div>
                             <div class="col-sm-8">
-                                <input class="form-control" id="emai" name="email" placeholder="Email" type="email">
+                                <input class="form-control" id="email" name="email" value="<sec:authentication
+                                property="principal.email"/>" type="email" ng-readonly="emailInputEnable" ng-blur="emailInputEnable=true" required>
                             </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="emailEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-click="emailInputEnable=false; notChanged= false" ng-hide="emailEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
-                        <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true" ng-init="telEdit=true">
+                        <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true" ng-init="telEdit=true; telInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Tel. number:</label>
                             </div>
                             <div class="col-sm-8">
-                                <input class="form-control" id="telephone" name="telephone" placeholder="Telephone number" type="text">
+                                <input class="form-control" id="phoneNumber" name="phoneNumber" value="<sec:authentication
+                                property="principal.phoneNumber"/>" type="text" ng-readonly="telInputEnable" ng-blur="telInputEnable=true">
                             </div>
-                            <div class="col-sm-2"><a href="#" ng-hide="telEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-click="telInputEnable=false; notChanged= false" ng-hide="telEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
+                        <div class="form-group">
+                            <button type='submit' class='btn btn-primary pull-right' ng-hide="notChanged">Save changes</button>
+                        </div>
+                    </form>
                         </form>
                     </div>
             </div>

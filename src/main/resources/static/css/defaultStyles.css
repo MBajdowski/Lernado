@@ -6838,4 +6838,13 @@ body {
     text-align: left;
     font-weight: bold;
 }
-
+.roomBorder{
+    background-color: white;
+    border: ridge #BDBDBD;
+    border-radius: 5px;
+}
+.roomPanelBorder{
+    background-color: white;
+    border: ridge #BDBDBD;
+    border-radius: 3px;
+}
