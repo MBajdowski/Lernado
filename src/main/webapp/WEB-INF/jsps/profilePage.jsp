@@ -26,10 +26,10 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class="img-responsive logo">
+                        <img src="${currentPhoto}" class="img-responsive logo">
                     </div>
                     <div class="col-md-7">
-                        <h1>Name Surname</h1>
+                        <h1><sec:authentication property="principal.firstName"/> <sec:authentication property="principal.lastName"/></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-md-12">
                     <h1>Personal Information:</h1>
-                    <form class="form-horizontal" role="form" method="POST" action="/user/edit" ng-init="notChanged=true">
+                    <form class="form-horizontal" role="form" method="POST" action="${pageContext.request.contextPath}/user/edit" ng-init="notChanged=true" enctype="multipart/form-data">
                         <div class="form-group" ng-mouseover="nameEdit=false" ng-mouseleave="nameEdit=true" ng-init="nameEdit=true; nameInputEnable=true">
                             <div class="col-sm-2">
                             <label class="control-label">Name:</label>
@@ -89,6 +89,14 @@
                                 property="principal.phoneNumber"/>" type="text" ng-readonly="telInputEnable" ng-blur="telInputEnable=true">
                             </div>
                             <div class="col-sm-2"><a ng-click="telInputEnable=false; notChanged= false" ng-hide="telEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                        </div>
+                        <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true" ng-init="telEdit=true; telInputEnable=true">
+                            <div class="col-sm-2">
+                                <label class="control-label">Photo:</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input name="photo" type="file" ng-click="notChanged= false">
+                            </div>
                         </div>
                         <div class="form-group">
                             <button type='submit' class='btn btn-primary pull-right' ng-hide="notChanged">Save changes</button>
