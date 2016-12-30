@@ -23,13 +23,13 @@
                         <h1>New Course/Room Creation:</h1>
                     </div>
                 </div>
-                <form class="form-horizontal" role="form" method="POST" action="doCreate" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" method="POST" action="${pageContext.request.contextPath}/createCourseRoom" enctype="multipart/form-data">
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <label class="control-label">Titile</label>
+                            <label class="control-label">Title</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control">
+                            <input name="title" type="text" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -37,7 +37,7 @@
                             <label class="control-label">Description</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control">
+                            <input name="description" type="text" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -45,7 +45,7 @@
                             <label class="control-label">Picture</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="file">
+                            <input type="file" name="photo">
                         </div>
                     </div>
                     <div class="form-group">
@@ -89,10 +89,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <label class="control-label">Sylabus</label>
+                            <label class="control-label">Syllabus</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control">
+                            <input name="syllabus" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -100,13 +100,15 @@
                             <label class="control-label">Price</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control">
+                            <input name="price" type="number" step="0.01" class="form-control" value="0.00" required>
                         </div>
                     </div>
                     </div>
+                    <input name="creatorId" type="hidden" value="<sec:authentication
+                                property="principal.id"/>">
                     <div class="row">
                         <div class="col-md-11 text-right">
-                            <a class="btn btn-primary">Create</a>
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </div>
                 </form>
