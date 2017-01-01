@@ -25,11 +25,11 @@ public class Course {
     private String description;
     private String category;
     private String level;
-    private Byte validated;
-    private Byte highlighted;
+    private boolean validated;
+    private boolean highlighted;
     @Column(length = 1_000_000)
     private byte[] photoBinary;
-    private Byte isPrivate;
+    private boolean isPrivate;
     @ManyToOne
     @JoinColumn(name = "CreatorId", referencedColumnName = "iduser", nullable = false)
     private User creator;

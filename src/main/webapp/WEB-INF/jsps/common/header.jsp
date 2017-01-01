@@ -9,7 +9,7 @@
     <title>Lernado</title>
 </head>
 <body>
-<div class="section footer">
+<div class="section footer" ng-app="">
     <div class="container">
         <div class="row">
             <div class="col-md-1">
@@ -20,13 +20,12 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                <form class="navbar-form navbar-left menuitems" role="search" action="" method="POST">
+                <form class="navbar-form navbar-left menuitems" role="search" action='${pageContext.request.contextPath}/course/search' method="GET">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search courses and rooms">
+                        <input type="text" name="phrase" class="form-control" placeholder="Search courses and rooms">
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>
-                <a href="/course/search">Pusty search</a>
             </div>
             <div class="col-md-3">
                 <ul class="nav navbar-nav navbar-right menuitems">

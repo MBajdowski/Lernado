@@ -31,26 +31,24 @@
                         <h1>Search Course:</h1><br>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-7">
-                        <form class="form-horizontal" role="form" method="POST" action="doSearch">
+                <form class="form-horizontal" role="form" method="GET" action="advanceSearch">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-7">
                             <div class="form-group textfield">
                                 <div class="col-sm-10">
-                                    <input type="text" name="word" class="form-control input-sm">
+                                    <input type="text" name="phrase" class="form-control input-sm">
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-11 text-left">
-                        <h3 class="text-muted">Advanced Searching:<a href="" ng-click="showMenu = !showMenu">
-                            <i class="fa fa-1x fa-fw fa-angle-double-down"></i></a></h3></div>
-                </div>
-                <div ng-init="showMenu=false" ng-show="showMenu">
-                    <form class="form-horizontal" role="form" method="POST" action="doAdvancedSearch">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-11 text-left">
+                            <h3 class="text-muted">Advanced Searching:<a href="" ng-click="showMenu = !showMenu">
+                                <i class="fa fa-1x fa-fw fa-angle-double-down"></i></a></h3></div>
+                    </div>
+                    <div ng-init="showMenu=false" ng-show="showMenu">
                         <div class="row">
                             <div class="col-sm-1">
                                 <label class="control-label">Category</label>
@@ -78,13 +76,13 @@
                                 </select>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-info">Search</button>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-info">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
         </div>
@@ -95,86 +93,52 @@
     <div class="container">
         <div id="paragraph1" class="row">
             <div id="owl-demo" class="owl-carousel owl-theme">
-
-
-                <div class='item'>
-                    <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                        <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                             class='img-responsive'>
-                        <h2>Title</h2>
-                        <p>Description</p>
-                        <input type='hidden' name='idCourse' value="courseId">
-                        <button type='submit' class='btn btn-primary'>More info</button>
-                    </form>
-                </div>
-                <div class='item'>
-                    <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                        <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                             class='img-responsive'>
-                        <h2>Title</h2>
-                        <p>Description</p>
-                        <input type='hidden' name='idCourse' value="courseId">
-                        <button type='submit' class='btn btn-primary'>More info</button>
-                    </form>
-                </div>
-                <div class='item'>
-                    <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                        <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                             class='img-responsive'>
-                        <h2>Title</h2>
-                        <p>Description</p>
-                        <input type='hidden' name='idCourse' value="courseId">
-                        <button type='submit' class='btn btn-primary'>More info</button>
-                    </form>
-                </div>
-                <div class='item'>
-                    <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                        <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                             class='img-responsive'>
-                        <h2>Title</h2>
-                        <p>Description</p>
-                        <input type='hidden' name='idCourse' value="courseId">
-                        <button type='submit' class='btn btn-primary'>More info</button>
-                    </form>
-                </div>
-                <div class='item'>
-                    <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                        <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                             class='img-responsive'>
-                        <h2>Title</h2>
-                        <p>Description</p>
-                        <input type='hidden' name='idCourse' value="courseId">
-                        <button type='submit' class='btn btn-primary'>More info</button>
-                    </form>
-                </div>
-
-
+                <c:choose>
+                    <c:when test="${highlighted.size()!= 0}">
+                        <c:forEach var="i" begin="0" end="${highlighted.size()-1}">
+                            <div class='item'>
+                                <img src="${highlighted.get(i).getValue()}"
+                                     class='img-responsive'>
+                                <h2>${highlighted.get(i).getKey().title}</h2>
+                                <p>${highlighted.get(i).getKey().description}</p>
+                                <a href='${pageContext.request.contextPath}/course/${highlighted.get(i).getKey().idcourse}'>
+                                    <button class='btn btn-primary'>More info</button>
+                                </a>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
             </div>
         </div>
-
     </div>
 </div>
 
 <div class='section'>
-    <c:forEach var="i" begin="0" end="${pairs.size()-1}">
-        <c:if test="${i%3==0}">
-            <div class='container'>
-                <div class='row'>
-        </c:if>
-            <div class='col-md-4'>
-                <div style="margin-bottom: 15px">
-                    <img src="${pairs.get(i).getValue()}"
-                         class='img-responsive'>
-                    <h2>${pairs.get(i).getKey().title}</h2>
-                    <p>${pairs.get(i).getKey().description}</p>
-                    <a href='${pageContext.request.contextPath}/course/${pairs.get(i).getKey().idcourse}'><button class='btn btn-primary'>More info</button></a>
+    <c:choose>
+        <c:when test="${pairs.size()!= 0}">
+            <c:forEach var="i" begin="0" end="${pairs.size()-1}">
+                <c:if test="${i%3==0}">
+                    <div class='container'>
+                    <div class='row'>
+                </c:if>
+                <div class='col-md-4'>
+                    <div style="margin-bottom: 15px">
+                        <img src="${pairs.get(i).getValue()}"
+                             class='img-responsive'>
+                        <h2>${pairs.get(i).getKey().title}</h2>
+                        <p>${pairs.get(i).getKey().description}</p>
+                        <a href='${pageContext.request.contextPath}/course/${pairs.get(i).getKey().idcourse}'>
+                            <button class='btn btn-primary'>More info</button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-         <c:if test="${(i%3==2&&i>0)||(i==pairs.size()-1)}">
-                 </div>
-             </div>
-         </c:if>
-    </c:forEach>
+                <c:if test="${(i%3==2&&i>0)||(i==pairs.size()-1)}">
+                    </div>
+                    </div>
+                </c:if>
+            </c:forEach>
+        </c:when>
+    </c:choose>
 </div>
 
 <jsp:include page="common/footer.jsp"></jsp:include>

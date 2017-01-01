@@ -9,6 +9,7 @@ import com.Lernado.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,16 +35,58 @@ public class CourseController {
     @RequestMapping("/wishlist")
     public String wishlistPage() {return "wishlistPage";}
 
-    @RequestMapping("/search")
-    public String search(Model model) {
+    @RequestMapping(value="/search", method = RequestMethod.GET)
+    public String search(String phrase, Model model) {
         List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();
-        List<Course> courses = courseRepository.findAll();
-
+        List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
+        List<Course> courses;
+        List<Course> highlightedCourses = courseRepository.findByHighlighted(true);
+        if(StringUtils.isEmpty(phrase)){
+            courses = courseRepository.findAll();
+        } else {
+            courses = courseRepository.findByTitleContaining(phrase);
+        }
         for(Course course : courses){
             String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
             pairs.add(new AbstractMap.SimpleEntry(course, base64));
         }
+        for(Course highlightedCourse : highlightedCourses){
+            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(highlightedCourse.getPhotoBinary());
+            highlighted.add(new AbstractMap.SimpleEntry(highlightedCourse, base64));
+        }
         model.addAttribute("pairs", pairs);
+        model.addAttribute("highlighted", highlighted);
+        return "searchPage";
+    }
+
+    @RequestMapping(value="/advanceSearch", method = RequestMethod.GET)
+    public String advanceSearch(Model model, String phrase, String category, String level) {
+        List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();
+        List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
+        List<Course> courses;
+        List<Course> highlightedCourses = courseRepository.findByHighlighted(true);
+        if(StringUtils.isEmpty(phrase)){
+            phrase ="%";
+        } else {
+            phrase = "%" + phrase + "%";
+        }
+        if(StringUtils.isEmpty(category)|| category.equals("Any")){
+            category ="%";
+        }
+        if(StringUtils.isEmpty(level) || level.equals("Any")){
+            level = "%";
+        }
+        courses = courseRepository.findByCategoryLikeAndLevelLikeAndTitleLike(category, level, phrase);
+        for(Course course : courses){
+            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
+            pairs.add(new AbstractMap.SimpleEntry(course, base64));
+        }
+        for(Course highlightedCourse : highlightedCourses){
+            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(highlightedCourse.getPhotoBinary());
+            highlighted.add(new AbstractMap.SimpleEntry(highlightedCourse, base64));
+        }
+        model.addAttribute("pairs", pairs);
+        model.addAttribute("highlighted", highlighted);
         return "searchPage";
     }
 
