@@ -68,7 +68,7 @@
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-2">
-                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class="img-responsive logo">
+                            <img src="${currentTeacherPhoto}" class="img-responsive logo">
                         </div>
                         <div class="col-md-10">
                             <div class="row">
@@ -79,68 +79,6 @@
                                     <p> ${currentTeacher.description}</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <br><br>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1>Lesson1 - Title of lesson1</h1>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x fa-file-movie-o fa-fw"></i>Video1 - Title of the
-                                        video1
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x fa-file-movie-o fa-fw"></i>Video2 - Title of the
-                                        video2
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw fa-file-photo-o"></i>Image1 - Title
-                                        of the image1
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1>Lesson2 - Title of lesson2</h1>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw fa-file-zip-o"></i>ZipFile - Title
-                                        of the zipFile
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw -pdf-o fa-file-text-o"></i>Txt -
-                                        Title of the txt
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw -photo-o fa-file-pdf-o"></i>Pdf -
-                                        Title of the pdf
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw -photo-o fa-file-code-o"></i>Code -
-                                        Title of the code
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

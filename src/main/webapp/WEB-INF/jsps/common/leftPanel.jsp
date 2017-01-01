@@ -5,27 +5,27 @@
 <html><body>
     <div class="col-md-3">
     <ul class="kolumna list-group">
-        <a href="/user/profile">
+        <a href="${pageContext.request.contextPath}/user/profile">
             <li class="list-group-item h2">
                 My Profile
             </li>
         </a>
-        <a href="/coursesPage">
+        <a href="${pageContext.request.contextPath}/coursesPage">
             <li class="list-group-item h2">
                 My Courses
             </li>
         </a>
-        <a href="/room/">
+        <a href="${pageContext.request.contextPath}/room/">
             <li class="list-group-item h2">
                 My Rooms
             </li>
         </a>
-        <a href="/course/wishlist">
+        <a href="${pageContext.request.contextPath}/course/wishlist">
             <li class="list-group-item h2">
                 Wishlist
             </li>
         </a>
-        <a href="/createPage">
+        <a href="${pageContext.request.contextPath}/createPage">
             <li class="list-group-item h2">
                 Create Course/Room
             </li>

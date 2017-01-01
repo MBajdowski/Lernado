@@ -1,6 +1,5 @@
 package com.Lernado.controllers;
 
-import com.Lernado.beans.RoomCourseBean;
 import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.UserRepository;
 import com.Lernado.model.Course;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
@@ -106,13 +104,13 @@ public class UserController {
         model.addAttribute("rooms", rooms);
     }
 
-    private User getCurrentUser(){
+    public User getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser currentUser = (CurrentUser)authentication.getPrincipal();
         return userRepository.getByIduser(currentUser.getId());
     }
 
-    private void setAuthUser(User user){
+    public void setAuthUser(User user){
         UserDetails userDetails = new CurrentUser(user.getEmail(), user.getPassword(),
                 user.getFirstName(), user.getLastName(), user.getNickName(),
                 user.getDescription(), user.getPhoneNumber(), user.getIduser());

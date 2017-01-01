@@ -31,7 +31,7 @@ public class CourseController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private MainController mainController;
+    private UserController userController;
 
 
     @RequestMapping("/wishlist")
@@ -96,12 +96,18 @@ public class CourseController {
     private String showCoursePage(@PathVariable("id") int courseId, Model model){
 
         Course currentCourse = courseRepository.getOne(courseId);
+        User currentUser = userController.getCurrentUser();
+        model.addAttribute("currentCourse", currentCourse);
         String base64 =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getPhotoBinary());
+        model.addAttribute("currentPhoto", base64);
+
+        if(currentUser.getAttends().contains(currentCourse)||currentUser.getCreatedCourses().contains(currentCourse)){
+            return "coursePage";
+        }
+
         String base64Teacher =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getCreator().getPhotoBinary());
-        model.addAttribute("currentPhoto", base64);
-        model.addAttribute("currentCourse", currentCourse);
         model.addAttribute("currentTeacher",currentCourse.getCreator());
         model.addAttribute("currentTeacherPhoto", base64Teacher);
 
@@ -124,6 +130,6 @@ public class CourseController {
                 .build();
         courseRepository.save(course);
 
-        return mainController.home(model);
+        return showCoursePage(course.getIdcourse(), model);
     }
 }

@@ -1,4 +1,3 @@
-<%@page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -25,11 +24,11 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <img src="${pageContext.request.contextPath}/images/courseDefault.jpg" class="img-responsive logo">
+                        <img src="${currentPhoto}" class="img-responsive logo">
                     </div>
                 </div>
-                <h1 class="text-center">Titile</h1>
-                <p class="text-center">Description</p>
+                <h1 class="text-center">${currentCourse.getTitle()}</h1>
+                <p class="text-center">${currentCourse.getDescription()}</p>
                 </div>
 
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
@@ -38,11 +37,11 @@
 
                 <div class="row">
                     <div class="col-md-10">
-                <h3>Level: Medium</h3>
-                <h3>Category: Programming</h3>
+                <h3>Level: ${currentCourse.getLevel()}</h3>
+                <h3>Category: ${currentCourse.getCategory()}</h3>
                         </div>
                         <div class="col-md-2">
-                        Go to chat-room <form id="myForm2" class="form-horizontal" role="form" method="POST" action="doChat"><a onclick="chat()"><i class='fa fa-3x fa-fw fa-envelope-o'></i></a></form>
+                        Go to chat-room <form id="myForm2" class="form-horizontal" role="form" method="POST" action=""><a onclick="chat()"><i class='fa fa-3x fa-fw fa-envelope-o'></i></a></form>
                     </div>
                 </div>
                 <br><br>

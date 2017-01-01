@@ -1,6 +1,6 @@
-<%@page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -109,7 +109,7 @@
         </div>
         <div class="row">
             <div id="courses2" class="col-md-6">
-                <h1>Your Courses:&nbsp;</h1>
+                <h1>Your Courses:</h1>
                 <ul class="list-group">
                     <c:choose>
                         <c:when test="${courses.size() >= 1}">
@@ -122,7 +122,7 @@
                     </c:choose>
                 </ul>
             </div>
-            <div id="rooms" class="col-md-6">
+            <div id="rooms2" class="col-md-6">
                 <h1>Your Rooms:</h1>
                 <ul class="list-group">
                     <c:choose>
