@@ -111,33 +111,29 @@
             <div id="courses2" class="col-md-6">
                 <h1>Your Courses:&nbsp;</h1>
                 <ul class="list-group">
-                    <form id="myForm1" class="form-horizontal" role="form" method="POST" action="doShowCourse">
-                        <a onclick="">
-                            <li class="h3 list-group-item list-group-item-success">Tytuł1</li>
-                        </a>
-                        <a onclick="">
-                            <li class="h3 list-group-item list-group-item-success">Tytuł2</li>
-                        </a>
-                        <a onclick="">
-                            <li class="h3 list-group-item list-group-item-success">Tytuł3</li>
-                        </a>
-                    </form>
+                    <c:choose>
+                        <c:when test="${courses.size() >= 1}">
+                            <c:forEach var="i" begin="0" end="${courses.size()-1}">
+                                <a href='${pageContext.request.contextPath}/course/${courses.get(i).getIdcourse()}'>
+                                    <li class="h3 list-group-item list-group-item-success">${courses.get(i).getTitle()}</li>
+                                </a>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
                 </ul>
             </div>
             <div id="rooms" class="col-md-6">
                 <h1>Your Rooms:</h1>
                 <ul class="list-group">
-                    <form id="myForm2" class="form-horizontal" role="form" method="POST" action="doShowCourse">
-                        <a onclick="">
-                            <li class="h3 list-group-item list-group-item-success">Tytuł1</li>
-                        </a>
-                        <a onclick="">
-                            <li class="h3 list-group-item list-group-item-success">Tytuł2</li>
-                        </a>
-                        <a onclick="">
-                            <li class="h3 list-group-item list-group-item-success">Tytuł3</li>
-                        </a>
-                    </form>
+                    <c:choose>
+                        <c:when test="${rooms.size() >= 1}">
+                            <c:forEach var="i" begin="0" end="${rooms.size()-1}">
+                                <a href='${pageContext.request.contextPath}/room/${rooms.get(i).getIdroom()}'>
+                                    <li class="h3 list-group-item list-group-item-success">${rooms.get(i).getTitle()}</li>
+                                </a>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
                 </ul>
             </div>
         </div>

@@ -27,7 +27,8 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <img src="${pageContext.request.contextPath}/images/computerTlo.jpg" class="img-responsive logo">
+                        <img src="${pageContext.request.contextPath}/images/computerTlo.jpg"
+                             class="img-responsive logo">
                     </div>
                 </div>
                 <div class="row">
@@ -36,24 +37,34 @@
                                 property="principal.firstName"/>!</h1>
 
                         <p class="text-center menuitems">Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                        <br>Ut enim ad minim veniam, quis nostrud</p>
-                    <h2>My Courses:</h2>
-                    <ul class="list-group">
-                        <li class="h3 list-group-item">Computing Technologies for the Web</li>
-                        <li class="list-group-item list-group-item-success h3">Software Engineering</li>
-                        <li class="list-group-item list-group-item-success h3">User Interfaces</li>
-                        <li class="list-group-item list-group-item-success h3">Electronic Components and Circuits</li>
-                        <li class="list-group-item list-group-item-success h3">Real Time Systems</li>
-                    </ul>
-                    <h2>My Rooms:</h2>
-                    <ul class="list-group">
-                        <li class="h3 list-group-item">EITI- new students</li>
-                        <li class="list-group-item list-group-item-success h3">Course 16Z - Software Engineering</li>
-                        <li class="list-group-item list-group-item-success h3">ECE group</li>
-                    </ul>
-                    <br>
-                    <h1>Popoular courses:</h1>
+                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                            <br>Ut enim ad minim veniam, quis nostrud</p>
+                        <h2>My Courses:</h2>
+                        <ul class="list-group">
+                            <c:choose>
+                                <c:when test="${courses.size() >= 1}">
+                                    <c:forEach var="i" begin="0" end="${courses.size()-1}">
+                                        <a href='${pageContext.request.contextPath}/course/${courses.get(i).getIdcourse()}'>
+                                            <li class="h3 list-group-item">${courses.get(i).getTitle()}</li>
+                                        </a>
+                                    </c:forEach>
+                                </c:when>
+                            </c:choose>
+                        </ul>
+                        <h2>My Rooms:</h2>
+                        <ul class="list-group">
+                            <c:choose>
+                                <c:when test="${rooms.size() >= 1}">
+                                    <c:forEach var="i" begin="0" end="${rooms.size()-1}">
+                                        <a href='${pageContext.request.contextPath}/room/${rooms.get(i).getIdroom()}'>
+                                            <li class="h3 list-group-item">${rooms.get(i).getTitle()}</li>
+                                        </a>
+                                    </c:forEach>
+                                </c:when>
+                            </c:choose>
+                        </ul>
+                        <br>
+                        <h1>Popoular courses:</h1>
                         <div class="section highlightedCarousel">
                             <div class="container">
                                 <div id="paragraph1" class="row">
@@ -118,7 +129,7 @@
                 </div>
             </div>
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
-         </div>
+        </div>
     </div>
 </div>
 <jsp:include page="common/footer.jsp"></jsp:include>

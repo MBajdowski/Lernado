@@ -1,6 +1,7 @@
 package com.Lernado.controllers;
 
 import com.Lernado.beans.RoomCourseBean;
+import com.Lernado.model.Course;
 import com.Lernado.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -20,7 +22,8 @@ public class MainController {
     private CourseController courseController;
     @Autowired
     private RoomController roomController;
-
+    @Autowired
+    private UserController userController;
 
     @RequestMapping("/")
     public String index() {return "loginPage"; }
@@ -34,7 +37,8 @@ public class MainController {
     }
 
     @RequestMapping("/home")
-    public String home() {
+    public String home(Model model) throws IOException {
+        userController.getUserCoursesAndRooms(model);
         return "homePage";
     }
 
@@ -54,12 +58,12 @@ public class MainController {
     }
 
     @RequestMapping("/createCourseRoom")
-    public String redirectCourseRoom(RoomCourseBean rcBean, MultipartFile photo) throws IOException {
+    public String redirectCourseRoom(RoomCourseBean rcBean, MultipartFile photo, Model model) throws IOException {
         if (photo!=null && photo.getSize()!=0)
             rcBean.setPhotoBinary(photo.getBytes());
 
         if (rcBean.getType()==null || rcBean.getType().equals("room"))
             return roomController.createRoom(rcBean);
-        return courseController.createCourse(rcBean);
+        return courseController.createCourse(rcBean, model);
     }
 }

@@ -1,7 +1,10 @@
 package com.Lernado.controllers;
 
+import com.Lernado.beans.RoomCourseBean;
 import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.UserRepository;
+import com.Lernado.model.Course;
+import com.Lernado.model.Room;
 import com.Lernado.model.User;
 import com.Lernado.security.CurrentUser;
 import lombok.NonNull;
@@ -18,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -34,7 +39,7 @@ public class UserController {
     @RequestMapping("/profile")
     public String profilePage(Model model) {
         User existingUser = getCurrentUser();
-
+        getUserCoursesAndRooms(model);
         String base64 =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(existingUser.getPhotoBinary());
         model.addAttribute("currentPhoto", base64);
@@ -86,6 +91,19 @@ public class UserController {
         }catch (Exception e) {
         }
         return "profilePage";
+    }
+
+    public void getUserCoursesAndRooms(Model model) {
+        User user = getCurrentUser();
+        List<Course> courses = user.getAttends();
+        List<Course> createdCourses = user. getCreatedCourses();
+        for(int i=0; i< createdCourses.size(); i++){
+            courses.add(createdCourses.get(i));
+        }
+
+        List<Room> rooms = user.getRooms();
+        model.addAttribute("courses", courses);
+        model.addAttribute("rooms", rooms);
     }
 
     private User getCurrentUser(){

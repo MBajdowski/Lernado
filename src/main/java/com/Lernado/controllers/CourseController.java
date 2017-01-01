@@ -30,6 +30,8 @@ public class CourseController {
     private AdminRepository adminRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MainController mainController;
 
 
     @RequestMapping("/wishlist")
@@ -107,7 +109,7 @@ public class CourseController {
     }
 
     @RequestMapping("/create")
-    public String createCourse(RoomCourseBean rcBean) throws IOException {
+    public String createCourse(RoomCourseBean rcBean, Model model) throws IOException {
         User user = userRepository.getOne(rcBean.getCreatorId());
 
         Course course = Course.builder().admin(adminRepository.getOne(1))
@@ -122,6 +124,6 @@ public class CourseController {
                 .build();
         courseRepository.save(course);
 
-        return "homePage";
+        return mainController.home(model);
     }
 }
