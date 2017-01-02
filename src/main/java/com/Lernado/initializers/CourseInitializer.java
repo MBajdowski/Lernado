@@ -82,15 +82,15 @@ public class CourseInitializer {
                         .price(120.0)
                         .highlighted(true)
                         .build(),
-                Course.builder().title("Title7")
-                        .creator(userRepository.getByIduser(1))
+                Course.builder().title("Asia's Course")
+                        .creator(userRepository.getByIduser(2))
                         .admin(adminRepository.getOne(1))
-                        .description("Description7")
+                        .description("Description of Asia's Course")
                         .category("Telecommunication")
                         .level("Hard")
                         .photoBinary(photoBinary)
-                        .price(120.0)
-                        .highlighted(true)
+                        .price(99.99)
+                        .highlighted(false)
                         .build()
         ).forEach(course -> courseRepository.save(course));
     }

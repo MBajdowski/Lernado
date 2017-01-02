@@ -3,8 +3,10 @@ package com.Lernado.controllers;
 import com.Lernado.beans.RoomCourseBean;
 import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.CourseRepository;
+import com.Lernado.managers.LessonRepository;
 import com.Lernado.managers.UserRepository;
 import com.Lernado.model.Course;
+import com.Lernado.model.Lesson;
 import com.Lernado.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ public class CourseController {
     private AdminRepository adminRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LessonRepository lessonRepository;
     @Autowired
     private UserController userController;
 
@@ -131,5 +136,24 @@ public class CourseController {
         courseRepository.save(course);
 
         return showCoursePage(course.getIdcourse(), model);
+    }
+
+    @RequestMapping("{id}/addLesson")
+    public String addLesson(@PathVariable("id") int courseId, Model model, HttpServletResponse res) throws IOException {
+        User currentUser = userController.getCurrentUser();
+        Course currentCourse =  courseRepository.getOne(courseId);
+        if(currentUser.getIduser() != currentCourse.getCreator().getIduser())
+            res.sendError(401);
+
+        Lesson newLesson = Lesson.builder().title("Example title")
+                .course(currentCourse)
+                .number(currentCourse.getLessons().size()+1)
+                .build();
+        lessonRepository.save(newLesson);
+
+        currentCourse.getLessons().add(newLesson);
+        courseRepository.save(currentCourse);
+
+        return showCoursePage(courseId, model);
     }
 }
