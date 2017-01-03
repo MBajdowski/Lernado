@@ -20,7 +20,7 @@ public class Room {
     private int idroom;
     private String title;
     private String description;
-    private Byte isPrivate;
+    private boolean isPrivate;
     @Column(length = 1_000_000)
     private byte[] photoBinary;
     @ManyToOne

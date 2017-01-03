@@ -1,6 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="java.util.*" %>
-<%@page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <html>
@@ -94,7 +92,7 @@
         <div id="paragraph1" class="row">
             <div id="owl-demo" class="owl-carousel owl-theme">
                 <c:choose>
-                    <c:when test="${highlighted.size()!= 0}">
+                    <c:when test="${highlighted.size()>= 1}">
                         <c:forEach var="i" begin="0" end="${highlighted.size()-1}">
                             <div class='item'>
                                 <img src="${highlighted.get(i).getValue()}"
@@ -114,8 +112,13 @@
 </div>
 
 <div class='section'>
+    <div class='container'>
+        <div class='row'>
+            <h1>Courses:</h1>
+        </div>
+    </div>
     <c:choose>
-        <c:when test="${pairs.size()!= 0}">
+        <c:when test="${pairs.size()>= 1}">
             <c:forEach var="i" begin="0" end="${pairs.size()-1}">
                 <c:if test="${i%3==0}">
                     <div class='container'>
@@ -139,6 +142,53 @@
             </c:forEach>
         </c:when>
     </c:choose>
+    <div class='container'>
+        <div class='row'>
+            <div class="col-md-11 text-right">
+                <a>Show more courses--></a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class='section' ng-hide="${advanceSearch}">
+    <div class='container'>
+        <div class='row'>
+            <h1>Rooms:</h1>
+        </div>
+    </div>
+    <c:choose>
+        <c:when test="${rooms.size()>=1}">
+            <c:forEach var="i" begin="0" end="${rooms.size()-1}">
+                <c:if test="${i%3==0}">
+                    <div class='container'>
+                    <div class='row'>
+                </c:if>
+                <div class='col-md-4'>
+                    <div style="margin-bottom: 15px">
+                        <img src="${rooms.get(i).getValue()}"
+                             class='img-responsive'>
+                        <h2>${rooms.get(i).getKey().title}</h2>
+                        <p>${rooms.get(i).getKey().description}</p>
+                        <a href='${pageContext.request.contextPath}/room/${rooms.get(i).getKey().idroom}'>
+                            <button class='btn btn-primary'>More info</button>
+                        </a>
+                    </div>
+                </div>
+                <c:if test="${(i%3==2&&i>0)||(i==rooms.size()-1)}">
+                    </div>
+                    </div>
+                </c:if>
+            </c:forEach>
+        </c:when>
+    </c:choose>
+    <div class='container'>
+        <div class='row'>
+            <div class="col-md-11 text-right">
+                <a>Show more rooms--></a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <jsp:include page="common/footer.jsp"></jsp:include>

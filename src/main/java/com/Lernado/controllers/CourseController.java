@@ -37,6 +37,8 @@ public class CourseController {
     private LessonRepository lessonRepository;
     @Autowired
     private UserController userController;
+    @Autowired
+    private RoomController roomController;
 
 
     @RequestMapping("/wishlist")
@@ -45,6 +47,7 @@ public class CourseController {
     @RequestMapping(value="/search", method = RequestMethod.GET)
     public String search(String phrase, Model model) {
         List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();
+        List<AbstractMap.SimpleEntry> rooms = roomController.searchRooms(phrase);
         List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
         List<Course> courses;
         List<Course> highlightedCourses = courseRepository.findByHighlighted(true);
@@ -63,25 +66,36 @@ public class CourseController {
         }
         model.addAttribute("pairs", pairs);
         model.addAttribute("highlighted", highlighted);
+        model.addAttribute("rooms", rooms);
+        model.addAttribute("advanceSearch", false);
         return "searchPage";
     }
 
     @RequestMapping(value="/advanceSearch", method = RequestMethod.GET)
     public String advanceSearch(Model model, String phrase, String category, String level) {
+        boolean ifAddRooms = true;
         List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();
         List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
+        List<AbstractMap.SimpleEntry> rooms = new ArrayList<>();
         List<Course> courses;
         List<Course> highlightedCourses = courseRepository.findByHighlighted(true);
+        if(StringUtils.isEmpty(category)|| category.equals("Any")){
+            category ="%";
+        } else {
+            ifAddRooms = false;
+        }
+        if(StringUtils.isEmpty(level) || level.equals("Any")){
+            level = "%";
+        } else {
+            ifAddRooms = false;
+        }
+        if(ifAddRooms){
+            rooms = roomController.searchRooms(phrase);
+        }
         if(StringUtils.isEmpty(phrase)){
             phrase ="%";
         } else {
             phrase = "%" + phrase + "%";
-        }
-        if(StringUtils.isEmpty(category)|| category.equals("Any")){
-            category ="%";
-        }
-        if(StringUtils.isEmpty(level) || level.equals("Any")){
-            level = "%";
         }
         courses = courseRepository.findByCategoryLikeAndLevelLikeAndTitleLike(category, level, phrase);
         for(Course course : courses){
@@ -94,6 +108,10 @@ public class CourseController {
         }
         model.addAttribute("pairs", pairs);
         model.addAttribute("highlighted", highlighted);
+        model.addAttribute("advanceSearch", !ifAddRooms);
+        if(ifAddRooms){
+            model.addAttribute("rooms", rooms);
+        }
         return "searchPage";
     }
 
