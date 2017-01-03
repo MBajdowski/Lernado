@@ -21,6 +21,7 @@ public class Room {
     private String title;
     private String description;
     private Byte isPrivate;
+    @Column(length = 1_000_000)
     private byte[] photoBinary;
     @ManyToOne
     @JoinColumn(name = "AdminId", referencedColumnName = "idadmin", nullable = false)

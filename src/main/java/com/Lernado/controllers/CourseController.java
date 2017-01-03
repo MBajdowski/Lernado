@@ -162,8 +162,7 @@ public class CourseController {
         User currentUser = userController.getCurrentUser();
 
         currentUser.getAttends().add(courseRepository.getOne(courseId));
-        currentUser = userRepository.save(currentUser);
-        userController.setAuthUser(currentUser);
+        userController.setAuthUser(userRepository.save(currentUser));
 
         return showCoursePage(courseId, model);
     }
