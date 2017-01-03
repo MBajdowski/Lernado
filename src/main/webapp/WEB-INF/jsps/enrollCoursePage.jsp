@@ -40,14 +40,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <form class="form-horizontal" role="form" method="POST" action="">
+                            <form class="form-horizontal" role="form" method="POST" action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/enroll">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-lg btn-success">Enroll for the course for
                                         ${currentCourse.price}
                                     </button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

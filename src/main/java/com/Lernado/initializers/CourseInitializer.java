@@ -4,14 +4,18 @@ import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.CourseRepository;
 import com.Lernado.managers.UserRepository;
 import com.Lernado.model.Course;
+import com.Lernado.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 @Service
@@ -72,11 +76,11 @@ public class CourseInitializer {
                         .price(120.0)
                         .highlighted(true)
                         .build(),
-                Course.builder().title("Title6")
-                        .creator(userRepository.getByIduser(1))
+                Course.builder().title("Breaking internet connection")
+                        .creator(userRepository.getByIduser(2))
                         .admin(adminRepository.getOne(1))
-                        .description("Description6")
-                        .category("Design")
+                        .description("I will teach you, how, only by own presence, break internet connections")
+                        .category("Telecommunication")
                         .level("Medium")
                         .photoBinary(photoBinary)
                         .price(120.0)

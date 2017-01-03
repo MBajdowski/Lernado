@@ -18,7 +18,7 @@
     <script src="${pageContext.request.contextPath}/js/carouselHighlited.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
-<body ng-app="">
+<body ng-app="" ng-init="creator=(${currentCourse.getCreator().getIduser()}==<sec:authentication property="principal.Id"/>)">
 <jsp:include page="common/header.jsp"></jsp:include>
 <div class="section tlo">
     <div class="container">
@@ -56,13 +56,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-1">
-                                            <a href="#"><i class="fa fa-3x fa-fw fa-trash-o pull-right"></i></a>
+                                            <a ng-show="creator" href="#"><i class="fa fa-3x fa-fw fa-trash-o pull-right "></i></a>
                                         </div>
                                         <div class="col-md-10">
                                             <h1>Lesson ${currentCourse.getLessons().get(i).getNumber()} - ${currentCourse.getLessons().get(i).getTitle()}</h1>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="#"><i class="fa fa-3x fa-edit fa-fw"></i></a>
+                                            <a ng-show="creator" href="#"><i class="fa fa-3x fa-edit fa-fw"></i></a>
                                         </div>
                                         <table class="table">
                                             <tbody>
@@ -72,14 +72,14 @@
                                                     Title of the video1
                                                 </td>
                                                 <td>
-                                                    <i class="-circle-o fa fa-2x fa-close fa-fw pull-right"></i>
+                                                    <i ng-show="creator" class="-circle-o fa fa-2x fa-close fa-fw pull-right"></i>
                                                 </td>
                                             </tr>
                                             </tr>
                                             </tbody>
                                         </table>
                                         <div class="col-md-12">
-                                            <a href="#"><h3 class="text-right">Add new material<i
+                                            <a ng-show="creator" href="#"><h3 class="text-right">Add new material<i
                                                     class="fa fa-1x fa-file fa-fw pull-right"></i></h3></a>
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="${pageContext.request.contextPath}/course/${currentCourse.getIdcourse()}/addLesson"><h2><i class="fa fa-1x fa-fw fa-university pull-left"></i>New Lesson</h2></a>
+                            <a ng-show="creator" href="${pageContext.request.contextPath}/course/${currentCourse.getIdcourse()}/addLesson"><h2><i class="fa fa-1x fa-fw fa-university pull-left"></i>New Lesson</h2></a>
                         </div>
                     </div>
                 </div>

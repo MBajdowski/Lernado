@@ -156,4 +156,15 @@ public class CourseController {
 
         return showCoursePage(courseId, model);
     }
+
+    @RequestMapping("{id}/enroll")
+    public String enrollStudent(@PathVariable("id") int courseId, Model model){
+        User currentUser = userController.getCurrentUser();
+
+        currentUser.getAttends().add(courseRepository.getOne(courseId));
+        currentUser = userRepository.save(currentUser);
+        userController.setAuthUser(currentUser);
+
+        return showCoursePage(courseId, model);
+    }
 }
