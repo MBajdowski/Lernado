@@ -86,6 +86,7 @@ public class UserController {
             String base64 =
                     "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(savedUser.getPhotoBinary());
             model.addAttribute("currentPhoto", base64);
+            getUserCoursesAndRooms(model);
         }catch (Exception e) {
         }
         return "profilePage";

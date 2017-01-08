@@ -1,14 +1,13 @@
 package com.Lernado.controllers;
 
 import com.Lernado.beans.JmsMessage;
+import com.Lernado.beans.MaterialBean;
 import com.Lernado.beans.RoomCourseBean;
+import com.Lernado.managers.*;
 import com.Lernado.jms.JmsService;
-import com.Lernado.managers.AdminRepository;
-import com.Lernado.managers.CourseRepository;
-import com.Lernado.managers.LessonRepository;
-import com.Lernado.managers.UserRepository;
 import com.Lernado.model.Course;
 import com.Lernado.model.Lesson;
+import com.Lernado.model.Material;
 import com.Lernado.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class CourseController {
     private UserRepository userRepository;
     @Autowired
     private LessonRepository lessonRepository;
+    @Autowired
+    private MaterialRepository materialRepository;
     @Autowired
     private UserController userController;
     @Autowired
@@ -118,7 +121,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    private String showCoursePage(@PathVariable("id") int courseId, Model model){
+    public String showCoursePage(@PathVariable("id") int courseId, Model model){
 
         Course currentCourse = courseRepository.getOne(courseId);
         User currentUser = userController.getCurrentUser();
@@ -126,6 +129,8 @@ public class CourseController {
         String base64 =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getPhotoBinary());
         model.addAttribute("currentPhoto", base64);
+        List<Material> userMaterials = currentUser.getMaterials();
+        model.addAttribute("userMaterials", userMaterials);
 
         if(currentUser.getAttends().contains(currentCourse)||currentUser.getCreatedCourses().contains(currentCourse)){
             return "coursePage";
@@ -135,6 +140,7 @@ public class CourseController {
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getCreator().getPhotoBinary());
         model.addAttribute("currentTeacher",currentCourse.getCreator());
         model.addAttribute("currentTeacherPhoto", base64Teacher);
+        model.addAttribute("currentLessonId", 0);
 
         return "enrollCoursePage";
     }
@@ -173,7 +179,8 @@ public class CourseController {
 
         currentCourse.getLessons().add(newLesson);
         courseRepository.save(currentCourse);
-
+        List<Material> userMaterials = currentUser.getMaterials();
+        model.addAttribute("userMaterials", userMaterials);
         return showCoursePage(courseId, model);
     }
 
@@ -225,5 +232,61 @@ public class CourseController {
         jmsService.sendTo(String.valueOf(courseId),jmsMessage);
 
         return chatRoom(courseId,model);
+    }
+
+    @RequestMapping("/addMaterial")
+    public String addMaterial(int lessonId, MaterialBean mBean, String type, Model model,
+                              HttpServletResponse res, String path) throws IOException {
+        User currentUser = userController.getCurrentUser();
+        //Course currentCourse =  courseRepository.getOne(courseId);
+        Lesson currentLesson = lessonRepository.getOne(lessonId);
+        if(currentUser.getIduser() != currentLesson.getCourse().getCreator().getIduser())
+            res.sendError(401);
+
+        Material newMaterial = Material.builder().title(mBean.getTitle())
+                .description(mBean.getDescription())
+                .path(path)
+                .type(type)
+                .creator(currentUser)
+                .build();
+        newMaterial = materialRepository.save(newMaterial);
+
+        currentLesson.getMaterials().add(newMaterial);
+        lessonRepository.save(currentLesson);
+        currentUser.getMaterials().add(newMaterial);
+        userController.setAuthUser(userRepository.save(currentUser));
+
+        List<Material> userMaterials = currentUser.getMaterials();
+        model.addAttribute("userMaterials", userMaterials);
+        return showCoursePage(currentLesson.getCourse().getIdcourse(), model);
+    }
+    @RequestMapping("{idlesson}/{idmaterial}/removeMaterial")
+    public String removeMaterial(@PathVariable("idlesson") int lessonId,@PathVariable("idmaterial") int materialId, Model model){
+        Lesson currentLesson = lessonRepository.getOne(lessonId);
+        Material material = materialRepository.getOne(materialId);
+        User currentUser = userController.getCurrentUser();
+        currentLesson.getMaterials().remove(material);
+        lessonRepository.save(currentLesson);
+
+        List<Material> userMaterials = currentUser.getMaterials();
+        model.addAttribute("userMaterials", userMaterials);
+        return showCoursePage(currentLesson.getCourse().getIdcourse(), model);
+    }
+    @RequestMapping("{idlesson}/{idmaterial}/addExistingMaterial")
+    public String addExistingMaterial(@PathVariable("idlesson") int lessonId,@PathVariable("idmaterial") int materialId,
+                                      Model model, HttpServletResponse res) throws IOException{
+        User currentUser = userController.getCurrentUser();
+        Lesson currentLesson = lessonRepository.getOne(lessonId);
+        if(currentUser.getIduser() != currentLesson.getCourse().getCreator().getIduser())
+            res.sendError(401);
+
+        Material material = materialRepository.getOne(materialId);
+
+        currentLesson.getMaterials().add(material);
+        lessonRepository.save(currentLesson);
+
+        List<Material> userMaterials = currentUser.getMaterials();
+        model.addAttribute("userMaterials", userMaterials);
+        return showCoursePage(currentLesson.getCourse().getIdcourse(), model);
     }
 }
