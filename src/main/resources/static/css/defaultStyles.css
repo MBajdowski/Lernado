@@ -6848,3 +6848,17 @@ body {
     border: ridge #BDBDBD;
     border-radius: 3px;
 }
+
+.customMessage{
+    margin: 5px;
+    background-color: #e1e1e1;
+    border: solid black 1px;
+    border-radius: 3px;
+}
+
+.customOwnMessage{
+    margin: 5px;
+    background-color: #B7DEE5;
+    border: solid black 1px;
+    border-radius: 3px;
+}

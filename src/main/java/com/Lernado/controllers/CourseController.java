@@ -1,6 +1,8 @@
 package com.Lernado.controllers;
 
+import com.Lernado.beans.JmsMessage;
 import com.Lernado.beans.RoomCourseBean;
+import com.Lernado.jms.JmsService;
 import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.CourseRepository;
 import com.Lernado.managers.LessonRepository;
@@ -183,5 +185,45 @@ public class CourseController {
         userController.setAuthUser(userRepository.save(currentUser));
 
         return showCoursePage(courseId, model);
+    }
+
+    @RequestMapping(value = "/{id}/chatRoom", method = RequestMethod.GET)
+    public String chatRoom(@PathVariable("id") int courseId, Model model){
+        Course currentCourse = courseRepository.getOne(courseId);
+        User currentUser = userController.getCurrentUser();
+        model.addAttribute("currentCourse", currentCourse);
+        String base64 =
+                "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getPhotoBinary());
+        model.addAttribute("currentPhoto", base64);
+
+        if(currentUser.getAttends().contains(currentCourse)||currentUser.getCreatedCourses().contains(currentCourse)){
+            JmsService jmsService = new JmsService();
+            List<JmsMessage> chat = jmsService.receiveAllFrom(String.valueOf(currentCourse.getIdcourse()));
+            model.addAttribute("chat", chat);
+            model.addAttribute("principalId", currentUser.getIduser());
+            return "courseChatPage";
+        }
+
+        String base64Teacher =
+                "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getCreator().getPhotoBinary());
+        model.addAttribute("currentTeacher",currentCourse.getCreator());
+        model.addAttribute("currentTeacherPhoto", base64Teacher);
+
+        return "enrollCoursePage";
+    }
+
+    @RequestMapping(value = "/{id}/chatRoom", method = RequestMethod.POST)
+    public String chatRoomMsgPost(@PathVariable("id") int courseId, String message, Model model){
+        User currentUser = userController.getCurrentUser();
+
+        JmsService jmsService = new JmsService();
+        JmsMessage jmsMessage = JmsMessage.builder()
+                    .iduser(currentUser.getIduser())
+                    .author(currentUser.getFirstName()+" "+currentUser.getLastName())
+                    .message(message)
+                    .build();
+        jmsService.sendTo(String.valueOf(courseId),jmsMessage);
+
+        return chatRoom(courseId,model);
     }
 }

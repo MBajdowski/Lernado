@@ -44,8 +44,7 @@
                         </div>
                         <div class="col-md-2">
                             Go to chat-room
-                            <form id="myForm2" class="form-horizontal" role="form" method="POST" action=""><a
-                                    onclick="chat()"><i class='fa fa-3x fa-fw fa-envelope-o'></i></a></form>
+                            <a href="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/chatRoom"><i class='fa fa-3x fa-fw fa-envelope-o'></i></a>
                         </div>
                     </div>
                     <br>
