@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/defaultStyles.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/SignUp.js"></script>
 </head>
 <body>
 <div class="cover" id="home">
@@ -50,7 +51,7 @@
                         <a href="#" class="logo"><i class="fa fa-graduation-cap text-muted text-info"></i></a>Lernado</h1>
                     <p>Best e-learning portal EVER!</p>
                 </div>
-                <form:form class="form-horizontal text-right" role="form" action="/user/create" method="POST" commandName="previousUser">
+                <form:form class="form-horizontal text-right" role="form" action="/user/create" method="POST" commandName="previousUser" onsubmit="return validateForm()">
                     <div class="form-group">
                         <div class="col-sm-3">
                             <label for="firstName" class="control-label">First name</label>
@@ -108,21 +109,6 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-5">
-                            <script>
-                                function checkPass(){
-                                    var pass1 = document.getElementById("inputPassword3");
-                                    var pass2 = document.getElementById("inputPassword3");
-                                    var button = document.getElementById("submitButton");
-                                    if(pass1.value!=pass2.value){
-                                        pass2.style.backgroudColor="red";
-                                        $('#submitButton').prop('disabled', true);
-                                    }
-                                    else{
-                                        pass2.style.backgroudColor="white";
-                                        $('#submitButton').removeAttr('disabled');
-                                    }
-                                }
-                            </script>
                             <button id="submitButton" type="submit" class="btn btn-default btn-md">Sign Up</button>
                             <button type="reset" class="btn btn-default btn-md">Clear form</button>
                         </div>
