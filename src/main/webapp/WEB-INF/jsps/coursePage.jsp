@@ -57,8 +57,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-1">
-                                            <a ng-show="creator" href="#"><i
-                                                    class="fa fa-3x fa-fw fa-trash-o pull-right "></i></a>
+                                            <a ng-show="creator" href="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/${currentCourse.getLessons().get(i).idlesson/deleteLesson}">
+                                                 <i class="fa fa-3x fa-fw fa-trash-o pull-right "></i></a>
                                         </div>
                                         <div class="col-md-10">
                                             <h1>Lesson ${currentCourse.getLessons().get(i).getNumber()}

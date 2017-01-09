@@ -238,7 +238,6 @@ public class CourseController {
     public String addMaterial(int lessonId, MaterialBean mBean, String type, Model model,
                               HttpServletResponse res, String path) throws IOException {
         User currentUser = userController.getCurrentUser();
-        //Course currentCourse =  courseRepository.getOne(courseId);
         Lesson currentLesson = lessonRepository.getOne(lessonId);
         if(currentUser.getIduser() != currentLesson.getCourse().getCreator().getIduser())
             res.sendError(401);
@@ -288,5 +287,23 @@ public class CourseController {
         List<Material> userMaterials = currentUser.getMaterials();
         model.addAttribute("userMaterials", userMaterials);
         return showCoursePage(currentLesson.getCourse().getIdcourse(), model);
+    }
+    @RequestMapping("{idcourse}/{idlesson}/deleteLesson")
+    public String deleteLesson(@PathVariable("idcourse") int idcourse, @PathVariable("idlesson") int lessonId,
+                                      Model model, HttpServletResponse res) throws IOException{
+        User currentUser = userController.getCurrentUser();
+        Course currentCourse =  courseRepository.getOne(idcourse);
+        if(currentUser.getIduser() != currentCourse.getCreator().getIduser())
+            res.sendError(401);
+        Lesson currentLesson = lessonRepository.getOne(lessonId);
+
+
+        currentCourse.getLessons().remove(currentLesson);
+        courseRepository.save(currentCourse);
+        lessonRepository.delete(currentLesson);
+
+        List<Material> userMaterials = currentUser.getMaterials();
+        model.addAttribute("userMaterials", userMaterials);
+        return showCoursePage(idcourse, model);
     }
 }

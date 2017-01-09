@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <h1>Personal Information:</h1>
+                    <h2>Personal Information:</h2>
                     <form class="form-horizontal" role="form" method="POST" action="${pageContext.request.contextPath}/user/edit" ng-init="notChanged=true" enctype="multipart/form-data">
                         <div class="form-group" ng-mouseover="nameEdit=false" ng-mouseleave="nameEdit=true" ng-init="nameEdit=true; nameInputEnable=true">
                             <div class="col-sm-2">
@@ -80,6 +80,21 @@
                             </div>
                             <div class="col-sm-2"><a ng-click="emailInputEnable=false; notChanged= false" ng-hide="emailEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
+
+
+                        <div class="form-group" ng-mouseover="desEdit=false" ng-mouseleave="desEdit=true" ng-init="desEdit=true; desInputEnable=true">
+                            <div class="col-sm-2">
+                                <label class="control-label">Description:</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="description" name="description" value="<sec:authentication
+                                property="principal.description"/>" type="text" ng-readonly="desInputEnable" ng-blur="desInputEnable=true">
+                            </div>
+                            <div class="col-sm-2"><a ng-click="desInputEnable=false; notChanged= false" ng-hide="desEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                        </div>
+
+
+
                         <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true" ng-init="telEdit=true; telInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Tel. number:</label>
@@ -102,7 +117,6 @@
                             <button type='submit' class='btn btn-primary pull-right' ng-hide="notChanged">Save changes</button>
                         </div>
                     </form>
-                        </form>
                     </div>
             </div>
             <jsp:include page="common/leftPanel.jsp"></jsp:include>

@@ -78,7 +78,11 @@ public class UserController {
             existingUser.setDescription(user.getDescription());
             existingUser.setPhoneNumber(user.getPhoneNumber());
             existingUser.setNickName(user.getNickName());
-            existingUser.setPhotoBinary(photo.getBytes());
+            if(photo != null) {
+                existingUser.setPhotoBinary(photo.getBytes());
+            } else {
+                existingUser.setPhotoBinary(existingUser.getPhotoBinary());
+            }
             User savedUser = userRepository.save(existingUser);
 
             setAuthUser(savedUser);
