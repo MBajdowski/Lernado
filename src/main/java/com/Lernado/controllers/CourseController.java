@@ -3,8 +3,8 @@ package com.Lernado.controllers;
 import com.Lernado.beans.JmsMessage;
 import com.Lernado.beans.MaterialBean;
 import com.Lernado.beans.RoomCourseBean;
-import com.Lernado.managers.*;
 import com.Lernado.jms.JmsService;
+import com.Lernado.managers.*;
 import com.Lernado.model.Course;
 import com.Lernado.model.Lesson;
 import com.Lernado.model.Material;
@@ -16,8 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -47,7 +46,40 @@ public class CourseController {
 
 
     @RequestMapping("/wishlist")
-    public String wishlistPage() {return "wishlistPage";}
+    public String wishlistPage(Model model) {
+        User currentUser = userController.getCurrentUser();
+        List<AbstractMap.SimpleEntry> wishlist = new ArrayList<>();
+        List<Course> wishlistList = currentUser.getWishes();
+        for(Course course : wishlistList){
+            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
+            wishlist.add(new AbstractMap.SimpleEntry(course, base64));
+        }
+        model.addAttribute("wishlist", wishlist);
+        return "wishlistPage";
+    }
+
+    @RequestMapping("/addToWishlist")
+    public String addToWishlist(@RequestParam() int idCourse, Model model){
+        User currentUser = userController.getCurrentUser();
+        List<Course> wishlist = currentUser.getWishes();
+        Course currentCourse = courseRepository.getOne(idCourse);
+        if(!wishlist.contains(currentCourse)) {
+            wishlist.add(currentCourse);
+            currentUser.setWishes(wishlist);
+            userController.setAuthUser(userRepository.save(currentUser));
+        }
+        return showCoursePage(idCourse, model);
+    }
+
+    @RequestMapping("/removeFromWishlist")
+    public String removeFromWishlist(@RequestParam() int idCourse, Model model){
+        User currentUser = userController.getCurrentUser();
+        List<Course> wishlist = currentUser.getWishes();
+        wishlist.remove(courseRepository.getOne(idCourse));
+        currentUser.setWishes(wishlist);
+        userController.setAuthUser(userRepository.save(currentUser));
+        return showCoursePage(idCourse, model);
+    }
 
     @RequestMapping(value="/search", method = RequestMethod.GET)
     public String search(String phrase, Model model) {
@@ -138,9 +170,11 @@ public class CourseController {
 
         String base64Teacher =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentCourse.getCreator().getPhotoBinary());
+        boolean inWishlist = currentUser.getWishes().contains(currentCourse);
         model.addAttribute("currentTeacher",currentCourse.getCreator());
         model.addAttribute("currentTeacherPhoto", base64Teacher);
         model.addAttribute("currentLessonId", 0);
+        model.addAttribute("inWishlist", inWishlist);
 
         return "enrollCoursePage";
     }
@@ -187,8 +221,9 @@ public class CourseController {
     @RequestMapping("{id}/enroll")
     public String enrollStudent(@PathVariable("id") int courseId, Model model){
         User currentUser = userController.getCurrentUser();
-
-        currentUser.getAttends().add(courseRepository.getOne(courseId));
+        Course currentCourse = courseRepository.getOne(courseId);
+        currentUser.getAttends().add(currentCourse);
+        currentUser.getWishes().remove(currentCourse);
         userController.setAuthUser(userRepository.save(currentUser));
 
         return showCoursePage(courseId, model);

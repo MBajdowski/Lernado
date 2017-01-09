@@ -27,27 +27,31 @@
             <div class="col-md-9">
                 <h1> Your Wishlist:</h1>
                 <br>
-                <c:forEach var="i" begin="0" end="${wishlist.size()-1}">
-                    <c:if test="${i%4==0}">
-                        <div class="row">
-                    </c:if>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-                                 class="img-responsive">
-                            <div class="caption">
-                                <h3>${wishlist.get(i).getKey().title}</h3>
-                                <p>Price: ${wishlist.get(i).getKey().price} $
-                                    <br>
-                                    <br>Category: ${wishlist.get(i).getKey().category}
-                                    <br>Level: ${wishlist.get(i).getKey().level}</p>
+                <c:choose>
+                    <c:when test="${wishlist.size()> 0}">
+                        <c:forEach var="i" begin="0" end="${wishlist.size()-1}">
+                            <c:if test="${i%4==0}">
+                                <div class="row">
+                            </c:if>
+                            <a href="${pageContext.request.contextPath}/course/${wishlist.get(i).getKey().idcourse}">
+                            <div class="col-md-3">
+                                <div class="thumbnail">
+                                    <img src="${wishlist.get(i).getValue()}" class='img-responsive'>
+                                    <div class="caption">
+                                        <h3>${wishlist.get(i).getKey().title}</h3>
+                                        <p>Price: ${wishlist.get(i).getKey().price}<br>
+                                            <br>Category: ${wishlist.get(i).getKey().category}
+                                            <br>Level: ${wishlist.get(i).getKey().level}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <c:if test="${(i%4==3&&i>0)||(i==wishlist.size()-1)}">
-                        </div>
-                     </c:if>
-                </c:forEach>
+                            </a>
+                            <c:if test="${(i%4==3&&i>0)||(i==wishlist.size()-1)}">
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
             </div>
 <jsp:include page="common/leftPanel.jsp"></jsp:include>
 </div>

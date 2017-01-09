@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
@@ -32,12 +33,26 @@
                             <div class="col-md-9">
                                 <h1>${currentCourse.title}</h1>
                             </div>
-                            <div class="col-md-3 text-center">
-                                <form id="myForm" class="form-horizontal" role="form" method="POST" action="">
-                                    <a onclick=""><i class="fa fa-3x fa-fw fa-heart"></i></a>
-                                </form>
-                                <h4>Add to Wishlist</h4>
-                            </div>
+                            <c:choose>
+                                <c:when test="${inWishlist}">
+                                    <div class="col-md-3 text-center">
+                                        <form id="myForm" class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/course/removeFromWishlist">
+                                            <input type="hidden" name="idCourse" value="${currentCourse.idcourse}">
+                                            <a onclick="document.getElementById('myForm').submit();"><i class="fa fa-3x fa-fw fa-heart" style="color: red"></i></a>
+                                        </form>
+                                        <h4>Remove from Wishlist</h4>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-3 text-center">
+                                        <form id="myForm" class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/course/addToWishlist">
+                                            <input type="hidden" name="idCourse" value="${currentCourse.idcourse}">
+                                            <a onclick="document.getElementById('myForm').submit();"><i class="fa fa-3x fa-fw fa-heart"></i></a>
+                                        </form>
+                                        <h4>Add to Wishlist</h4>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="row">
                             <form class="form-horizontal" role="form" method="POST" action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/enroll">
