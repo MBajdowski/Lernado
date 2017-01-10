@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -294,6 +295,7 @@ public class CourseController {
         model.addAttribute("userMaterials", userMaterials);
         return showCoursePage(currentLesson.getCourse().getIdcourse(), model);
     }
+
     @RequestMapping("{idlesson}/{idmaterial}/removeMaterial")
     public String removeMaterial(@PathVariable("idlesson") int lessonId,@PathVariable("idmaterial") int materialId, Model model){
         Lesson currentLesson = lessonRepository.getOne(lessonId);
@@ -306,6 +308,7 @@ public class CourseController {
         model.addAttribute("userMaterials", userMaterials);
         return showCoursePage(currentLesson.getCourse().getIdcourse(), model);
     }
+
     @RequestMapping("{idlesson}/{idmaterial}/addExistingMaterial")
     public String addExistingMaterial(@PathVariable("idlesson") int lessonId,@PathVariable("idmaterial") int materialId,
                                       Model model, HttpServletResponse res) throws IOException{
@@ -323,6 +326,7 @@ public class CourseController {
         model.addAttribute("userMaterials", userMaterials);
         return showCoursePage(currentLesson.getCourse().getIdcourse(), model);
     }
+
     @RequestMapping("{idcourse}/{idlesson}/deleteLesson")
     public String deleteLesson(@PathVariable("idcourse") int idcourse, @PathVariable("idlesson") int lessonId,
                                       Model model, HttpServletResponse res) throws IOException{
@@ -341,4 +345,22 @@ public class CourseController {
         model.addAttribute("userMaterials", userMaterials);
         return showCoursePage(idcourse, model);
     }
+
+    @RequestMapping("{idcourse}/updateDetails")
+    public String updatedDetails(@PathVariable int idcourse, String title, String description, Model model){
+        Course currentCourse = courseRepository.getOne(idcourse);
+        currentCourse.setTitle(title);
+        currentCourse.setDescription(description);
+        courseRepository.save(currentCourse);
+        return showCoursePage(idcourse, model);
+    }
+
+    @RequestMapping("{idcourse}/updatePhoto")
+    public String updatedDetails(@PathVariable int idcourse, MultipartFile photoBinary, Model model) throws IOException {
+        Course currentCourse = courseRepository.getOne(idcourse);
+        currentCourse.setPhotoBinary(photoBinary.getBytes());
+        courseRepository.save(currentCourse);
+        return showCoursePage(idcourse, model);
+    }
+
 }

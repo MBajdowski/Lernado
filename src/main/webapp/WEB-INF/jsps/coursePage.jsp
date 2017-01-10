@@ -29,13 +29,26 @@
                 <div class="row">
                     <div class="col-md-12">
                         <img src="${currentPhoto}" class="img-responsive logo">
+                        <div class="pull-right">
+                            <form ng-show="creator" method="POST" enctype="multipart/form-data"
+                                  action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/updatePhoto">
+                                <label  for="photobinary" class="btn">Update photo<i class="fa fa-2x fa-picture-o fa-fw"></i></label>
+                                <input type="file" id="photobinary" name="photoBinary" onchange="this.form.submit();" style="display: none">
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <h1 class="text-center">${currentCourse.getTitle()}</h1>
-                <p class="text-center">${currentCourse.getDescription()}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">${currentCourse.getTitle()}
+                            <a ng-show="creator" data-toggle="modal" data-target="#myDetailsModal"><i class="fa fa-1x fa-edit fa-fw"></i></a></h1>
+                        <p class="text-center">${currentCourse.getDescription()}</p>
+                    </div>
+                </div>
             </div>
 
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
+        </div>
             <div class="row">
                 <div class="col-md-9">
 
@@ -172,9 +185,48 @@
                     </div>
                 </div>
             </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="myDetailsModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/updateDetails">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Update course's details</h3>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Title</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input name="title" type="text" class="form-control" value="${currentCourse.title}" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Description</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input name="description" type="text" class="form-control" value="${currentCourse.description}" required>
+                        </div>
+                    </div>
+                    <hr>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class='btn btn-primary' type="submit"/>Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 
 <c:choose>
     <c:when test="${currentCourse.getLessons().size() > 0}">
