@@ -35,10 +35,7 @@ public class MainController {
     }
 
     @RequestMapping("/home")
-    public String home(Model model) throws IOException {
-        userController.getUserCoursesAndRooms(model);
-        return "homePage";
-    }
+    public String home(){return "homePage";}
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loggingPage(@RequestParam("error") String error, Model model){

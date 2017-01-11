@@ -2,8 +2,6 @@ package com.Lernado.controllers;
 
 import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.UserRepository;
-import com.Lernado.model.Course;
-import com.Lernado.model.Room;
 import com.Lernado.model.User;
 import com.Lernado.security.CurrentUser;
 import lombok.NonNull;
@@ -23,7 +21,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -37,7 +34,6 @@ public class UserController {
     @RequestMapping("/profile")
     public String profilePage(Model model) {
         User existingUser = getCurrentUser();
-        getUserCoursesAndRooms(model);
         String base64 =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(existingUser.getPhotoBinary());
         model.addAttribute("currentPhoto", base64);
@@ -78,36 +74,15 @@ public class UserController {
             existingUser.setDescription(user.getDescription());
             existingUser.setPhoneNumber(user.getPhoneNumber());
             existingUser.setNickName(user.getNickName());
-            if(photo != null) {
+            if(photo != null && photo.getSize()>0)
                 existingUser.setPhotoBinary(photo.getBytes());
-            } else {
-                existingUser.setPhotoBinary(existingUser.getPhotoBinary());
-            }
-            User savedUser = userRepository.save(existingUser);
 
-            setAuthUser(savedUser);
-
-            String base64 =
-                    "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(savedUser.getPhotoBinary());
-            model.addAttribute("currentPhoto", base64);
-            getUserCoursesAndRooms(model);
+            setAuthUser(userRepository.save(existingUser));
         }catch (Exception e) {
         }
-        return "profilePage";
+        return profilePage(model);
     }
 
-    public void getUserCoursesAndRooms(Model model) {
-        User user = getCurrentUser();
-        List<Course> courses = user.getAttends();
-        List<Course> createdCourses = user. getCreatedCourses();
-        for(int i=0; i< createdCourses.size(); i++){
-            courses.add(createdCourses.get(i));
-        }
-
-        List<Room> rooms = user.getRooms();
-        model.addAttribute("courses", courses);
-        model.addAttribute("rooms", rooms);
-    }
 
     public User getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

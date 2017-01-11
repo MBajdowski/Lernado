@@ -122,37 +122,6 @@
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
         </div>
         <div class="row">
-            <div id="courses2" class="col-md-6">
-                <h1>Your Courses:</h1>
-                <ul class="list-group">
-                    <c:choose>
-                        <c:when test="${courses.size() >= 1}">
-                            <c:forEach var="i" begin="0" end="${courses.size()-1}">
-                                <a href='${pageContext.request.contextPath}/course/${courses.get(i).getIdcourse()}'>
-                                    <li class="h3 list-group-item list-group-item-success">${courses.get(i).getTitle()}</li>
-                                </a>
-                            </c:forEach>
-                        </c:when>
-                    </c:choose>
-                </ul>
-            </div>
-            <div id="rooms2" class="col-md-6">
-                <h1>Your Rooms:</h1>
-                <ul class="list-group">
-                    <c:choose>
-                        <c:when test="${rooms.size() >= 1}">
-                            <c:forEach var="i" begin="0" end="${rooms.size()-1}">
-                                <a href='${pageContext.request.contextPath}/room/${rooms.get(i).getIdroom()}'>
-                                    <li class="h3 list-group-item list-group-item-success">${rooms.get(i).getTitle()}</li>
-                                </a>
-                            </c:forEach>
-                        </c:when>
-                    </c:choose>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row">
             <div id="courses" class="col-md-12">
                 <h1>Suggested Courses:&nbsp;</h1>
                 <div id="owl-demo" class="owl-carousel owl-theme highlightedCarousel">
@@ -193,65 +162,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Wishlist:</h1>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="${pageContext.request.contextPath}/images/courseDefault.jpg"
-                                 class="img-responsive">
-                            <div class="caption">
-                                <h3>Basic Programming</h3>
-                                <p>Price: 20 $
-                                    <br>
-                                    <br>Category: Programming
-                                    <br>Level: Easy</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="${pageContext.request.contextPath}/images/courseDefault.jpg"
-                                 class="img-responsive">
-                            <div class="caption">
-                                <h3>Basic Programming</h3>
-                                <p>Price: 20 $
-                                    <br>
-                                    <br>Category: Programming
-                                    <br>Level: Easy</p>
-                            </div>
-                        </div></div>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="${pageContext.request.contextPath}/images/courseDefault.jpg"
-                                 class="img-responsive">
-                            <div class="caption">
-                                <h3>Basic Programming</h3>
-                                <p>Price: 20 $
-                                    <br>
-                                    <br>Category: Programming
-                                    <br>Level: Easy</p>
-                            </div>
-                        </div></div>
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="${pageContext.request.contextPath}/images/courseDefault.jpg"
-                                 class="img-responsive">
-                            <div class="caption">
-                                <h3>Basic Programming</h3>
-                                <p>Price: 20 $
-                                    <br>
-                                    <br>Category: Programming
-                                    <br>Level: Easy</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-
 </div>
 <jsp:include page="common/footer.jsp"></jsp:include>
 

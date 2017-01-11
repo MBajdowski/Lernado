@@ -4,7 +4,6 @@ import com.Lernado.beans.RoomCourseBean;
 import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.RoomRepository;
 import com.Lernado.managers.UserRepository;
-import com.Lernado.model.Course;
 import com.Lernado.model.Material;
 import com.Lernado.model.Room;
 import com.Lernado.model.User;
@@ -35,8 +34,12 @@ public class RoomController {
     private UserController userController;
 
 
-    @RequestMapping("/")
-    public String roomsPage() {return "roomsPage";}
+    @RequestMapping("/myRooms")
+    public String roomsPage(Model model) {
+        User user = userController.getCurrentUser();
+        model.addAttribute("rooms", user.getRooms());
+        return "myRoomsPage";
+    }
 
     @RequestMapping("/create")
     public String createRoom(RoomCourseBean rcBean){

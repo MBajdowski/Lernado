@@ -363,4 +363,12 @@ public class CourseController {
         return showCoursePage(idcourse, model);
     }
 
+    @RequestMapping("myCourses")
+    public String myCoursePage(Model model){
+        User user = userController.getCurrentUser();
+        model.addAttribute("attendedCourses", user.getAttends());
+        model.addAttribute("createdCourses", user.getCreatedCourses());
+        return "myCoursesPage";
+    }
+
 }

@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta charset="utf-8">
@@ -44,39 +42,6 @@
                 </div>
             </div>
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h2>My Courses:</h2>
-                        <ul class="list-group">
-                            <c:choose>
-                                <c:when test="${courses.size() >= 1}">
-                                    <c:forEach var="i" begin="0" end="${courses.size()-1}">
-                                        <a href='${pageContext.request.contextPath}/course/${courses.get(i).getIdcourse()}'>
-                                            <li class="h3 list-group-item">${courses.get(i).getTitle()}</li>
-                                        </a>
-                                    </c:forEach>
-                                </c:when>
-                            </c:choose>
-                        </ul>
-                        <h2>My Rooms:</h2>
-                        <ul class="list-group">
-                            <c:choose>
-                                <c:when test="${rooms.size() >= 1}">
-                                    <c:forEach var="i" begin="0" end="${rooms.size()-1}">
-                                        <a href='${pageContext.request.contextPath}/room/${rooms.get(i).getIdroom()}'>
-                                            <li class="h3 list-group-item">${rooms.get(i).getTitle()}</li>
-                                        </a>
-                                    </c:forEach>
-                                </c:when>
-                            </c:choose>
-                        </ul>
-                        <br>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="row">
             <h1>Popoular courses:</h1>
