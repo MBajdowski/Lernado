@@ -11,6 +11,7 @@
 <body>
 <div class="section footer" ng-app="">
     <div class="container">
+        <!--<div class="row" style="margin:8px"></div> doda? i usun?? section na górze? -->
         <div class="row">
             <div class="col-md-1">
                 <a class="logo"><i class="fa fa-4x fa-fw fa-graduation-cap text-info"></i></a>
@@ -37,17 +38,17 @@
                             Profile<i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="/user/profile">Information</a>
+                                <a href="${pageContext.request.contextPath}/user/profile">Information</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/coursesPage">My Courses</a>
+                                <a href="${pageContext.request.contextPath}/course/myCourses">My Courses</a>
                             </li>
                             <li>
-                                <a href="/room/">My Rooms</a>
+                                <a href="${pageContext.request.contextPath}/room/myRooms">My Rooms</a>
                             </li>
                             <li>
-                                <a href="/course/wishlist">Wishlist</a>
+                                <a href="${pageContext.request.contextPath}/course/wishlist">Wishlist</a>
                             </li>
                             <li class="divider"></li>
                             <li>

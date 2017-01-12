@@ -371,4 +371,13 @@ public class CourseController {
         return "myCoursesPage";
     }
 
+    @RequestMapping("{idcourse}/updateLesson")
+    public String updateLessonsTitle(@PathVariable("idcourse") int idcourse, int idlesson, String title, Model model){
+
+        Lesson lesson = lessonRepository.getOne(idlesson);
+        lesson.setTitle(title);
+        lessonRepository.save(lesson);
+        return showCoursePage(idcourse, model);
+    }
+
 }

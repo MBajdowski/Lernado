@@ -68,7 +68,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-1">
-                                            <a ng-show="creator" href="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/${currentCourse.getLessons().get(i).idlesson/deleteLesson}">
+                                            <a ng-show="creator" href="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/${currentCourse.getLessons().get(i).idlesson}/deleteLesson">
                                                  <i class="fa fa-3x fa-fw fa-trash-o pull-right "></i></a>
                                         </div>
                                         <div class="col-md-10">
@@ -76,7 +76,7 @@
                                                 - ${currentCourse.getLessons().get(i).getTitle()}</h1>
                                         </div>
                                         <div class="col-md-1">
-                                            <a ng-show="creator" href="#"><i class="fa fa-3x fa-edit fa-fw"></i></a>
+                                            <a ng-show="creator" data-toggle="modal" data-target="#lessonNameModal${i}"><i class="fa fa-3x fa-edit fa-fw"></i></a>
                                         </div>
                                         <table class="table">
                                             <tbody>
@@ -229,6 +229,36 @@
 <c:choose>
     <c:when test="${currentCourse.getLessons().size() > 0}">
         <c:forEach var="i" begin="0" end="${currentCourse.getLessons().size()-1}">
+
+            <div class="modal fade" id="lessonNameModal${i}" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/updateLesson">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h3 class="modal-title">Update lesson's title</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Title</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input name="title" type="text" class="form-control" value="${currentCourse.getLessons().get(i).title}" required>
+                                        <input name="idlesson" type="hidden" value="${currentCourse.getLessons().get(i).idlesson}">
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button class='btn btn-primary' type="submit"/>Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div class="modal fade" id="myModal${i}" role="dialog">
                 <div class="modal-dialog">
 
