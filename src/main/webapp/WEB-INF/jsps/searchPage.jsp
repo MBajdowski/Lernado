@@ -144,13 +144,22 @@
     </c:choose>
     <div class='container'>
         <div class='row'>
-            <div class="col-md-11 text-right">
-                <a>Show more courses--></a>
+            <div class="col-md-6 text-left">
+                <c:if test="${(page-1)>=0}">
+                    <a href="${pageContext.request.contextPath}/course/search?phrase=${phrase}&page=${page-1}"><-- Previous page</a>
+                </c:if>
+            </div>
+            <div class="col-md-6 text-right">
+                <c:if test="${!endOfList}">
+                    <a href="${pageContext.request.contextPath}/course/search?phrase=${phrase}&page=${page+1}">Next page --></a>
+                </c:if>
             </div>
         </div>
     </div>
 </div>
 <hr>
+
+
 <div class='section' ng-hide="${advanceSearch}">
     <div class='container'>
         <div class='row'>

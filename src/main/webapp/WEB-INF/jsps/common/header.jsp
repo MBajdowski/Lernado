@@ -9,9 +9,9 @@
     <title>Lernado</title>
 </head>
 <body>
-<div class="section footer" ng-app="">
+<div class="footer" ng-app="">
     <div class="container">
-        <!--<div class="row" style="margin:8px"></div> doda? i usun?? section na górze? -->
+        <div class="row" style="margin:8px"></div>
         <div class="row">
             <div class="col-md-1">
                 <a class="logo"><i class="fa fa-4x fa-fw fa-graduation-cap text-info"></i></a>

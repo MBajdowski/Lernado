@@ -45,6 +45,8 @@ public class CourseController {
     @Autowired
     private RoomController roomController;
 
+    private static int PAGE_SIZE=3;
+
 
     @RequestMapping("/wishlist")
     public String wishlistPage(Model model) {
@@ -83,18 +85,20 @@ public class CourseController {
     }
 
     @RequestMapping(value="/search", method = RequestMethod.GET)
-    public String search(String phrase, Model model) {
+    public String search(@RequestParam(value = "page", required = false) String pageStr, String phrase, Model model) {
+
         List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();
         List<AbstractMap.SimpleEntry> rooms = roomController.searchRooms(phrase);
         List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
-        List<Course> courses;
+
+        List<Course> courses = courseRepository.findByTitleContaining(phrase);
         List<Course> highlightedCourses = courseRepository.findByHighlighted(true);
-        if(StringUtils.isEmpty(phrase)){
-            courses = courseRepository.findAll();
-        } else {
-            courses = courseRepository.findByTitleContaining(phrase);
-        }
-        for(Course course : courses){
+
+
+        int page = (pageStr==null || pageStr.equals(""))?0:Integer.parseInt(pageStr);
+        List<Course> pagedCoursess = getPagedCourses(courses, page, model);
+
+        for(Course course : pagedCoursess){
             String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
             pairs.add(new AbstractMap.SimpleEntry(course, base64));
         }
@@ -102,6 +106,9 @@ public class CourseController {
             String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(highlightedCourse.getPhotoBinary());
             highlighted.add(new AbstractMap.SimpleEntry(highlightedCourse, base64));
         }
+
+        model.addAttribute("page", page);
+        model.addAttribute("phrase", phrase);
         model.addAttribute("pairs", pairs);
         model.addAttribute("highlighted", highlighted);
         model.addAttribute("rooms", rooms);
@@ -383,6 +390,18 @@ public class CourseController {
         lesson.setTitle(title);
         lessonRepository.save(lesson);
         return showCoursePage(idcourse, model);
+    }
+
+    private List<Course> getPagedCourses(List<Course> allCourses, int page, Model model){
+        int from = (page)*PAGE_SIZE;
+        int to = (page+1)*PAGE_SIZE;
+        model.addAttribute("endOfList", false);
+
+        if (to>=allCourses.size()){
+            to=allCourses.size();
+            model.addAttribute("endOfList", true);
+        }
+        return allCourses.subList(from, to);
     }
 
     public List<Course> getPopularCourses(int userId){
