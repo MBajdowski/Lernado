@@ -269,7 +269,7 @@
                         </div>
                         <div class="modal-body">
                             <form method="POST" enctype="multipart/form-data"
-                                  action="${pageContext.request.contextPath}/upload">
+                                  action="${pageContext.request.contextPath}/courses/upload">
                                 <input name="idlesson" type="hidden"
                                        value="${currentCourse.getLessons().get(i).idlesson}">
                                 <div class="form-group">

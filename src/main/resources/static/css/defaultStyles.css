@@ -6862,3 +6862,6 @@ body {
     border: solid black 1px;
     border-radius: 3px;
 }
+.margin10{
+    margin: 10px;
+}

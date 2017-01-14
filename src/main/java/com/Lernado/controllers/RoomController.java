@@ -1,12 +1,12 @@
 package com.Lernado.controllers;
 
+import com.Lernado.beans.MaterialBean;
 import com.Lernado.beans.RoomCourseBean;
 import com.Lernado.managers.AdminRepository;
+import com.Lernado.managers.MaterialRepository;
 import com.Lernado.managers.RoomRepository;
 import com.Lernado.managers.UserRepository;
-import com.Lernado.model.Material;
-import com.Lernado.model.Room;
-import com.Lernado.model.User;
+import com.Lernado.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -32,6 +34,8 @@ public class RoomController {
     private AdminRepository adminRepository;
     @Autowired
     private UserController userController;
+    @Autowired
+    private MaterialRepository materialRepository;
 
 
     @RequestMapping("/myRooms")
@@ -87,5 +91,37 @@ public class RoomController {
             roomsMap.add(new AbstractMap.SimpleEntry(room, base64));
         }
         return roomsMap;
+    }
+    @RequestMapping("/addMaterial")
+    public String addMaterial(MaterialBean mBean, String type, Model model,
+                              HttpServletResponse res, String path, int roomId) throws IOException {
+        User currentUser = userController.getCurrentUser();
+
+        Material newMaterial = Material.builder().title(mBean.getTitle())
+                .description(mBean.getDescription())
+                .path(path)
+                .type(type)
+                .creator(currentUser)
+                .build();
+        newMaterial = materialRepository.save(newMaterial);
+
+        Room currentRoom = roomRepository.getOne(roomId);
+        currentRoom.getMaterials().add(newMaterial);
+
+        roomRepository.save(currentRoom);
+        currentUser.getMaterials().add(newMaterial);
+        userController.setAuthUser(userRepository.save(currentUser));
+        List<AbstractMap.SimpleEntry> materials = new ArrayList<>();
+        String currentRoomPhoto =
+                "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentRoom.getPhotoBinary());
+        model.addAttribute("currentRoomPhoto", currentRoomPhoto);
+        model.addAttribute("currentRoom", currentRoom);
+        List<Material> roomsMaterials = currentRoom.getMaterials();
+        for(int i=0; i< roomsMaterials.size(); i++){
+            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString((roomsMaterials.get(i).getCreator().getPhotoBinary()));
+            materials.add(new AbstractMap.SimpleEntry(roomsMaterials.get(i), base64));
+        }
+        model.addAttribute("materials", materials);
+        return "roomsPage";
     }
 }

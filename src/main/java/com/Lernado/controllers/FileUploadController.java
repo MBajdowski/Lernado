@@ -1,6 +1,7 @@
 package com.Lernado.controllers;
 
 import com.Lernado.beans.MaterialBean;
+import com.Lernado.model.Room;
 import com.Lernado.storage.StorageFileNotFoundException;
 import com.Lernado.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class FileUploadController {
 
     @Autowired
     private CourseController courseController;
+
+    @Autowired
+    private RoomController roomController;
 
     @Autowired
     public FileUploadController(StorageService storageService) {
@@ -80,12 +84,15 @@ public class FileUploadController {
                 .body(file);
     }
 
-    @RequestMapping("/upload")
-    public String handleFileUpload(MaterialBean mBean, MultipartFile file,
+    @RequestMapping("{type}/upload")
+    public String handleFileUpload(@PathVariable("type") String type,MaterialBean mBean, MultipartFile file,
                                    Model model, HttpServletResponse res) throws IOException {
-
         storageService.store(file);
-                return courseController.addMaterial(mBean.getIdlesson(), mBean, file.getContentType(), model, res, getFile(file.getOriginalFilename()));
+        if(type.equals("courses")) {
+            return courseController.addMaterial(mBean.getIdlesson(), mBean, file.getContentType(), model, res, getFile(file.getOriginalFilename()));
+        } else {
+            return roomController.addMaterial(mBean, file.getContentType(), model, res, getFile(file.getOriginalFilename()), mBean.getIdlesson());
+        }
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

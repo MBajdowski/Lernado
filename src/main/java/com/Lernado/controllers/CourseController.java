@@ -336,8 +336,12 @@ public class CourseController {
             res.sendError(401);
         Lesson currentLesson = lessonRepository.getOne(lessonId);
 
-
+        int i = currentCourse.getLessons().indexOf(currentLesson);
         currentCourse.getLessons().remove(currentLesson);
+        for(; i<currentCourse.getLessons().size();i++ ) {
+            currentCourse.getLessons().get(i).setNumber(currentCourse.getLessons().get(i).getNumber()-1);
+            lessonRepository.save(currentCourse.getLessons().get(i));
+        }
         courseRepository.save(currentCourse);
         lessonRepository.delete(currentLesson);
 
