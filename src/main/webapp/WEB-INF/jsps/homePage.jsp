@@ -49,43 +49,21 @@
                 <div class="container">
                     <div id="paragraph1" class="row">
                         <div id="owl-demo" class="owl-carousel owl-theme">
-
-
-                            <div class='item'>
-                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                     class='img-responsive'>
-                                <h2>Title</h2>
-                                <p>Description</p>
-                                <button type='submit' class='btn btn-primary'>More info</button>
-                            </div>
-                            <div class='item'>
-                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                     class='img-responsive'>
-                                <h2>Title</h2>
-                                <p>Description</p>
-                                <button type='submit' class='btn btn-primary'>More info</button>
-                            </div>
-                            <div class='item'>
-                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                     class='img-responsive'>
-                                <h2>Title</h2>
-                                <p>Description</p>
-                                <button type='submit' class='btn btn-primary'>More info</button>
-                            </div>
-                            <div class='item'>
-                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                     class='img-responsive'>
-                                <h2>Title</h2>
-                                <p>Description</p>
-                                <button type='submit' class='btn btn-primary'>More info</button>
-                            </div>
-                            <div class='item'>
-                                <img src="https://unsplash.imgix.net/reserve/N13RIliTTASBbuYyszgq_P9020914-54.jpg?w=1024&q=50&fm=jpg&s=9c914a5c9288fc66860fde2c45521ff4"
-                                     class='img-responsive'>
-                                <h2>Title</h2>
-                                <p>Description</p>
-                                <button type='submit' class='btn btn-primary'>More info</button>
-                            </div>
+                            <c:choose>
+                                <c:when test="${popular.size()>= 1}">
+                                    <c:forEach var="i" begin="0" end="${popular.size()-1}">
+                                        <div class='item'>
+                                            <img src="${popular.get(i).getValue()}"
+                                                 class='img-responsive'>
+                                            <h2>${popular.get(i).getKey().title}</h2>
+                                            <p>${popular.get(i).getKey().description}</p>
+                                            <a href='${pageContext.request.contextPath}/course/${popular.get(i).getKey().idcourse}'>
+                                                <button class='btn btn-primary'>More info</button>
+                                            </a>
+                                        </div>
+                                    </c:forEach>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>

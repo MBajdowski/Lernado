@@ -53,6 +53,7 @@ public class RoomController {
                 .title(rcBean.getTitle())
                 .description(rcBean.getDescription())
                 .photoBinary(rcBean.getPhotoBinary())
+                .isPrivate(rcBean.isPrivate())
                 .build();
 
         user.getRooms().add(roomRepository.save(room));

@@ -1,8 +1,12 @@
 package com.Lernado.controllers;
 
 import com.Lernado.beans.RoomCourseBean;
+import com.Lernado.model.Course;
 import com.Lernado.model.User;
+import com.Lernado.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -35,7 +40,12 @@ public class MainController {
     }
 
     @RequestMapping("/home")
-    public String home(){return "homePage";}
+    public String home(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser currentUser = (CurrentUser)authentication.getPrincipal();
+        List<Course> popular = courseController.getPopularCourses(currentUser.getId());
+        model.addAttribute("popular" , popular);
+        return "homePage";}
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loggingPage(@RequestParam("error") String error, Model model){

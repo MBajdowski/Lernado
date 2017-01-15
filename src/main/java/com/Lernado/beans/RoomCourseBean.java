@@ -23,6 +23,7 @@ public class RoomCourseBean {
     private double price;
     private int creatorId;
     private byte[] photoBinary;
+    private boolean isPrivate;
 
     public RoomCourseBean() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();

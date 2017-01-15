@@ -2,6 +2,7 @@ package com.Lernado.controllers;
 
 import com.Lernado.managers.AdminRepository;
 import com.Lernado.managers.UserRepository;
+import com.Lernado.model.Course;
 import com.Lernado.model.User;
 import com.Lernado.security.CurrentUser;
 import lombok.NonNull;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -30,13 +32,17 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private AdminRepository adminRepository;
+    @Autowired
+    private CourseController courseController;
 
     @RequestMapping("/profile")
     public String profilePage(Model model) {
         User existingUser = getCurrentUser();
         String base64 =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(existingUser.getPhotoBinary());
+        List<Course> suggested = courseController.getSuggestedCourses(existingUser.getIduser());
         model.addAttribute("currentPhoto", base64);
+        model.addAttribute("suggested", suggested);
         return "profilePage";
     }
 

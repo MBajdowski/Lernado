@@ -123,42 +123,23 @@
         </div>
         <div class="row">
             <div id="courses" class="col-md-12">
-                <h1>Suggested Courses:&nbsp;</h1>
+                <h1>Suggested Courses:</h1>
                 <div id="owl-demo" class="owl-carousel owl-theme highlightedCarousel">
-                    <div class='item'>
-                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class='img-responsive'>
-                            <h2>Tytuł</h2>
-                            <p>Opis</p>
-                            <button type='submit' class='btn btn-primary'>More info</button>
-                        </form>
-                    </div>
-
-                    <div class='item'>
-                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class='img-responsive'>
-                            <h2>Tytuł2</h2>
-                            <p>Opis2</p>
-                            <button type='submit' class='btn btn-primary'>More info</button>
-                        </form>
-                    </div>
-
-                    <div class='item'>
-                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class='img-responsive'>
-                            <h2>Tytuł3</h2>
-                            <p>Opis3</p>
-                            <button type='submit' class='btn btn-primary'>More info</button>
-                        </form>
-                    </div>
-                    <div class='item'>
-                        <form class='form-horizontal' role='form' method='POST' action='doSearch'>
-                            <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg" class='img-responsive'>
-                            <h2>Tytuł4</h2>
-                            <p>Opis4</p>
-                            <button type='submit' class='btn btn-primary'>More info</button>
-                        </form>
-                    </div>
+                    <c:choose>
+                        <c:when test="${suggested.size()>= 1}">
+                            <c:forEach var="i" begin="0" end="${suggested.size()-1}">
+                                <div class='item'>
+                                    <img src="${suggested.get(i).getValue()}"
+                                         class='img-responsive'>
+                                    <h2>${suggested.get(i).getKey().title}</h2>
+                                    <p>${suggested.get(i).getKey().description}</p>
+                                    <a href='${pageContext.request.contextPath}/course/${suggested.get(i).getKey().idcourse}'>
+                                        <button class='btn btn-primary'>More info</button>
+                                    </a>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
                 </div>
             </div>
         </div>

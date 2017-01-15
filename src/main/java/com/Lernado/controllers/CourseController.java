@@ -193,6 +193,7 @@ public class CourseController {
                 .price(rcBean.getPrice())
                 .photoBinary(rcBean.getPhotoBinary())
                 .creator(user)
+                .isPrivate(rcBean.isPrivate())
                 .build();
         courseRepository.save(course);
 
@@ -382,6 +383,21 @@ public class CourseController {
         lesson.setTitle(title);
         lessonRepository.save(lesson);
         return showCoursePage(idcourse, model);
+    }
+
+    public List<Course> getPopularCourses(int userId){
+        return courseRepository.findPopularCourses(userId);
+    }
+    public List<Course> getSuggestedCourses(int userId){
+        String category = courseRepository.findMostFrequentCategory(userId);
+        if(category == null || category.isEmpty()){
+            category = "*";
+        }
+       List<Course> suggested = courseRepository.findSugestedCourses(userId, category);
+        if(suggested.size() < 1){
+            suggested = courseRepository.findPopularCourses(userId);
+        }
+        return suggested;
     }
 
 }
