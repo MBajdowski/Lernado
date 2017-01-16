@@ -34,39 +34,42 @@
                         <h1 class="text-center text-primary header2">Welcome to Lernado Platform <sec:authentication
                                 property="principal.firstName"/>!</h1>
 
-                        <p class="text-center menuitems">Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
+                        <p class="text-center menuitems">We are honored to welcome you on the best e-learning platform
+                            ever!<br>
+                            We are grateful that you want to create with us a new world, <br>
+                            in which everyone can have an easy access to the knowledge shared by our platform- anywhere
+                            and anytime.<br>
+                            We wish you the best experience!</p>
 
                     </div>
                 </div>
             </div>
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
         </div>
+    </div>
+</div>
+<div class="section highlightedCarousel">
+    <div class="container">
         <div class="row">
             <h1>Popoular courses:</h1>
-            <div class="col-md-12 section highlightedCarousel">
-                <div class="container">
-                    <div id="paragraph1" class="row">
-                        <div id="owl-demo" class="owl-carousel owl-theme">
-                            <c:choose>
-                                <c:when test="${popular.size()>= 1}">
-                                    <c:forEach var="i" begin="0" end="${popular.size()-1}">
-                                        <div class='item'>
-                                            <img src="${popular.get(i).getValue()}"
-                                                 class='img-responsive'>
-                                            <h2>${popular.get(i).getKey().title}</h2>
-                                            <p>${popular.get(i).getKey().description}</p>
-                                            <a href='${pageContext.request.contextPath}/course/${popular.get(i).getKey().idcourse}'>
-                                                <button class='btn btn-primary'>More info</button>
-                                            </a>
-                                        </div>
-                                    </c:forEach>
-                                </c:when>
-                            </c:choose>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div id="paragraph1" class="row">
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                <c:choose>
+                    <c:when test="${popular.size()>= 1}">
+                        <c:forEach var="i" begin="0" end="${popular.size()-1}">
+                            <div class='item'>
+                                <img src="${popular.get(i).getValue()}"
+                                     class='img-responsive'>
+                                <h2>${popular.get(i).getKey().title}</h2>
+                                <p>${popular.get(i).getKey().description}</p>
+                                <a href='${pageContext.request.contextPath}/course/${popular.get(i).getKey().idcourse}'>
+                                    <button class='btn btn-primary'>More info</button>
+                                </a>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
             </div>
         </div>
     </div>

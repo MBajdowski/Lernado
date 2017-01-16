@@ -23,7 +23,7 @@ public class RoomCourseBean {
     private double price;
     private int creatorId;
     private byte[] photoBinary;
-    private boolean isPrivate;
+    private String isPrivate;
 
     public RoomCourseBean() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -31,6 +31,10 @@ public class RoomCourseBean {
         byte[] photoBinary = Files.readAllBytes(Paths.get(file.toURI()));
 
         this.photoBinary = photoBinary;
+    }
+
+    public boolean getIsPrivate(){
+        return isPrivate.equals("true")? true: false;
     }
 
 }

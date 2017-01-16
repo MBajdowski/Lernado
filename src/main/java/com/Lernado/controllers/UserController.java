@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -34,13 +36,21 @@ public class UserController {
     private AdminRepository adminRepository;
     @Autowired
     private CourseController courseController;
+    @Autowired
+    private MainController mainController;
 
     @RequestMapping("/profile")
     public String profilePage(Model model) {
         User existingUser = getCurrentUser();
         String base64 =
                 "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(existingUser.getPhotoBinary());
-        List<Course> suggested = courseController.getSuggestedCourses(existingUser.getIduser());
+        List<Course> suggestedCourses = courseController.getSuggestedCourses(existingUser.getIduser());
+
+        List<AbstractMap.SimpleEntry> suggested = new ArrayList<>();
+        for(Course course : suggestedCourses){
+            String base64Course = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
+            suggested.add(new AbstractMap.SimpleEntry(course, base64Course));
+        }
         model.addAttribute("currentPhoto", base64);
         model.addAttribute("suggested", suggested);
         return "profilePage";
@@ -66,8 +76,9 @@ public class UserController {
             model.addAttribute("previousUser", user);
             return "signUpPage";
         }
-        return "homePage";
+        return mainController.home(model);
     }
+
     @RequestMapping("/edit")
     public String editProfile(User user, MultipartFile photo, Model model){
         try {

@@ -6865,3 +6865,7 @@ body {
 .margin10{
     margin: 10px;
 }
+.fillScreen{
+    min-height: 30%;
+    height: 30%;
+}

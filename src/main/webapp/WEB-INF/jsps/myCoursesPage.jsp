@@ -60,6 +60,8 @@
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
         </div>
     </div>
+    <div class="fillScreen">
+    </div>
 </div>
 <jsp:include page="common/footer.jsp"></jsp:include>
 </body>

@@ -46,20 +46,21 @@ public class RoomController {
     }
 
     @RequestMapping("/create")
-    public String createRoom(RoomCourseBean rcBean){
+    public String createRoom(RoomCourseBean rcBean, Model model){
         User user = userRepository.getOne(rcBean.getCreatorId());
 
         Room room = Room.builder().admin(adminRepository.getOne(1))
                 .title(rcBean.getTitle())
                 .description(rcBean.getDescription())
                 .photoBinary(rcBean.getPhotoBinary())
-                .isPrivate(rcBean.isPrivate())
+                .isPrivate(rcBean.getIsPrivate())
+                .materials(new ArrayList<>())
                 .build();
 
         user.getRooms().add(roomRepository.save(room));
         userController.setAuthUser(userRepository.save(user));
 
-        return "roomsPage";
+        return showRoomPage(room.getIdroom(), model);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -75,6 +76,9 @@ public class RoomController {
             String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString((roomsMaterials.get(i).getCreator().getPhotoBinary()));
             materials.add(new AbstractMap.SimpleEntry(roomsMaterials.get(i), base64));
         }
+        User currentUser = userController.getCurrentUser();
+        List<Material> userMaterials = currentUser.getMaterials();
+        model.addAttribute("userMaterials", userMaterials);
         model.addAttribute("materials", materials);
         return "roomsPage";
     }
@@ -83,9 +87,9 @@ public class RoomController {
         List<AbstractMap.SimpleEntry> roomsMap = new ArrayList<>();
         List<Room> rooms;
         if(StringUtils.isEmpty(phrase)){
-            rooms = roomRepository.findAll();
+            rooms = roomRepository.findByIsPrivateFalse();
         } else {
-            rooms = roomRepository.findByTitleContaining(phrase);
+            rooms = roomRepository.findByTitleContainingAndIsPrivateFalse(phrase);
         }
         for(Room room : rooms){
             String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(room.getPhotoBinary());
@@ -124,5 +128,20 @@ public class RoomController {
         }
         model.addAttribute("materials", materials);
         return "roomsPage";
+    }
+    @RequestMapping("{idroom}/{idmaterial}/addExistingMaterial")
+    public String addExistingMaterial(@PathVariable("idroom") int roomId,@PathVariable("idmaterial") int materialId,
+                                      Model model, HttpServletResponse res) throws IOException{
+        User currentUser = userController.getCurrentUser();
+        Room currentRoom = roomRepository.getOne(roomId);
+
+        Material material = materialRepository.getOne(materialId);
+
+        currentRoom.getMaterials().add(material);
+        roomRepository.save(currentRoom);
+
+        List<Material> userMaterials = currentUser.getMaterials();
+        model.addAttribute("userMaterials", userMaterials);
+        return showRoomPage(currentRoom.getIdroom(), model);
     }
 }

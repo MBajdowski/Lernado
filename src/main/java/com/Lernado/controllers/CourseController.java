@@ -91,8 +91,8 @@ public class CourseController {
         List<AbstractMap.SimpleEntry> rooms = roomController.searchRooms(phrase);
         List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
 
-        List<Course> courses = courseRepository.findByTitleContaining(phrase);
-        List<Course> highlightedCourses = courseRepository.findByHighlighted(true);
+        List<Course> courses = courseRepository.findByTitleContainingAndIsPrivateFalse(phrase);
+        List<Course> highlightedCourses = courseRepository.findByHighlightedAndIsPrivateFalse(true);
 
 
         int page = (pageStr==null || pageStr.equals(""))?0:Integer.parseInt(pageStr);
@@ -123,7 +123,7 @@ public class CourseController {
         List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
         List<AbstractMap.SimpleEntry> rooms = new ArrayList<>();
         List<Course> courses;
-        List<Course> highlightedCourses = courseRepository.findByHighlighted(true);
+        List<Course> highlightedCourses = courseRepository.findByHighlightedAndIsPrivateFalse(true);
         if(StringUtils.isEmpty(category)|| category.equals("Any")){
             category ="%";
         } else {
@@ -142,7 +142,7 @@ public class CourseController {
         } else {
             phrase = "%" + phrase + "%";
         }
-        courses = courseRepository.findByCategoryLikeAndLevelLikeAndTitleLike(category, level, phrase);
+        courses = courseRepository.findByCategoryLikeAndLevelLikeAndTitleLikeAndIsPrivateFalse(category, level, phrase);
         for(Course course : courses){
             String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
             pairs.add(new AbstractMap.SimpleEntry(course, base64));
@@ -200,7 +200,7 @@ public class CourseController {
                 .price(rcBean.getPrice())
                 .photoBinary(rcBean.getPhotoBinary())
                 .creator(user)
-                .isPrivate(rcBean.isPrivate())
+                .isPrivate(rcBean.getIsPrivate())
                 .build();
         courseRepository.save(course);
 

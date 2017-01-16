@@ -45,8 +45,9 @@
                                 <form method="POST" enctype="multipart/form-data"
                                       action="${pageContext.request.contextPath}/room/upload">
                                 <div class="col-md-9 margin10">
-                                    <p>Write your post here: &emsp;  <a>Add material<i class="fa fa-paperclip" aria-hidden="true"></i></a>
-                                        <input name="file" type="file">
+                                    <p>Write your post here: &emsp;  <label for="roomFile">Add new material<i class="fa fa-paperclip" aria-hidden="true"></i></label>
+                                        <input id="roomFile" name="file" type="file" style="display: none">
+                                        <a data-toggle="modal" data-target="#myModal" >Add existing material<i class="fa fa-paperclip" aria-hidden="true"></i></a>
                                     </p>
                                     <input name="description" type="text" placeholder="Your post...">
                                     <input name="title" type="text" ng-show="false" value="material${users.get(i).getKey().getMaterials().getSize()+1}">
@@ -87,36 +88,50 @@
                                 </c:forEach>
                             </c:when>
                         </c:choose>
-
-                        <br>
-
-                        <div class="col-md-10 roomBorder">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img src="${pageContext.request.contextPath}/images/defaultProfile.jpg"
-                                         class="img-responsive img-circle">
-                                </div>
-                                <div class="col-md-10">
-                                    <h3>Tom Hanks</h3>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                                        <br>Ut enim ad minim veniam, quis nostrud</p>
-                                    <hr>
-                                    <a>See more comments</a>
-                                    <br>
-                                    <i class="fa fa-comment fa-fw fa-lg pull-left"></i>
-                                    <input type="text" placeholder="Comment here">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Add file</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <c:choose>
+                            <c:when test="${userMaterials.size()>= 1}">
+                                <h4>Add material from your previously uploaded: </h4>
+                                <div class="highlightedCarousel">
+                                    <div id="owl-demo" class="owl-carousel owl-theme">
+                                        <c:forEach var="j" begin="0" end="${userMaterials.size()-1}">
+                                            <div class='item'>
+                                                <i class="-circle-o fa fa-2x -movie-o fa-fw -photo-o fa-file-pdf-o"></i>
+                                                <h3>${userMaterials.get(j).title}</h3>
+                                                <a href='${pageContext.request.contextPath}/room/${currentRoom.idroom}/${userMaterials.get(j).idmaterial}/addExistingMaterial'>
+                                                    <button class='btn btn-primary'>Add material</button>
+                                                </a>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </c:when>
+                        </c:choose>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>
 <jsp:include page="common/footer.jsp"></jsp:include>

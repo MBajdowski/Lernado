@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -33,4 +32,16 @@ public class Room {
     @JoinColumn(name = "room_idroom", referencedColumnName = "idroom", nullable = false), inverseJoinColumns =
     @JoinColumn(name = "material_idmaterial", referencedColumnName = "idmaterial", nullable = false))
     private List<Material> materials;
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "idroom=" + idroom +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", isPrivate=" + isPrivate +
+                ", photoBinary=" + Arrays.toString(photoBinary) +
+                ", admin=" + admin +
+                '}';
+    }
 }

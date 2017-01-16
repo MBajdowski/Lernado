@@ -29,7 +29,8 @@
                         <img src="${currentPhoto}" class="img-responsive logo">
                     </div>
                     <div class="col-md-7">
-                        <h1><sec:authentication property="principal.firstName"/> <sec:authentication property="principal.lastName"/></h1>
+                        <h1><sec:authentication property="principal.firstName"/> <sec:authentication
+                                property="principal.lastName"/></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -39,73 +40,97 @@
                 </div>
                 <div class="col-md-12">
                     <h2>Personal Information:</h2>
-                    <form class="form-horizontal" role="form" method="POST" action="${pageContext.request.contextPath}/user/edit" ng-init="notChanged=true" enctype="multipart/form-data">
-                        <div class="form-group" ng-mouseover="nameEdit=false" ng-mouseleave="nameEdit=true" ng-init="nameEdit=true; nameInputEnable=true">
+                    <form class="form-horizontal" role="form" method="POST"
+                          action="${pageContext.request.contextPath}/user/edit" ng-init="notChanged=true"
+                          enctype="multipart/form-data">
+                        <div class="form-group" ng-mouseover="nameEdit=false" ng-mouseleave="nameEdit=true"
+                             ng-init="nameEdit=true; nameInputEnable=true">
                             <div class="col-sm-2">
-                            <label class="control-label">Name:</label>
-                                </div>
+                                <label class="control-label">Name:</label>
+                            </div>
                             <div class="col-sm-8">
-                            <input class="form-control" id="firstName" name="firstName" value="<sec:authentication
-                                property="principal.firstName"/>" type="text" ng-readonly="nameInputEnable" ng-blur="nameInputEnable=true" required>
-                                </div>
-                            <div class="col-sm-2"><a ng-hide="nameEdit" ng-click="nameInputEnable=false; notChanged= false"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                                <input class="form-control" id="firstName" name="firstName" value="<sec:authentication
+                                property="principal.firstName"/>" type="text" ng-readonly="nameInputEnable"
+                                       ng-blur="nameInputEnable=true" required>
+                            </div>
+                            <div class="col-sm-2"><a ng-hide="nameEdit"
+                                                     ng-click="nameInputEnable=false; notChanged= false"><i
+                                    class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
-                        <div class="form-group"  ng-mouseover="surnameEdit=false" ng-mouseleave="surnameEdit=true" ng-init="surnameEdit=true; surnameInputEnable=true">
+                        <div class="form-group" ng-mouseover="surnameEdit=false" ng-mouseleave="surnameEdit=true"
+                             ng-init="surnameEdit=true; surnameInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Surname:</label>
                             </div>
                             <div class="col-sm-8">
                                 <input class="form-control" id="lastName" name="lastName" value="<sec:authentication
-                                property="principal.lastName"/>" type="text" ng-readonly="surnameInputEnable" ng-blur="surnameInputEnable=true" required>
+                                property="principal.lastName"/>" type="text" ng-readonly="surnameInputEnable"
+                                       ng-blur="surnameInputEnable=true" required>
                             </div>
-                            <div class="col-sm-2"><a ng-hide="surnameEdit" ng-click="surnameInputEnable=false; notChanged= false"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-hide="surnameEdit"
+                                                     ng-click="surnameInputEnable=false; notChanged= false"><i
+                                    class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
-                        <div class="form-group" ng-mouseover="nicknameEdit=false" ng-mouseleave="nicknameEdit=true" ng-init="nicknameEdit=true; nicknameInputEnable=true">
+                        <div class="form-group" ng-mouseover="nicknameEdit=false" ng-mouseleave="nicknameEdit=true"
+                             ng-init="nicknameEdit=true; nicknameInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Nick-name:</label>
                             </div>
                             <div class="col-sm-8">
                                 <input class="form-control" id="nickName" name="nickName" value="<sec:authentication
-                                property="principal.nickName"/>" type="text" ng-readonly="nicknameInputEnable" ng-blur="nicknameInputEnable=true">
+                                property="principal.nickName"/>" type="text" ng-readonly="nicknameInputEnable"
+                                       ng-blur="nicknameInputEnable=true">
                             </div>
-                            <div class="col-sm-2"><a ng-click="nicknameInputEnable=false; notChanged= false" ng-hide="nicknameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-click="nicknameInputEnable=false; notChanged= false"
+                                                     ng-hide="nicknameEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a>
+                            </div>
                         </div>
-                        <div class="form-group" ng-mouseover="emailEdit=false" ng-mouseleave="emailEdit=true" ng-init="emailEdit=true; emailInputEnable=true">
+                        <div class="form-group" ng-mouseover="emailEdit=false" ng-mouseleave="emailEdit=true"
+                             ng-init="emailEdit=true; emailInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Email:</label>
                             </div>
                             <div class="col-sm-8">
                                 <input class="form-control" id="email" name="email" value="<sec:authentication
-                                property="principal.email"/>" type="email" ng-readonly="emailInputEnable" ng-blur="emailInputEnable=true" required>
+                                property="principal.email"/>" type="email" ng-readonly="emailInputEnable"
+                                       ng-blur="emailInputEnable=true" required>
                             </div>
-                            <div class="col-sm-2"><a ng-click="emailInputEnable=false; notChanged= false" ng-hide="emailEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-click="emailInputEnable=false; notChanged= false"
+                                                     ng-hide="emailEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a>
+                            </div>
                         </div>
 
 
-                        <div class="form-group" ng-mouseover="desEdit=false" ng-mouseleave="desEdit=true" ng-init="desEdit=true; desInputEnable=true">
+                        <div class="form-group" ng-mouseover="desEdit=false" ng-mouseleave="desEdit=true"
+                             ng-init="desEdit=true; desInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Description:</label>
                             </div>
                             <div class="col-sm-8">
                                 <input class="form-control" id="description" name="description" value="<sec:authentication
-                                property="principal.description"/>" type="text" ng-readonly="desInputEnable" ng-blur="desInputEnable=true">
+                                property="principal.description"/>" type="text" ng-readonly="desInputEnable"
+                                       ng-blur="desInputEnable=true">
                             </div>
-                            <div class="col-sm-2"><a ng-click="desInputEnable=false; notChanged= false" ng-hide="desEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-click="desInputEnable=false; notChanged= false"
+                                                     ng-hide="desEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
 
 
-
-                        <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true" ng-init="telEdit=true; telInputEnable=true">
+                        <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true"
+                             ng-init="telEdit=true; telInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Tel. number:</label>
                             </div>
                             <div class="col-sm-8">
                                 <input class="form-control" id="phoneNumber" name="phoneNumber" value="<sec:authentication
-                                property="principal.phoneNumber"/>" type="text" ng-readonly="telInputEnable" ng-blur="telInputEnable=true">
+                                property="principal.phoneNumber"/>" type="text" ng-readonly="telInputEnable"
+                                       ng-blur="telInputEnable=true">
                             </div>
-                            <div class="col-sm-2"><a ng-click="telInputEnable=false; notChanged= false" ng-hide="telEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
+                            <div class="col-sm-2"><a ng-click="telInputEnable=false; notChanged= false"
+                                                     ng-hide="telEdit"><i class="fa fa-2x fa-fw fa-edit"></i></a></div>
                         </div>
-                        <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true" ng-init="telEdit=true; telInputEnable=true">
+                        <div class="form-group" ng-mouseover="telEdit=false" ng-mouseleave="telEdit=true"
+                             ng-init="telEdit=true; telInputEnable=true">
                             <div class="col-sm-2">
                                 <label class="control-label">Photo:</label>
                             </div>
@@ -114,33 +139,38 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type='submit' class='btn btn-primary pull-right' ng-hide="notChanged">Save changes</button>
+                            <button type='submit' class='btn btn-primary pull-right' ng-hide="notChanged">Save changes
+                            </button>
                         </div>
                     </form>
-                    </div>
+                </div>
             </div>
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
         </div>
+    </div>
+</div>
+<div class="section highlightedCarousel">
+    <div class="container">
         <div class="row">
-            <div id="courses" class="col-md-12">
-                <h1>Suggested Courses:</h1>
-                <div id="owl-demo" class="owl-carousel owl-theme highlightedCarousel">
-                    <c:choose>
-                        <c:when test="${suggested.size()>= 1}">
-                            <c:forEach var="i" begin="0" end="${suggested.size()-1}">
-                                <div class='item'>
-                                    <img src="${suggested.get(i).getValue()}"
-                                         class='img-responsive'>
-                                    <h2>${suggested.get(i).getKey().title}</h2>
-                                    <p>${suggested.get(i).getKey().description}</p>
-                                    <a href='${pageContext.request.contextPath}/course/${suggested.get(i).getKey().idcourse}'>
-                                        <button class='btn btn-primary'>More info</button>
-                                    </a>
-                                </div>
-                            </c:forEach>
-                        </c:when>
-                    </c:choose>
-                </div>
+            <h1>Suggested courses:</h1>
+        </div>
+        <div id="paragraph1" class="row">
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                <c:choose>
+                    <c:when test="${suggested.size()>= 1}">
+                        <c:forEach var="i" begin="0" end="${suggested.size()-1}">
+                            <div class='item'>
+                                <img src="${suggested.get(i).getValue()}"
+                                     class='img-responsive'>
+                                <h2>${suggested.get(i).getKey().title}</h2>
+                                <p>${suggested.get(i).getKey().description}</p>
+                                <a href='${pageContext.request.contextPath}/course/${suggested.get(i).getKey().idcourse}'>
+                                    <button class='btn btn-primary'>More info</button>
+                                </a>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
             </div>
         </div>
     </div>

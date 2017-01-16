@@ -43,6 +43,15 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-2">
+                            <label class="control-label">Visibility</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="radio" name="isPrivate" value="true">Private
+                            <input type="radio" name="isPrivate" value="false">Public
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
                             <label class="control-label">Picture</label>
                         </div>
                         <div class="col-sm-10">
@@ -104,17 +113,6 @@
                             <input name="price" type="number" step="0.01" class="form-control" value="0.00" required>
                         </div>
                     </div>
-                        <div class="form-group">
-                            <div class="col-sm-2">
-                                <label class="control-label">Visibility</label>
-                            </div>
-                            <div class="col-sm-10">
-                                <input type="radio" name="isPrivate" value="true">Private
-                                <br>
-                                <input type="radio" name="isPrivate" value="false">Public
-                                <br>
-                            </div>
-                        </div>
                     </div>
                     <input name="creatorId" type="hidden" value="<sec:authentication
                                 property="principal.id"/>">

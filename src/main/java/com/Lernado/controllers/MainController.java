@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -43,7 +46,13 @@ public class MainController {
     public String home(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser currentUser = (CurrentUser)authentication.getPrincipal();
-        List<Course> popular = courseController.getPopularCourses(currentUser.getId());
+        List<Course> popularCourses = courseController.getPopularCourses(currentUser.getId());
+
+        List<AbstractMap.SimpleEntry> popular = new ArrayList<>();
+        for(Course course : popularCourses){
+            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
+            popular.add(new AbstractMap.SimpleEntry(course, base64));
+        }
         model.addAttribute("popular" , popular);
         return "homePage";}
 
@@ -68,7 +77,7 @@ public class MainController {
             rcBean.setPhotoBinary(photo.getBytes());
 
         if (rcBean.getType()==null || rcBean.getType().equals("room"))
-            return roomController.createRoom(rcBean);
+            return roomController.createRoom(rcBean, model);
         return courseController.createCourse(rcBean, model);
     }
 }
