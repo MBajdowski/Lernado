@@ -15,7 +15,7 @@
     <link href="${pageContext.request.contextPath}/css/carouselHighlited.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/js/owl.carousel.js"></script>
     <script src="${pageContext.request.contextPath}/js/carouselHighlited.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/angular.min.js"></script>
 </head>
 <body ng-app=""
       ng-init="creator=(${currentCourse.getCreator().getIduser()}==<sec:authentication property="principal.Id"/>)">

@@ -16,7 +16,7 @@
     <link href="${pageContext.request.contextPath}/css/carouselHighlited.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/js/owl.carousel.js"></script>
     <script src="${pageContext.request.contextPath}/js/carouselHighlited.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/angular.min.js"></script>
 </head>
 <body ng-app="">
 <jsp:include page="common/header.jsp"></jsp:include>
@@ -149,7 +149,7 @@
         </div>
     </div>
 </div>
-<div class="section highlightedCarousel">
+<div class="section highlightedCarousel" ng-hide="${suggested.isEmpty()}">
     <div class="container">
         <div class="row">
             <h1>Suggested courses:</h1>

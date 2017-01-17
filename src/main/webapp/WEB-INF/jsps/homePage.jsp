@@ -16,8 +16,9 @@
     <link href="${pageContext.request.contextPath}/css/carouselHighlited.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/js/owl.carousel.js"></script>
     <script src="${pageContext.request.contextPath}/js/carouselHighlited.js"></script>
+    <script src="${pageContext.request.contextPath}/js/angular.min.js"></script>
 </head>
-<body>
+<body ng-app="">
 <jsp:include page="common/header.jsp"></jsp:include>
 <div class="section tlo">
     <div class="container">
@@ -47,7 +48,7 @@
         </div>
     </div>
 </div>
-<div class="section highlightedCarousel">
+<div class="section highlightedCarousel" ng-hide="${popular.isEmpty()}">
     <div class="container">
         <div class="row">
             <h1>Popoular courses:</h1>
