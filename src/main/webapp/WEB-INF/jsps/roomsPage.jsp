@@ -12,6 +12,11 @@
     <link href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
     <link href="${pageContext.request.contextPath}/css/defaultStyles.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/css/owl.carousel.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/owl.theme.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/carouselHighlited.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/js/owl.carousel.js"></script>
+    <script src="${pageContext.request.contextPath}/js/carouselHighlited.js"></script>
     <script src="${pageContext.request.contextPath}/js/angular.min.js"></script>
 
 </head>
