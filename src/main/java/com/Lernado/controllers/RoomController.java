@@ -14,6 +14,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -77,9 +79,11 @@ public class RoomController {
             materials.add(new AbstractMap.SimpleEntry(roomsMaterials.get(i), base64));
         }
         User currentUser = userController.getCurrentUser();
-        List<Material> userMaterials = currentUser.getMaterials();
-        model.addAttribute("userMaterials", userMaterials);
+        model.addAttribute("userMaterials", currentUser.getMaterials());
         model.addAttribute("materials", materials);
+        if(currentUser.getRooms().contains(currentRoom)){
+            model.addAttribute("inRoom", true);
+        }
         return "roomsPage";
     }
 
@@ -97,9 +101,9 @@ public class RoomController {
         }
         return roomsMap;
     }
+
     @RequestMapping("/addMaterial")
-    public String addMaterial(MaterialBean mBean, String type, Model model,
-                              HttpServletResponse res, String path, int roomId) throws IOException {
+    public String addMaterial(MaterialBean mBean, String type, Model model, String path, int roomId) throws IOException {
         User currentUser = userController.getCurrentUser();
 
         Material newMaterial = Material.builder().title(mBean.getTitle())
@@ -116,19 +120,10 @@ public class RoomController {
         roomRepository.save(currentRoom);
         currentUser.getMaterials().add(newMaterial);
         userController.setAuthUser(userRepository.save(currentUser));
-        List<AbstractMap.SimpleEntry> materials = new ArrayList<>();
-        String currentRoomPhoto =
-                "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(currentRoom.getPhotoBinary());
-        model.addAttribute("currentRoomPhoto", currentRoomPhoto);
-        model.addAttribute("currentRoom", currentRoom);
-        List<Material> roomsMaterials = currentRoom.getMaterials();
-        for(int i=0; i< roomsMaterials.size(); i++){
-            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString((roomsMaterials.get(i).getCreator().getPhotoBinary()));
-            materials.add(new AbstractMap.SimpleEntry(roomsMaterials.get(i), base64));
-        }
-        model.addAttribute("materials", materials);
-        return "roomsPage";
+
+        return showRoomPage(roomId, model);
     }
+
     @RequestMapping("{idroom}/{idmaterial}/addExistingMaterial")
     public String addExistingMaterial(@PathVariable("idroom") int roomId,@PathVariable("idmaterial") int materialId,
                                       Model model, HttpServletResponse res) throws IOException{
@@ -143,5 +138,40 @@ public class RoomController {
         List<Material> userMaterials = currentUser.getMaterials();
         model.addAttribute("userMaterials", userMaterials);
         return showRoomPage(currentRoom.getIdroom(), model);
+    }
+
+    @RequestMapping("joinRoom")
+    public String addUserToRoom(@RequestParam int idRoom, Model model){
+        User currentUser = userController.getCurrentUser();
+        currentUser.getRooms().add(roomRepository.getOne(idRoom));
+        currentUser = userRepository.save(currentUser);
+        userController.setAuthUser(currentUser);
+        return showRoomPage(idRoom, model);
+    }
+
+    @RequestMapping("leaveRoom")
+    public String removerUserFromRoom(@RequestParam int idRoom, Model model){
+        User currentUser = userController.getCurrentUser();
+        currentUser.getRooms().remove(roomRepository.getOne(idRoom));
+        currentUser = userRepository.save(currentUser);
+        userController.setAuthUser(currentUser);
+        return showRoomPage(idRoom, model);
+    }
+
+    @RequestMapping("{idroom}/updateDetails")
+    public String updatedDetails(@PathVariable int idroom, String title, String description, Model model){
+        Room currentRoom = roomRepository.getOne(idroom);
+        currentRoom.setTitle(title);
+        currentRoom.setDescription(description);
+        roomRepository.save(currentRoom);
+        return showRoomPage(idroom, model);
+    }
+
+    @RequestMapping("{idroom}/updatePhoto")
+    public String updatedDetails(@PathVariable int idroom, MultipartFile photoBinary, Model model) throws IOException {
+        Room currentRoom = roomRepository.getOne(idroom);
+        currentRoom.setPhotoBinary(photoBinary.getBytes());
+        roomRepository.save(currentRoom);
+        return showRoomPage(idroom, model);
     }
 }

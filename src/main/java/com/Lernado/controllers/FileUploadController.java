@@ -1,7 +1,6 @@
 package com.Lernado.controllers;
 
 import com.Lernado.beans.MaterialBean;
-import com.Lernado.model.Room;
 import com.Lernado.storage.StorageFileNotFoundException;
 import com.Lernado.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -91,7 +89,7 @@ public class FileUploadController {
         if(type.equals("courses")) {
             return courseController.addMaterial(mBean.getIdlesson(), mBean, file.getContentType(), model, res, getFile(file.getOriginalFilename()));
         } else {
-            return roomController.addMaterial(mBean, file.getContentType(), model, res, getFile(file.getOriginalFilename()), mBean.getIdlesson());
+            return roomController.addMaterial(mBean, file.getContentType(), model, getFile(file.getOriginalFilename()), mBean.getIdlesson());
         }
     }
 

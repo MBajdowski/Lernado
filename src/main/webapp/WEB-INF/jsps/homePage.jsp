@@ -37,8 +37,7 @@
                         <p class="text-center menuitems">We are honored to welcome you on the best e-learning platform
                             ever!<br>
                             We are grateful that you want to create with us a new world, <br>
-                            in which everyone can have an easy access to the knowledge shared by our platform- anywhere
-                            and anytime.<br>
+                            in which everyone can have an easy access to the knowledge anywhere and anytime.<br>
                             We wish you the best experience!</p>
 
                     </div>
