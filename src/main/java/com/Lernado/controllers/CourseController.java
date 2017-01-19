@@ -418,5 +418,27 @@ public class CourseController {
         }
         return suggested;
     }
+    @RequestMapping("adminPage")
+    public String showAdminPage(Model model){
+        model.addAttribute("isAdmin", true);
+        model.addAttribute("courses", courseRepository.findAll());
+        return "adminPage";
+    }
+    @RequestMapping("/setValidated")
+    public String setPrivacy(@RequestParam() int idCourse,@RequestParam() String isValidated, Model model){
+        Course currentCourse = courseRepository.getOne(idCourse);
+        String s = "true";
+        currentCourse.setValidated(s.equals(isValidated));
+        courseRepository.save(currentCourse);
+        return showAdminPage(model);
+    }
+    @RequestMapping("/setHighlighted")
+    public String setHighlighted(@RequestParam() int idCourse,@RequestParam() String isHighlighted, Model model){
+        Course currentCourse = courseRepository.getOne(idCourse);
+        String s = "true";
+        currentCourse.setHighlighted(s.equals(isHighlighted));
+        courseRepository.save(currentCourse);
+        return showAdminPage(model);
+    }
 
 }

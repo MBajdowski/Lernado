@@ -1,6 +1,7 @@
 package com.Lernado.controllers;
 
 import com.Lernado.beans.RoomCourseBean;
+import com.Lernado.managers.AdminRepository;
 import com.Lernado.model.Course;
 import com.Lernado.model.User;
 import com.Lernado.security.CurrentUser;
@@ -30,6 +31,8 @@ public class MainController {
     private RoomController roomController;
     @Autowired
     private UserController userController;
+    @Autowired
+    private AdminRepository adminRepository;
 
     @RequestMapping("/")
     public String index() {return "loginPage"; }
@@ -46,6 +49,9 @@ public class MainController {
     public String home(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser currentUser = (CurrentUser)authentication.getPrincipal();
+        if(currentUser.getEmail().equals(adminRepository.getOne(1).getEmail())){
+         return courseController.showAdminPage(model);
+        }
         List<Course> popularCourses = courseController.getPopularCourses(currentUser.getId());
 
         List<AbstractMap.SimpleEntry> popular = new ArrayList<>();

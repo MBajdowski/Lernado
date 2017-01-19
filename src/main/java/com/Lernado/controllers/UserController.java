@@ -59,6 +59,9 @@ public class UserController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createUser(@NonNull User user, Model model){
         try {
+            if(user.getEmail().equals(adminRepository.getOne(1).getEmail())){
+                throw new Exception();
+            }
             ClassLoader classLoader = getClass().getClassLoader();
             File file = new File(classLoader.getResource("static/images/defaultProfile.jpg").getFile());
             byte[] photoBinary = Files.readAllBytes(Paths.get(file.toURI()));
