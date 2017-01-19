@@ -254,13 +254,13 @@ public class CourseController {
 
     @RequestMapping("/addMaterial")
     public String addMaterial(int lessonId, MaterialBean mBean, String type, Model model,
-                              HttpServletResponse res, String path) throws IOException {
+                              HttpServletResponse res, String path, String title) throws IOException {
         User currentUser = userController.getCurrentUser();
         Lesson currentLesson = lessonRepository.getOne(lessonId);
         if(currentUser.getIduser() != currentLesson.getCourse().getCreator().getIduser())
             res.sendError(401);
 
-        Material newMaterial = Material.builder().title(mBean.getTitle())
+        Material newMaterial = Material.builder().title(title)
                 .description(mBean.getDescription())
                 .path(path)
                 .type(type)

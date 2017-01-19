@@ -49,13 +49,9 @@ public class FileUploadController {
     }
 
     public String getFile(String filename) throws IOException {
-//        return storageService.loadOne(filename).map(path ->
-//                MvcUriComponentsBuilder
-//                        .fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString())
-//                        .build().toString())
-//                .collect(Collectors.toList()).get(0).toString();
-
-
+        if(filename.isEmpty()){
+            return null;
+        }
         List<Object> files = storageService
                 .loadAll()
                 .map(path ->
@@ -68,7 +64,7 @@ public class FileUploadController {
                 return object.toString();
             }
         }
-        return "localhost:8080";
+        return null;
     }
 
     @GetMapping("/files/{filename:.+}")
@@ -85,11 +81,15 @@ public class FileUploadController {
     @RequestMapping("{type}/upload")
     public String handleFileUpload(@PathVariable("type") String type,MaterialBean mBean, MultipartFile file,
                                    Model model, HttpServletResponse res) throws IOException {
-        storageService.store(file);
+        boolean copy = false;
+        if(getFile(file.getOriginalFilename()) != null){
+            copy = true;
+        }
+        storageService.store(file, copy);
         if(type.equals("courses")) {
-            return courseController.addMaterial(mBean.getIdlesson(), mBean, file.getContentType(), model, res, getFile(file.getOriginalFilename()));
+            return courseController.addMaterial(mBean.getIdlesson(), mBean, file.getContentType(), model, res, getFile(file.getOriginalFilename()),file.getOriginalFilename());
         } else {
-            return roomController.addMaterial(mBean, file.getContentType(), model, getFile(file.getOriginalFilename()), mBean.getIdlesson());
+            return roomController.addMaterial(mBean, file.getContentType(), model, getFile(file.getOriginalFilename()),file.getOriginalFilename(), mBean.getIdlesson());
         }
     }
 

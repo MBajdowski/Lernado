@@ -18,6 +18,7 @@
         <div class="row">
             <div class="col-md-9">
                 <h1>My Rooms</h1>
+                <div class="col-md-8">
                     <ul class="list-group">
                         <c:choose>
                             <c:when test="${rooms.size() >= 1}">
@@ -32,12 +33,13 @@
                             </c:otherwise>
                         </c:choose>
                     </ul>
+                </div>
             </div>
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
         </div>
     </div>
     <div class="fillScreen">
-        </div>
+    </div>
 </div>
 <jsp:include page="common/footer.jsp"></jsp:include>
 </body>

@@ -103,10 +103,10 @@ public class RoomController {
     }
 
     @RequestMapping("/addMaterial")
-    public String addMaterial(MaterialBean mBean, String type, Model model, String path, int roomId) throws IOException {
+    public String addMaterial(MaterialBean mBean, String type, Model model, String path, String title, int roomId) throws IOException {
         User currentUser = userController.getCurrentUser();
 
-        Material newMaterial = Material.builder().title(mBean.getTitle())
+        Material newMaterial = Material.builder().title(title)
                 .description(mBean.getDescription())
                 .path(path)
                 .type(type)
@@ -130,9 +130,16 @@ public class RoomController {
         User currentUser = userController.getCurrentUser();
         Room currentRoom = roomRepository.getOne(roomId);
 
-        Material material = materialRepository.getOne(materialId);
+        Material oldMaterial = materialRepository.getOne(materialId);
+        Material newMaterial = Material.builder().title(oldMaterial.getTitle())
+                .description(null)
+                .path(oldMaterial.getPath())
+                .type(oldMaterial.getType())
+                .creator(currentUser)
+                .build();
+        newMaterial = materialRepository.save(newMaterial);
 
-        currentRoom.getMaterials().add(material);
+        currentRoom.getMaterials().add(newMaterial);
         roomRepository.save(currentRoom);
 
         List<Material> userMaterials = currentUser.getMaterials();

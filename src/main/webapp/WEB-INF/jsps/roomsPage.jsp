@@ -32,8 +32,10 @@
                         <div class="pull-right">
                             <form ng-show="${inRoom}" method="POST" enctype="multipart/form-data"
                                   action="${pageContext.request.contextPath}/room/${currentRoom.idroom}/updatePhoto">
-                                <label  for="photobinary" class="btn">Update photo<i class="fa fa-2x fa-picture-o fa-fw"></i></label>
-                                <input type="file" id="photobinary" name="photoBinary" onchange="this.form.submit();" style="display: none">
+                                <label for="photobinary" class="btn">Update photo<i
+                                        class="fa fa-2x fa-picture-o fa-fw"></i></label>
+                                <input type="file" id="photobinary" name="photoBinary" onchange="this.form.submit();"
+                                       style="display: none">
                             </form>
                         </div>
                     </div>
@@ -42,7 +44,8 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-8 text-center">
                         <h1>${currentRoom.getTitle()}
-                        <a ng-show="${inRoom}" data-toggle="modal" data-target="#myDetailsModal"><i class="fa fa-1x fa-edit fa-fw"></i></a></h1>
+                            <a ng-show="${inRoom}" data-toggle="modal" data-target="#myDetailsModal"><i
+                                    class="fa fa-1x fa-edit fa-fw"></i></a></h1>
                         <br>
                         <h4>${currentRoom.getDescription()}</h4>
                         <hr>
@@ -50,18 +53,22 @@
                     <c:choose>
                         <c:when test="${inRoom}">
                             <div class="col-md-2 text-center">
-                                <form id="myForm" class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/room/leaveRoom">
+                                <form id="myForm" class="form-horizontal" role="form" method="GET"
+                                      action="${pageContext.request.contextPath}/room/leaveRoom">
                                     <input type="hidden" name="idRoom" value="${currentRoom.idroom}">
-                                    <a onclick="document.getElementById('myForm').submit();"><i class="fa fa-3x fa-fw fa-toggle-on"></i></a>
+                                    <a onclick="document.getElementById('myForm').submit();"><i
+                                            class="fa fa-3x fa-fw fa-toggle-on"></i></a>
                                 </form>
                                 <h4>Leave room</h4>
                             </div>
                         </c:when>
                         <c:otherwise>
                             <div class="col-md-2 text-center">
-                                <form id="myForm" class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/room/joinRoom">
+                                <form id="myForm" class="form-horizontal" role="form" method="GET"
+                                      action="${pageContext.request.contextPath}/room/joinRoom">
                                     <input type="hidden" name="idRoom" value="${currentRoom.idroom}">
-                                    <a onclick="document.getElementById('myForm').submit();"><i class="fa fa-3x fa-fw fa-toggle-off"></i></a>
+                                    <a onclick="document.getElementById('myForm').submit();"><i
+                                            class="fa fa-3x fa-fw fa-toggle-off"></i></a>
                                 </form>
                                 <h4>Join room</h4>
                             </div>
@@ -72,32 +79,37 @@
 
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
 
-            <div class="row">
-                <div class="col-md-9">
                     <c:if test="${inRoom}">
-                        <div class="roomBorder">
-                            <div class="row">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                        <div class="col-md-10 roomBorder">
                                 <form method="POST" enctype="multipart/form-data"
                                       action="${pageContext.request.contextPath}/room/upload">
-                                <div class="col-md-9 margin10">
-                                    <p>Write your post here: &emsp;  <label for="roomFile">Add new material<i class="fa fa-paperclip" aria-hidden="true"></i></label>
-                                        <input id="roomFile" name="file" type="file" style="display: none">
-                                        <a data-toggle="modal" data-target="#myModal" >Add existing material<i class="fa fa-paperclip" aria-hidden="true"></i></a>
-                                    </p>
-                                    <input name="description" type="text" placeholder="Your post...">
-                                    <input name="title" type="text" ng-show="false" value="material${users.get(i).getKey().getMaterials().getSize()+1}">
-                                    <input name="idlesson" type="hidden" value="${currentRoom.idroom}">
-                                    <button class='btn btn-primary' type="submit"/>Send</button>
-                                </div>
+                                    <div class="margin10">
+                                        <p>Write your post here: &emsp; <label for="roomFile">Add new material<i
+                                                class="fa fa-paperclip" aria-hidden="true"></i></label>
+                                            <input id="roomFile" name="file" type="file" style="display: none">
+                                            <a data-toggle="modal" data-target="#myModal">Add existing material<i
+                                                    class="fa fa-paperclip" aria-hidden="true"></i></a>
+                                        </p>
+                                        <input name="description" type="text" placeholder="Your post...">
+                                        <input name="idlesson" type="hidden" value="${currentRoom.idroom}">
+                                        <button class='btn btn-primary' type="submit"/>
+                                        Send</button>
+                                    </div>
                                 </form>
                             </div>
+                                </div>
                         </div>
                     </c:if>
-                        <br>
-                        <br>
-                        <c:choose>
-                            <c:when test="${materials.size()>=1}">
-                                <c:forEach var="i" begin="0" end="${materials.size()-1}">
+                    <br>
+                    <br>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <c:choose>
+                        <c:when test="${materials.size()>=1}">
+                            <c:forEach var="p" begin="0" end="${materials.size()-1}">
+                                <c:set var="i" value="${materials.size()-1-p}"/>
                                 <div class="row">
                                     <div class="col-md-10 roomBorder">
                                         <div class="row">
@@ -112,21 +124,25 @@
                                         <div class="row">
                                             <div class="col-md-12 margin10">
                                                 <p>${materials.get(i).getKey().description}</p>
-                                                <hr><a href="${materials.get(i).getKey().path}">
-                                                <i class="-circle-o fa fa-2x fa-file-movie-o fa-fw"></i></a>
-                                                <a href="${materials.get(i).getKey().path}">
-                                                        ${materials.get(i).getKey().path}</a>
+                                                <hr>
+                                                <c:choose>
+                                                    <c:when test="${materials.get(i).getKey().path != null}">
+                                                        <a href="${materials.get(i).getKey().path}">
+                                                            <i class="-circle-o fa fa-2x fa-file-movie-o fa-fw"></i></a>
+                                                        <a href="${materials.get(i).getKey().path}">
+                                                                ${materials.get(i).getKey().path}</a>
+                                                    </c:when>
+                                                </c:choose>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                    <br>
-                                </c:forEach>
-                            </c:when>
-                        </c:choose>
+                                <br>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
@@ -145,7 +161,8 @@
                             <label class="control-label">Title</label>
                         </div>
                         <div class="col-sm-10">
-                            <input name="title" type="text" class="form-control" value="${currentCourse.title}" required>
+                            <input name="title" type="text" class="form-control" value="${currentCourse.title}"
+                                   required>
                         </div>
                     </div>
                     <br>
@@ -154,7 +171,8 @@
                             <label class="control-label">Description</label>
                         </div>
                         <div class="col-sm-10">
-                            <input name="description" type="text" class="form-control" value="${currentCourse.description}" required>
+                            <input name="description" type="text" class="form-control"
+                                   value="${currentCourse.description}" required>
                         </div>
                     </div>
                     <hr>
@@ -162,7 +180,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button class='btn btn-primary' type="submit"/>Update</button>
+                    <button class='btn btn-primary' type="submit"/>
+                    Update</button>
                 </div>
             </form>
         </div>
@@ -205,7 +224,6 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>
 <jsp:include page="common/footer.jsp"></jsp:include>

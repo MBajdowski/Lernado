@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.util.stream.Stream;
 
 @Service
@@ -25,13 +26,20 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public void store(MultipartFile file, boolean copy) {
         try {
             if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
+                return;
             }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            if(copy){
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                String fileName = file.getOriginalFilename() + timestamp.getTime();
+                Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName));
+            } else {
+                Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            }
         } catch (IOException e) {
+
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
     }
@@ -41,18 +49,6 @@ public class FileSystemStorageService implements StorageService {
         try {
             return Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
-                    .map(path -> this.rootLocation.relativize(path));
-        } catch (IOException e) {
-            throw new StorageException("Failed to read stored files", e);
-        }
-
-    }
-
-    @Override
-    public Stream<Path> loadOne(String fileName) {
-        try {
-            return Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation)  && path.toString().contains(fileName))
                     .map(path -> this.rootLocation.relativize(path));
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);

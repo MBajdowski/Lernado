@@ -12,7 +12,6 @@ import java.io.IOException;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MaterialBean {
-    private String title;
     private String description;
     private int idlesson;
 
