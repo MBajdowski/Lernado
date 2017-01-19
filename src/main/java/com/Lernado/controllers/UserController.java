@@ -84,10 +84,8 @@ public class UserController {
 
     @RequestMapping("/edit")
     public String editProfile(User user, MultipartFile photo, Model model){
+        User existingUser = getCurrentUser();
         try {
-
-            User existingUser = getCurrentUser();
-
             existingUser.setFirstName(user.getFirstName());
             existingUser.setLastName(user.getLastName());
             existingUser.setEmail(user.getEmail());
@@ -97,9 +95,12 @@ public class UserController {
             if(photo != null && photo.getSize()>0)
                 existingUser.setPhotoBinary(photo.getBytes());
 
-            setAuthUser(userRepository.save(existingUser));
+            existingUser = userRepository.save(existingUser);
         }catch (Exception e) {
+            model.addAttribute("emailInUse", true);
+            return profilePage(model);
         }
+        setAuthUser(existingUser);
         return profilePage(model);
     }
 

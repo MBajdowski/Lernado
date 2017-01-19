@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-sm-10">
                             <input type="radio" name="isPrivate" value="true">Private
-                            <input type="radio" name="isPrivate" value="false">Public
+                            <input type="radio" name="isPrivate" value="false" ng-checked="true">Public
                         </div>
                     </div>
                     <div class="form-group">
@@ -65,7 +65,7 @@
                         <div class="col-sm-10">
                             <input type="radio" name="type" value="course" ng-model="myVar">Course
                             <br>
-                            <input type="radio" name="type" value="room" ng-model="myVar">Room
+                            <input type="radio" name="type" value="room" ng-checked="true" ng-model="myVar">Room
                             <br>
                         </div>
                     </div>

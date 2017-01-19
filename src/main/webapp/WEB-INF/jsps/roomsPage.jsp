@@ -86,9 +86,8 @@
                                 <form method="POST" enctype="multipart/form-data"
                                       action="${pageContext.request.contextPath}/room/upload">
                                     <div class="margin10">
-                                        <p>Write your post here: &emsp; <label for="roomFile">Add new material<i
-                                                class="fa fa-paperclip" aria-hidden="true"></i></label>
-                                            <input id="roomFile" name="file" type="file" style="display: none">
+                                        <p>Write your post here:
+                                            <input id="roomFile" name="file" type="file" value="Add new material">
                                             <a data-toggle="modal" data-target="#myModal">Add existing material<i
                                                     class="fa fa-paperclip" aria-hidden="true"></i></a>
                                         </p>

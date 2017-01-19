@@ -92,7 +92,7 @@ public class CourseController {
         String level = sb.getLevel();
         List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();
         List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
-        List<Course> highlightedCourses = courseRepository.findByHighlightedAndIsPrivateFalse(true);
+        List<Course> highlightedCourses = courseRepository.findByHighlightedAndIsPrivateFalseAndValidatedTrue(true);
         int page = (pageStr==null || pageStr.equals(""))?0:Integer.parseInt(pageStr);
 
         if(!sb.isRoomChecked()) {
@@ -104,7 +104,7 @@ public class CourseController {
                 sb.setLevel("Any");
                 level = "%";
             }
-            List<Course> courses = courseRepository.findByCategoryLikeAndLevelLikeAndTitleContainingAndIsPrivateFalse(category, level, sb.getPhrase());
+            List<Course> courses = courseRepository.findByCategoryLikeAndLevelLikeAndTitleContainingAndIsPrivateFalseAndValidatedTrue(category, level, sb.getPhrase());
             List<Course> pagedCourses = getPagedCourses(courses, page, model);
 
             for(Course course : pagedCourses){
@@ -174,6 +174,7 @@ public class CourseController {
                 .price(rcBean.getPrice())
                 .photoBinary(rcBean.getPhotoBinary())
                 .creator(user)
+                .validated(true)
                 .isPrivate(rcBean.getIsPrivate())
                 .build();
         courseRepository.save(course);

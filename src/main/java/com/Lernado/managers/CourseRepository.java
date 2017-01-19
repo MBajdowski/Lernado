@@ -8,19 +8,19 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CourseRepository extends JpaRepository<Course, Integer> {
-    List<Course> findByTitleContainingAndIsPrivateFalse(String title);
 
-    List<Course> findByCategoryLikeAndLevelLikeAndTitleContainingAndIsPrivateFalse(String category, String level, String title);
+    List<Course> findByCategoryLikeAndLevelLikeAndTitleContainingAndIsPrivateFalseAndValidatedTrue(String category, String level, String title);
 
-    List<Course> findByHighlightedAndIsPrivateFalse(boolean highlighted);
+    List<Course> findByHighlightedAndIsPrivateFalseAndValidatedTrue(boolean highlighted);
 
     @Query(value = "SELECT * FROM Course a WHERE a.idcourse IN " +
             "(SELECT at.course_idcourse FROM user_attends_course at WHERE at.user_iduser != :userId GROUP BY at.course_idcourse ORDER BY COUNT(DISTINCT at.user_iduser)) " +
             "and a.creator_id != :userId " +
             "and a.idcourse NOT IN "+
-            "(SELECT at.course_idcourse FROM user_attends_course at "+
-            "WHERE at.user_iduser = :userId) "+
-            "and a.is_private = false LIMIT 12",
+            "(SELECT at.course_idcourse FROM user_attends_course at WHERE at.user_iduser = :userId) "+
+            "and a.is_private = false " +
+            "and a.validated = true " +
+            "LIMIT 12",
             nativeQuery = true)
     List<Course> findPopularCourses(@Param("userId")int userId);
 
@@ -30,10 +30,11 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
             "WHERE at.user_iduser != :userId AND c.category = :category " +
             "GROUP BY at.course_idcourse ORDER BY COUNT(DISTINCT at.user_iduser)) " +
             "AND a.idcourse NOT IN "+
-            "(SELECT at.course_idcourse FROM user_attends_course at "+
-            "WHERE at.user_iduser = :userId) "+
+            "(SELECT at.course_idcourse FROM user_attends_course at WHERE at.user_iduser = :userId) "+
             "and a.creator_id != :userId " +
-            "and a.is_private = false LIMIT 12",
+            "and a.is_private = false " +
+            "and a.validated = true " +
+            "LIMIT 12",
             nativeQuery = true)
     List<Course> findSugestedCourses(@Param("userId")int userId, @Param("category")String category);
 

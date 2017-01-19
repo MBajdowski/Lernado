@@ -91,6 +91,7 @@
                                 <label class="control-label">Email:</label>
                             </div>
                             <div class="col-sm-8">
+                                <div ng-show="${emailInUse}" class="errorMessage">This email is already in use :(</div>
                                 <input class="form-control" id="email" name="email" value="<sec:authentication
                                 property="principal.email"/>" type="email" ng-readonly="emailInputEnable"
                                        ng-blur="emailInputEnable=true" required>

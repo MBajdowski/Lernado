@@ -34,6 +34,8 @@ public class RoomCourseBean {
     }
 
     public boolean getIsPrivate(){
+        if(isPrivate==null)
+            return false;
         return isPrivate.equals("true")? true: false;
     }
 

@@ -115,65 +115,6 @@
                         </c:when>
                     </c:choose>
 
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-1">
-                                <a href="#"><i class="fa fa-3x fa-fw fa-trash-o pull-right"></i></a>
-                            </div>
-                            <div class="col-md-10">
-                                <h1>Example lesson to remember icons</h1>
-                            </div>
-                            <div class="col-md-1">
-                                <a href="#"><i class="fa fa-3x fa-edit fa-fw"></i></a>
-                            </div>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw fa-file-zip-o"></i>ZipFile - Title
-                                        of the zipFile
-                                    </td>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x fa-close fa-fw pull-right"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw -pdf-o fa-file-text-o"></i>Txt -
-                                        Title of the txt
-                                    </td>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x fa-close fa-fw pull-right"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw -photo-o fa-file-pdf-o"></i>Pdf -
-                                        Title of the pdf
-                                    </td>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x fa-close fa-fw pull-right"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x -movie-o fa-fw -photo-o fa-file-code-o"></i>Code -
-                                        Title of the code
-                                    </td>
-                                    <td>
-                                        <i class="-circle-o fa fa-2x fa-close fa-fw pull-right"></i>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="col-md-12">
-                                <a data-toggle="modal" data-target="#myModal"><h3 class="text-right">Add new material<i
-                                        class="fa fa-1x fa-file fa-fw pull-right"></i></h3></a>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <a ng-show="creator"

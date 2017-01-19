@@ -26,7 +26,7 @@
             <div class="col-md-9 text-center">
                 <div class="row">
                     <div class="col-md-4">
-                        <h1>Search Course:</h1><br>
+                        <h1>Search:</h1><br>
                     </div>
                 </div>
                 <form class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/course/advanceSearch">
@@ -81,7 +81,7 @@
                                 <label class="control-label">Search for:</label>
                             </div>
                             <div class="col-sm-3">
-                                <input type="radio" name="roomChecked" value="false"> Courses
+                                <input type="radio" name="roomChecked" value="false" ng-checked="true"> Courses
                                 <input type="radio" name="roomChecked" value="true"> Rooms
                             </div>
                         </div>
