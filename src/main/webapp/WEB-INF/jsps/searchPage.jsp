@@ -29,13 +29,14 @@
                         <h1>Search Course:</h1><br>
                     </div>
                 </div>
-                <form class="form-horizontal" role="form" method="GET" action="advanceSearch">
+                <form class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/course/advanceSearch">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-7">
                             <div class="form-group textfield">
                                 <div class="col-sm-10">
-                                    <input type="text" name="phrase" class="form-control input-sm">
+                                    <input type="text" name="phrase" value="${searchBean.phrase}"
+                                           class="form-control input-sm">
                                 </div>
                             </div>
                         </div>
@@ -53,7 +54,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <select class="form-control" name="category">
-                                    <option value="Any">Any</option>
+                                    <option value="Any" selected="selected">Any</option>
                                     <option value="Programming">Programming</option>
                                     <option value="Economics">Economics</option>
                                     <option value="Computer Networks">Computer Networks</option>
@@ -67,11 +68,21 @@
                             </div>
                             <div class="col-sm-4">
                                 <select class="form-control" name="level">
-                                    <option value="Any">Any</option>
+                                    <option value="Any" selected="selected">Any</option>
                                     <option value="easy">Easy</option>
                                     <option value="medium">Medium</option>
                                     <option value="hard">Hard</option>
                                 </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label class="control-label">Search for:</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="radio" name="roomChecked" value="false"> Courses
+                                <input type="radio" name="roomChecked" value="true"> Rooms
                             </div>
                         </div>
                     </div>
@@ -87,9 +98,81 @@
     </div>
 </div>
 
+<div class='section'>
+    <div class='container'>
+        <div class='row'>
+            <h1 ng-hide="${searchBean.roomChecked}">Courses:</h1>
+            <h1 ng-show="${searchBean.roomChecked}">Rooms:</h1>
+        </div>
+    </div>
+    <c:if test="${pairs.size()> 0}">
+        <c:forEach var="i" begin="0" end="${pairs.size()-1}">
+            <c:if test="${i%3==0}">
+                <div class='container'>
+                <div class='row'>
+            </c:if>
+            <div class='col-md-4'>
+                <div style="margin-bottom: 15px">
+                    <img src="${pairs.get(i).getValue()}"
+                         class='img-responsive'>
+                    <h2>${pairs.get(i).getKey().title}</h2>
+                    <p>${pairs.get(i).getKey().description}</p>
+                    <c:choose>
+                        <c:when test="${searchBean.roomChecked}">
+                            <a href='${pageContext.request.contextPath}/room/${pairs.get(i).getKey().idroom}'>
+                                <button class='btn btn-primary'>More info</button>
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href='${pageContext.request.contextPath}/course/${pairs.get(i).getKey().idcourse}'>
+                                <button class='btn btn-primary'>More info</button>
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:if test="${searchBean.roomChecked}"></c:if>
+                </div>
+            </div>
+            <c:if test="${(i%3==2&&i>0)||(i==pairs.size()-1)}">
+                </div>
+                </div>
+            </c:if>
+        </c:forEach>
+    </c:if>
+
+    <div class='container'>
+        <div class='row'>
+            <div class="col-md-6 text-left">
+                <c:if test="${(page-1)>=0}">
+                    <form method="GET", role="search", action="${pageContext.request.contextPath}/course/advanceSearch">
+                        <input type="hidden" name="phrase" value="${searchBean.phrase}">
+                        <input type="hidden" name="category" value="${searchBean.category}">
+                        <input type="hidden" name="level" value="${searchBean.level}">
+                        <input type="hidden" name="roomChecked" value="${searchBean.roomChecked}">
+                        <input type="hidden" name="page" value="${page-1}">
+                        <input type="submit" value="<-- Previous page">
+                    </form>
+                </c:if>
+            </div>
+            <div class="col-md-6 text-right">
+                <c:if test="${!endOfList}">
+                    <form method="GET", role="search", action="${pageContext.request.contextPath}/course/advanceSearch">
+                        <input type="hidden" name="phrase" value="${searchBean.phrase}">
+                        <input type="hidden" name="category" value="${searchBean.category}">
+                        <input type="hidden" name="level" value="${searchBean.level}">
+                        <input type="hidden" name="roomChecked" value="${searchBean.roomChecked}">
+                        <input type="hidden" name="page" value="${page+1}">
+                        <input type="submit" value="Next page -->">
+                    </form>
+                </c:if>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="section highlightedCarousel">
     <div class="container">
         <div id="paragraph1" class="row">
+            <h1>Highlighted:</h1>
             <div id="owl-demo" class="owl-carousel owl-theme">
                 <c:choose>
                     <c:when test="${highlighted.size()>= 1}">
@@ -106,95 +189,6 @@
                         </c:forEach>
                     </c:when>
                 </c:choose>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class='section'>
-    <div class='container'>
-        <div class='row'>
-            <h1>Courses:</h1>
-        </div>
-    </div>
-    <c:choose>
-        <c:when test="${pairs.size()>= 1}">
-            <c:forEach var="i" begin="0" end="${pairs.size()-1}">
-                <c:if test="${i%3==0}">
-                    <div class='container'>
-                    <div class='row'>
-                </c:if>
-                <div class='col-md-4'>
-                    <div style="margin-bottom: 15px">
-                        <img src="${pairs.get(i).getValue()}"
-                             class='img-responsive'>
-                        <h2>${pairs.get(i).getKey().title}</h2>
-                        <p>${pairs.get(i).getKey().description}</p>
-                        <a href='${pageContext.request.contextPath}/course/${pairs.get(i).getKey().idcourse}'>
-                            <button class='btn btn-primary'>More info</button>
-                        </a>
-                    </div>
-                </div>
-                <c:if test="${(i%3==2&&i>0)||(i==pairs.size()-1)}">
-                    </div>
-                    </div>
-                </c:if>
-            </c:forEach>
-        </c:when>
-    </c:choose>
-    <div class='container'>
-        <div class='row'>
-            <div class="col-md-6 text-left">
-                <c:if test="${(page-1)>=0}">
-                    <a href="${pageContext.request.contextPath}/course/search?phrase=${phrase}&page=${page-1}"><-- Previous page</a>
-                </c:if>
-            </div>
-            <div class="col-md-6 text-right">
-                <c:if test="${!endOfList}">
-                    <a href="${pageContext.request.contextPath}/course/search?phrase=${phrase}&page=${page+1}">Next page --></a>
-                </c:if>
-            </div>
-        </div>
-    </div>
-</div>
-<hr>
-
-
-<div class='section' ng-hide="${advanceSearch}">
-    <div class='container'>
-        <div class='row'>
-            <h1>Rooms:</h1>
-        </div>
-    </div>
-    <c:choose>
-        <c:when test="${rooms.size()>=1}">
-            <c:forEach var="i" begin="0" end="${rooms.size()-1}">
-                <c:if test="${i%3==0}">
-                    <div class='container'>
-                    <div class='row'>
-                </c:if>
-                <div class='col-md-4'>
-                    <div style="margin-bottom: 15px">
-                        <img src="${rooms.get(i).getValue()}"
-                             class='img-responsive'>
-                        <h2>${rooms.get(i).getKey().title}</h2>
-                        <p>${rooms.get(i).getKey().description}</p>
-                        <a href='${pageContext.request.contextPath}/room/${rooms.get(i).getKey().idroom}'>
-                            <button class='btn btn-primary'>More info</button>
-                        </a>
-                    </div>
-                </div>
-                <c:if test="${(i%3==2&&i>0)||(i==rooms.size()-1)}">
-                    </div>
-                    </div>
-                </c:if>
-            </c:forEach>
-        </c:when>
-    </c:choose>
-    <div class='container'>
-        <div class='row'>
-            <div class="col-md-11 text-right">
-                <a>Show more rooms--></a>
             </div>
         </div>
     </div>

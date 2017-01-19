@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                <form class="navbar-form navbar-left menuitems" role="search" action='${pageContext.request.contextPath}/course/search' method="GET">
+                <form class="navbar-form navbar-left menuitems" role="search" action='${pageContext.request.contextPath}/course/advanceSearch' method="GET">
                     <div class="form-group">
                         <input type="text" name="phrase" class="form-control" placeholder="Search courses and rooms">
                     </div>

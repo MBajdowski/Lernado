@@ -10,7 +10,7 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Course, Integer> {
     List<Course> findByTitleContainingAndIsPrivateFalse(String title);
 
-    List<Course> findByCategoryLikeAndLevelLikeAndTitleLikeAndIsPrivateFalse(String category, String level, String title);
+    List<Course> findByCategoryLikeAndLevelLikeAndTitleContainingAndIsPrivateFalse(String category, String level, String title);
 
     List<Course> findByHighlightedAndIsPrivateFalse(boolean highlighted);
 

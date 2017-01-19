@@ -3,12 +3,10 @@ package com.Lernado.controllers;
 import com.Lernado.beans.JmsMessage;
 import com.Lernado.beans.MaterialBean;
 import com.Lernado.beans.RoomCourseBean;
+import com.Lernado.beans.SearchBean;
 import com.Lernado.jms.JmsService;
 import com.Lernado.managers.*;
-import com.Lernado.model.Course;
-import com.Lernado.model.Lesson;
-import com.Lernado.model.Material;
-import com.Lernado.model.User;
+import com.Lernado.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,11 +39,13 @@ public class CourseController {
     @Autowired
     private MaterialRepository materialRepository;
     @Autowired
+    private RoomRepository roomRepository;
+    @Autowired
     private UserController userController;
     @Autowired
     private RoomController roomController;
 
-    private static int PAGE_SIZE=3;
+    private static int PAGE_SIZE=6;
 
 
     @RequestMapping("/wishlist")
@@ -84,79 +84,53 @@ public class CourseController {
         return showCoursePage(idCourse, model);
     }
 
-    @RequestMapping(value="/search", method = RequestMethod.GET)
-    public String search(@RequestParam(value = "page", required = false) String pageStr, String phrase, Model model) {
+    @RequestMapping(value="/advanceSearch", method = RequestMethod.GET)
+    public String advanceSearch(@RequestParam(value = "page", required = false) String pageStr,
+                                Model model, SearchBean sb) {
 
+        String category = sb.getCategory();
+        String level = sb.getLevel();
         List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();
-        List<AbstractMap.SimpleEntry> rooms = roomController.searchRooms(phrase);
         List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
-
-        List<Course> courses = courseRepository.findByTitleContainingAndIsPrivateFalse(phrase);
         List<Course> highlightedCourses = courseRepository.findByHighlightedAndIsPrivateFalse(true);
-
-
         int page = (pageStr==null || pageStr.equals(""))?0:Integer.parseInt(pageStr);
-        List<Course> pagedCoursess = getPagedCourses(courses, page, model);
 
-        for(Course course : pagedCoursess){
-            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
-            pairs.add(new AbstractMap.SimpleEntry(course, base64));
+        if(!sb.isRoomChecked()) {
+            if (StringUtils.isEmpty(sb.getCategory()) || sb.getCategory().equals("Any") || sb.getCategory()==null) {
+                sb.setCategory("Any");
+                category = "%";
+            }
+            if (StringUtils.isEmpty(sb.getLevel()) || sb.getLevel().equals("Any") || sb.getLevel()==null) {
+                sb.setLevel("Any");
+                level = "%";
+            }
+            List<Course> courses = courseRepository.findByCategoryLikeAndLevelLikeAndTitleContainingAndIsPrivateFalse(category, level, sb.getPhrase());
+            List<Course> pagedCourses = getPagedCourses(courses, page, model);
+
+            for(Course course : pagedCourses){
+                String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
+                pairs.add(new AbstractMap.SimpleEntry(course, base64));
+            }
+        }else{
+            List<Room> rooms = roomRepository.findByTitleContainingAndIsPrivateFalse(sb.getPhrase());
+            List<Room> pagedRooms = getPagedRooms(rooms, page, model);
+
+            for(Room room : pagedRooms) {
+                String base64 = "data:image/jpg;base64," + Base64.getEncoder().encodeToString(room.getPhotoBinary());
+                pairs.add(new AbstractMap.SimpleEntry(room, base64));
+            }
         }
+
         for(Course highlightedCourse : highlightedCourses){
             String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(highlightedCourse.getPhotoBinary());
             highlighted.add(new AbstractMap.SimpleEntry(highlightedCourse, base64));
         }
+
 
         model.addAttribute("page", page);
-        model.addAttribute("phrase", phrase);
+        model.addAttribute("searchBean", sb);
         model.addAttribute("pairs", pairs);
         model.addAttribute("highlighted", highlighted);
-        model.addAttribute("rooms", rooms);
-        model.addAttribute("advanceSearch", false);
-        return "searchPage";
-    }
-
-    @RequestMapping(value="/advanceSearch", method = RequestMethod.GET)
-    public String advanceSearch(Model model, String phrase, String category, String level) {
-        boolean ifAddRooms = true;
-        List<AbstractMap.SimpleEntry> pairs = new ArrayList<>();
-        List<AbstractMap.SimpleEntry> highlighted = new ArrayList<>();
-        List<AbstractMap.SimpleEntry> rooms = new ArrayList<>();
-        List<Course> courses;
-        List<Course> highlightedCourses = courseRepository.findByHighlightedAndIsPrivateFalse(true);
-        if(StringUtils.isEmpty(category)|| category.equals("Any")){
-            category ="%";
-        } else {
-            ifAddRooms = false;
-        }
-        if(StringUtils.isEmpty(level) || level.equals("Any")){
-            level = "%";
-        } else {
-            ifAddRooms = false;
-        }
-        if(ifAddRooms){
-            rooms = roomController.searchRooms(phrase);
-        }
-        if(StringUtils.isEmpty(phrase)){
-            phrase ="%";
-        } else {
-            phrase = "%" + phrase + "%";
-        }
-        courses = courseRepository.findByCategoryLikeAndLevelLikeAndTitleLikeAndIsPrivateFalse(category, level, phrase);
-        for(Course course : courses){
-            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(course.getPhotoBinary());
-            pairs.add(new AbstractMap.SimpleEntry(course, base64));
-        }
-        for(Course highlightedCourse : highlightedCourses){
-            String base64 = "data:image/jpg;base64,"+ Base64.getEncoder().encodeToString(highlightedCourse.getPhotoBinary());
-            highlighted.add(new AbstractMap.SimpleEntry(highlightedCourse, base64));
-        }
-        model.addAttribute("pairs", pairs);
-        model.addAttribute("highlighted", highlighted);
-        model.addAttribute("advanceSearch", !ifAddRooms);
-        if(ifAddRooms){
-            model.addAttribute("rooms", rooms);
-        }
         return "searchPage";
     }
 
@@ -402,6 +376,18 @@ public class CourseController {
             model.addAttribute("endOfList", true);
         }
         return allCourses.subList(from, to);
+    }
+
+    private List<Room> getPagedRooms(List<Room> allRooms, int page, Model model){
+        int from = (page)*PAGE_SIZE;
+        int to = (page+1)*PAGE_SIZE;
+        model.addAttribute("endOfList", false);
+
+        if (to>=allRooms.size()){
+            to=allRooms.size();
+            model.addAttribute("endOfList", true);
+        }
+        return allRooms.subList(from, to);
     }
 
     public List<Course> getPopularCourses(int userId){

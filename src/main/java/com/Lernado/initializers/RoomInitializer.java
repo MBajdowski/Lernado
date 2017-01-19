@@ -37,6 +37,18 @@ public class RoomInitializer {
                         .description("Description2")
                         .photoBinary(photoBinary)
                         .isPrivate(false)
+                        .build(),
+                Room.builder().title("Room3")
+                        .admin(adminRepository.getOne(1))
+                        .description("Description1")
+                        .photoBinary(photoBinary)
+                        .isPrivate(false)
+                        .build(),
+                Room.builder().title("Room4")
+                        .admin(adminRepository.getOne(1))
+                        .description("Description1")
+                        .photoBinary(photoBinary)
+                        .isPrivate(false)
                         .build()
         ).forEach(room -> roomRepository.save(room));
     }
