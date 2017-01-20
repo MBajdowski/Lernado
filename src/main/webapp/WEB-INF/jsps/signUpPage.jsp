@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 
 <head>
@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/defaultStyles.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/SignUp.js"></script>
 </head>
 <body>
 <div class="cover" id="home">
@@ -23,9 +24,9 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right menuitems">
                     <li class="active">
-                        <a href="/homePage">Home</a>
+                        <a href="/">Home</a>
                     </li>
                     <li>
                         <a href="#AboutUsSection">About Us</a>
@@ -34,7 +35,7 @@
                         <a href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a href="#">Log in</a>
+                        <a href="/">Log in</a>
                     </li>
                 </ul>
             </div>
@@ -49,23 +50,23 @@
                         <a href="#" class="logo"><i class="fa fa-graduation-cap text-muted text-info"></i></a>Lernado</h1>
                     <p>Best e-learning portal EVER!</p>
                 </div>
-                <form class="form-horizontal text-right" role="form" action="/user/create" method="POST">
+                <form:form class="form-horizontal text-right" role="form" action="/user/create" method="POST" commandName="previousUser" onsubmit="return validateForm()">
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <label for="name" class="control-label">First name</label>
+                            <label for="firstName" class="control-label">First name</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control input-sm" id="name" name="name" placeholder="First name"
-                                   required="" style="max-width: 550px">
+                            <form:input type="text" class="form-control input-sm" id="firstName" name="firstName" placeholder="First name"
+                                   required="" style="max-width: 550px" path="firstName"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <label for="surname" class="control-label">Last name</label>
+                            <label for="lastName" class="control-label">Last name</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control input-sm" id="surname" name="surname" placeholder="Last name"
-                                   required="" style="max-width: 550px">
+                            <form:input type="text" class="form-control input-sm" id="lastName" name="lastName" placeholder="Last name"
+                                   required="" style="max-width: 550px" path="lastName"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -73,8 +74,9 @@
                             <label for="email" class="control-label">Email</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                                   required="" style="max-width: 550px">
+                            <c:if test="${emailInUse==true}"><div class="errorMessage">This email is already in use :(</div></c:if>
+                            <form:input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                   required="" style="max-width: 550px" path="email"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -105,27 +107,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <script>
-                                function checkPass(){
-                                    var pass1 = document.getElementById("inputPassword3");
-                                    var pass2 = document.getElementById("inputPassword3");
-                                    var button = document.getElementById("submitButton");
-                                    if(pass1.value!=pass2.value){
-                                        pass2.style.backgroudColor="red";
-                                        $('#submitButton').prop('disabled', true);
-                                    }
-                                    else{
-                                        pass2.style.backgroudColor="white";
-                                        $('#submitButton').removeAttr('disabled');
-                                    }
-                                }
-                            </script>
-                            <button id="submitButton" type="submit" class="btn btn-default btn-lg">Sign Up</button>
-                            <button type="reset" class="btn btn-default btn-lg">Clear form</button>
+                        <div class="col-sm-offset-4 col-sm-5">
+                            <button id="submitButton" type="submit" class="btn btn-default btn-md">Sign Up</button>
+                            <button type="reset" class="btn btn-default btn-md">Clear form</button>
                         </div>
                     </div>
-                </form>
+                </form:form>
                 <br>
                 <br>
             </div>

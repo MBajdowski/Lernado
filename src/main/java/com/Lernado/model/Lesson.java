@@ -17,13 +17,14 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idlesson;
-    @NonNull
     private String title;
     private Integer number;
-    @OneToMany(mappedBy = "lessonByLessonIdlesson")
-    private List<Material> materialsByIdlesson;
     @ManyToOne
-    @JoinColumn(name = "course_idcourse", referencedColumnName = "idcourse")
-    private Course courseByCourseIdcourse;
-
+    @JoinColumn(name = "CourseId", referencedColumnName = "idcourse", nullable = false)
+    private Course course;
+    @ManyToMany
+    @JoinTable(name = "lesson_has_material", joinColumns =
+    @JoinColumn(name = "lesson_idlesson", referencedColumnName = "idlesson", nullable = false), inverseJoinColumns =
+    @JoinColumn(name = "material_idmaterial", referencedColumnName = "idmaterial", nullable = false))
+    private List<Material> materials;
 }

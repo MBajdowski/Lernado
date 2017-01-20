@@ -11,6 +11,7 @@
       <mapping class="com.Lernado.model.Lesson"/>
       <mapping class="com.Lernado.model.Material"/>
       <mapping class="com.Lernado.model.Room"/>
+      <mapping class="com.Lernado.model.Admin"/>
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>

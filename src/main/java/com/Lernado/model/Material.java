@@ -3,6 +3,7 @@ package com.Lernado.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,16 +17,16 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idmaterial;
-    @NonNull
     private String title;
     private String type;
     private String description;
     private String path;
     @ManyToOne
-    @JoinColumn(name = "room_idroom", referencedColumnName = "idroom")
-    private Room roomByRoomIdroom;
-    @ManyToOne
-    @JoinColumn(name = "lesson_idlesson", referencedColumnName = "idlesson")
-    private Lesson lessonByLessonIdlesson;
+    @JoinColumn(name = "CreatorId", referencedColumnName = "iduser", nullable = false)
+    private User creator;
+    @ManyToMany(mappedBy = "materials")
+    private List<Room> rooms;
+    @ManyToMany(mappedBy = "materials")
+    private List<Lesson> lessons;
 
 }

@@ -6825,5 +6825,47 @@ body {
 }
 .highlightedCarousel{
     background-color:#ebebe0;
+    color: #6D4C41;
+}
+.bottom-align {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
+.errorMessage{
+    color: #264d00;
+    text-align: left;
+    font-weight: bold;
+}
+.roomBorder{
+    background-color: white;
+    border: ridge #BDBDBD;
+    border-radius: 5px;
+}
+.roomPanelBorder{
+    background-color: white;
+    border: ridge #BDBDBD;
+    border-radius: 3px;
+}
+
+.customMessage{
+    margin: 5px;
+    background-color: #e1e1e1;
+    border: solid black 1px;
+    border-radius: 3px;
+}
+
+.customOwnMessage{
+    margin: 5px;
+    background-color: #B7DEE5;
+    border: solid black 1px;
+    border-radius: 3px;
+}
+.margin10{
+    margin: 10px;
+}
+.fillScreen{
+    min-height: 30%;
+    height: 30%;
+}
