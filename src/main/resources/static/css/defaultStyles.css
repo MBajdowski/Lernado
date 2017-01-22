@@ -6797,11 +6797,11 @@ body {
     padding: 20px;
 }
 .h3 {
-    background: url(http://www.discovertextures.com/wp-content/uploads/2015/11/wood-texture0020-e1447163908131-1024x765.jpg);
+    background: url(http://localhost:8080/images/wood-texture.jpg);
     color: #424242;
 }
 .footer {
-    background: url(http://www.discovertextures.com/wp-content/uploads/2015/11/wood-texture0020-e1447163908131-1024x765.jpg);
+    background: url(http://localhost:8080/images/wood-texture.jpg);
     color: white;
 }
 .logo {

@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="cover-image" style="background-image : url('http://www.discovertextures.com/wp-content/uploads/2015/11/wood-texture0020-e1447163908131-1024x765.jpg')"></div>
+    <div class="cover-image" style="background-image : url('${pageContext.request.contextPath}/images/wood-texture.jpg')"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-11 text-center">
@@ -101,7 +101,7 @@
                 </p>
             </div>
             <div class="col-md-6">
-                <img src="http://api.ning.com/files/vZBStZ816j2JHx2uH-kfnBkra830sYFE0uFYvBZDeQzrVqJVfOxghUAUXUo9MK2WPKU8-0OvITo8Uz76NsssFIcBi*-3wq7E/elearning.jpg"
+                <img src="${pageContext.request.contextPath}/images/elearning.jpg"
                      class="img-responsive">
             </div>
         </div>
@@ -124,7 +124,7 @@
                     what are you waiting for? Sign up today and start learning with Lernado!</p>
             </div>
             <div class="col-md-6">
-                <img src="http://www-static.se-mc.com/blogs.dir/0/files/2015/01/xperia-z4-tablet-get-it-all-done-video-overlay-e6bf561b637c1e7ba0d9f3568ef5a0af-940.jpg"
+                <img src="${pageContext.request.contextPath}/images/xperia-z4.jpg"
                      class="img-responsive">
             </div>
         </div>
@@ -138,7 +138,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="http://www.gouspa.org/wp-content/uploads/2014/02/shutterstock_158327579-2.jpg"
+                                <img src="${pageContext.request.contextPath}/images/shutterstock.jpg"
                                      class="img-responsive">
                                 <h2>Contact</h2>
                                 <p>You can conntact us either by email or by phone. In case of any questions
@@ -150,7 +150,7 @@
                                 </p>
                             </div>
                             <div class="col-md-4">
-                                <img src="http://cdn.interkursy.pl/templates/ik/images/front/2/left.jpg"
+                                <img src="${pageContext.request.contextPath}/images/left.jpg"
                                      class="img-responsive">
                                 <h2>Our Courses</h2>
                                 <p>Our courses as so various as people using our portal. They differ in categories
@@ -158,7 +158,7 @@
                                     to learn.</p>
                             </div>
                             <div class="col-md-4">
-                                <img src="http://www.creativecertificates.com/wp-content/uploads/2014/03/certificate-of-achievement-template.jpg"
+                                <img src="${pageContext.request.contextPath}/images/certificate.jpg"
                                      class="img-responsive">
                                 <h2>Certificates</h2>
                                 <p contenteditable="true">All of courses run on our website &nbsp;are prepared by proffesional teachers,

@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface CourseRepository extends JpaRepository<Course, Integer> {
 
+    Course findOneByTitle(String title);
+
     List<Course> findByCategoryLikeAndLevelLikeAndTitleContainingAndIsPrivateFalseAndValidatedTrue(String category, String level, String title);
 
     List<Course> findByHighlightedAndIsPrivateFalseAndValidatedTrue(boolean highlighted);

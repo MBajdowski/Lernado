@@ -28,65 +28,51 @@ public class CourseInitializer {
         byte[] photoBinary = Files.readAllBytes(Paths.get(file.toURI()));
 
         List<Course> courses = new ArrayList<>();
-        for(int i=0;i<1000;i++){
-            courses.add(Course.builder().title("LoopCourse"+i)
+        for(int i=0;i<100;i++){
+            courses.add(Course.builder().title("Course"+i)
                     .creator(userRepository.getByIduser(1))
                     .admin(adminRepository.getOne(1))
                     .description("Loop description"+i)
                     .category("Programming")
                     .level("Medium")
+                    .validated(true)
                     .photoBinary(photoBinary)
                     .price((double)i)
                     .build());
         }
-
-        Stream.of(courses
-                /*Course.builder().title("Title1")
+        Stream.of(courses).forEach(x -> courseRepository.save(x));
+        Stream.of(Course.builder().title("The basics of C#")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
-                        .description("Description1")
+                        .description("Here you will learn only the basics of C#")
                         .category("Programming")
-                        .level("Medium")
-                        .photoBinary(photoBinary)
-                        .price(100.0)
-                        .build(),
-                Course.builder().title("Title2")
-                        .creator(userRepository.getByIduser(1))
-                        .admin(adminRepository.getOne(1))
-                        .description("Description2")
-                        .category("Telecommunication")
-                        .level("Hard")
-                        .photoBinary(photoBinary)
-                        .price(90.0)
-                        .build(),
-                Course.builder().title("Title3")
-                        .creator(userRepository.getByIduser(1))
-                        .admin(adminRepository.getOne(1))
-                        .description("Description3")
-                        .category("Data Bases")
                         .level("Easy")
                         .photoBinary(photoBinary)
-                        .price(80.0)
-                        .build(),
-                Course.builder().title("Title4")
-                        .creator(userRepository.getByIduser(1))
-                        .admin(adminRepository.getOne(1))
-                        .description("Description4")
-                        .category("Computer Networks")
-                        .level("Medium")
-                        .photoBinary(photoBinary)
-                        .price(110.0)
+                        .price(45.0)
                         .highlighted(true)
+                        .validated(true)
                         .build(),
-                Course.builder().title("Title5")
+                Course.builder().title("Digital Signal Processing")
                         .creator(userRepository.getByIduser(1))
                         .admin(adminRepository.getOne(1))
-                        .description("Description5")
-                        .category("Design")
-                        .level("Easy")
+                        .description("How to design different filters")
+                        .category("Telecommunication")
+                        .level("Medium")
+                        .photoBinary(photoBinary)
+                        .price(78.0)
+                        .highlighted(true)
+                        .validated(true)
+                        .build(),
+                Course.builder().title("Advance database normalization")
+                        .creator(userRepository.getByIduser(1))
+                        .admin(adminRepository.getOne(1))
+                        .description("You will learn advance ways of DB normalization")
+                        .category("Data Bases")
+                        .level("Hard")
                         .photoBinary(photoBinary)
                         .price(120.0)
                         .highlighted(true)
+                        .validated(true)
                         .build(),
                 Course.builder().title("Breaking internet connection")
                         .creator(userRepository.getByIduser(2))
@@ -97,17 +83,19 @@ public class CourseInitializer {
                         .photoBinary(photoBinary)
                         .price(120.0)
                         .highlighted(true)
+                        .validated(true)
                         .build(),
-                Course.builder().title("Asia's Course")
+                Course.builder().title("Decoupage")
                         .creator(userRepository.getByIduser(2))
                         .admin(adminRepository.getOne(1))
-                        .description("Description of Asia's Course")
-                        .category("Telecommunication")
-                        .level("Hard")
+                        .description("How to make simple decoupage decoration")
+                        .category("Design")
+                        .level("Easy")
                         .photoBinary(photoBinary)
-                        .price(99.99)
-                        .highlighted(false)
-                        .build()*/
+                        .price(3.99)
+                        .highlighted(true)
+                        .validated(true)
+                        .build()
         ).forEach(course -> courseRepository.save(course));
     }
 }

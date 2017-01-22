@@ -126,6 +126,7 @@
             </div>
 
     </div>
+    <div class="fillScreen"></div>
 </div>
 
 <div class="modal fade" id="myDetailsModal" role="dialog">
