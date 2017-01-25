@@ -27,13 +27,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <img src="${currentPhoto}" class="img-responsive logo">
-                        <div class="pull-right">
-                            <form ng-show="creator" method="POST" enctype="multipart/form-data"
-                                  action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/updatePhoto">
-                                <label  for="photobinary" class="btn">Update photo<i class="fa fa-2x fa-picture-o fa-fw"></i></label>
-                                <input type="file" id="photobinary" name="photoBinary" onchange="this.form.submit();" style="display: none">
-                            </form>
-                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 pull-right">
+                        <form ng-show="creator" method="POST" enctype="multipart/form-data"
+                             action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/updatePhoto">
+                            <label  for="photobinary" class="btn">Update photo<i class="fa fa-2x fa-picture-o fa-fw"></i></label>
+                            <input type="file" id="photobinary" name="photoBinary" onchange="this.form.submit();" style="display: none">
+                        </form>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn" ng-show="creator" data-toggle="modal" data-target="#myStatisticsModal">Statistics<i class="fa fa-2x fa-line-chart fa-fw"></i></label>
                     </div>
                 </div>
                 <div class="row">
@@ -127,6 +132,24 @@
 
     </div>
     <div class="fillScreen"></div>
+</div>
+
+<div class="modal fade" id="myStatisticsModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Course statistics:</h3>
+            </div>
+            <div class="modal-body">
+                <h4>No. of enrolled users: 12</h4>
+                <h4>No. of students in wishlist: 123 </h4>
+                <h4>Earnings from this course: 222$ </h4>
+                <h4>Popular category: Programming </h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="myDetailsModal" role="dialog">
