@@ -142,10 +142,10 @@
                 <h3 class="modal-title">Course statistics:</h3>
             </div>
             <div class="modal-body">
-                <h4>No. of enrolled users: 12</h4>
-                <h4>No. of students in wishlist: 123 </h4>
-                <h4>Earnings from this course: 222$ </h4>
-                <h4>Popular category: Programming </h4>
+                <h4><i class="fa fa-1x fa-fw fa-users"></i>No. of enrolled users: ${statistics.nrOfEnrolled} </h4>
+                <h4><i class="fa fa-1x fa-fw fa-heart"></i>No. of students in wishlist: ${statistics.nrOfWished} </h4>
+                <h4><i class="fa fa-1x fa-fw fa-money"></i>Earnings from this course: ${statistics.earned}$ </h4>
+                <h4><i class="fa fa-1x fa-fw fa-thumbs-o-up"></i>Popular category among enrolled: ${statistics.popularAmongEnrolled} </h4>
                 </div>
             </div>
         </div>

@@ -37,6 +37,7 @@ public class CourseInitializer {
                     .level("Medium")
                     .validated(true)
                     .photoBinary(photoBinary)
+                    .validated(true)
                     .price((double)i)
                     .build());
         }

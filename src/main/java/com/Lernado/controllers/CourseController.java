@@ -1,9 +1,6 @@
 package com.Lernado.controllers;
 
-import com.Lernado.beans.JmsMessage;
-import com.Lernado.beans.MaterialBean;
-import com.Lernado.beans.RoomCourseBean;
-import com.Lernado.beans.SearchBean;
+import com.Lernado.beans.*;
 import com.Lernado.jms.JmsService;
 import com.Lernado.managers.*;
 import com.Lernado.model.*;
@@ -147,6 +144,12 @@ public class CourseController {
         model.addAttribute("userMaterials", userMaterials);
 
         if(currentUser.getAttends().contains(currentCourse)||currentUser.getCreatedCourses().contains(currentCourse)){
+            StatisticBean sb = new StatisticBean();
+            sb.setNrOfEnrolled(currentCourse.getIsAttendedBy()==null?0:currentCourse.getIsAttendedBy().size());
+            sb.setEarned((float)(currentCourse.getPrice()*(currentCourse.getIsAttendedBy()==null?0:currentCourse.getIsAttendedBy().size())));
+            sb.setNrOfWished(currentCourse.getIsWishedBy()==null?0:currentCourse.getIsWishedBy().size());
+            sb.setPopularAmongEnrolled(courseRepository.getPopularCategoryAmongEnrolled(currentCourse.getIdcourse()));
+            model.addAttribute("statistics", sb);
             return "coursePage";
         }
 

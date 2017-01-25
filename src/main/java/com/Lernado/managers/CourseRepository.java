@@ -16,7 +16,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     List<Course> findByHighlightedAndIsPrivateFalseAndValidatedTrue(boolean highlighted);
 
     @Query(value = "SELECT * FROM Course a WHERE a.idcourse IN " +
-            "(SELECT at.course_idcourse FROM user_attends_course at WHERE at.user_iduser != :userId GROUP BY at.course_idcourse ORDER BY COUNT(DISTINCT at.user_iduser)) " +
+            "(SELECT at.course_idcourse FROM user_attends_course at WHERE at.user_iduser != :userId GROUP BY at.course_idcourse ORDER BY COUNT(DISTINCT at.user_iduser) DESC) " +
             "and a.creator_id != :userId " +
             "and a.idcourse NOT IN "+
             "(SELECT at.course_idcourse FROM user_attends_course at WHERE at.user_iduser = :userId) "+
@@ -30,7 +30,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
             "(SELECT at.course_idcourse FROM user_attends_course at " +
             "JOIN Course c on at.course_idcourse = c.idcourse " +
             "WHERE at.user_iduser != :userId AND c.category = :category " +
-            "GROUP BY at.course_idcourse ORDER BY COUNT(DISTINCT at.user_iduser)) " +
+            "GROUP BY at.course_idcourse ORDER BY COUNT(DISTINCT at.user_iduser) DESC) " +
             "AND a.idcourse NOT IN "+
             "(SELECT at.course_idcourse FROM user_attends_course at WHERE at.user_iduser = :userId) "+
             "and a.creator_id != :userId " +
@@ -43,8 +43,16 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "SELECT c.category FROM user_attends_course at " +
             "JOIN Course c on at.course_idcourse = c.idcourse " +
             "WHERE at.user_iduser = :userId " +
-            "GROUP BY c.category ORDER BY COUNT(DISTINCT at.user_iduser) " +
+            "GROUP BY c.category ORDER BY COUNT(DISTINCT at.user_iduser) DESC " +
             "LIMIT 1",
             nativeQuery = true)
     String findMostFrequentCategory(@Param("userId") int userId);
+
+    @Query(value = "SELECT c.category FROM user_attends_course at " +
+            "JOIN Course c on at.course_idcourse = c.idcourse " +
+            "WHERE at.course_idcourse = :courseId " +
+            "GROUP BY c.category ORDER BY COUNT(at.user_iduser) DESC " +
+            "LIMIT 1",
+            nativeQuery = true)
+    String getPopularCategoryAmongEnrolled(@Param("courseId") int courseId);
 }
