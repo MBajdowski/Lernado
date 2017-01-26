@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h1 class="text-center">${currentCourse.getTitle()}
-                            <a ng-show="creator" data-toggle="modal" data-target="#myDetailsModal"><i class="fa fa-1x fa-edit fa-fw"></i></a></h1>
+                            <a ng-show="creator && ${statistics.nrOfEnrolled==0}" data-toggle="modal" data-target="#myDetailsModal"><i class="fa fa-1x fa-edit fa-fw"></i></a></h1>
                         <p class="text-center">${currentCourse.getDescription()}</p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-1">
-                                            <a ng-show="creator" href="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/${currentCourse.getLessons().get(i).idlesson}/deleteLesson">
+                                            <a ng-show="creator && ${statistics.nrOfEnrolled==0}" href="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/${currentCourse.getLessons().get(i).idlesson}/deleteLesson">
                                                  <i class="fa fa-3x fa-fw fa-trash-o pull-right "></i></a>
                                         </div>
                                         <div class="col-md-10">
@@ -81,7 +81,7 @@
                                                 - ${currentCourse.getLessons().get(i).getTitle()}</h1>
                                         </div>
                                         <div class="col-md-1">
-                                            <a ng-show="creator" data-toggle="modal" data-target="#lessonNameModal${i}"><i class="fa fa-3x fa-edit fa-fw"></i></a>
+                                            <a ng-show="creator && ${statistics.nrOfEnrolled==0}" data-toggle="modal" data-target="#lessonNameModal${i}"><i class="fa fa-3x fa-edit fa-fw"></i></a>
                                         </div>
                                         <table class="table">
                                             <tbody>
@@ -98,7 +98,7 @@
                                                             </td>
                                                             <td>
                                                                 <a href="${pageContext.request.contextPath}/course/${currentCourse.getLessons().get(i).idlesson}/${currentCourse.getLessons().get(i).getMaterials().get(j).idmaterial}/removeMaterial">
-                                                                    <i ng-show="creator"
+                                                                    <i ng-show="creator && ${statistics.nrOfEnrolled==0}"
                                                                        class="-circle-o fa fa-2x fa-close fa-fw pull-right"></i>
                                                                 </a>
                                                             </td>

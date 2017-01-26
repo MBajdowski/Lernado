@@ -30,7 +30,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
             "(SELECT at.course_idcourse FROM user_attends_course at " +
             "JOIN Course c on at.course_idcourse = c.idcourse " +
             "WHERE at.user_iduser != :userId AND c.category = :category " +
-            "GROUP BY at.course_idcourse ORDER BY COUNT(DISTINCT at.user_iduser) DESC) " +
+            "GROUP BY at.course_idcourse ORDER BY COUNT(at.user_iduser) DESC) " +
             "AND a.idcourse NOT IN "+
             "(SELECT at.course_idcourse FROM user_attends_course at WHERE at.user_iduser = :userId) "+
             "and a.creator_id != :userId " +
@@ -43,7 +43,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "SELECT c.category FROM user_attends_course at " +
             "JOIN Course c on at.course_idcourse = c.idcourse " +
             "WHERE at.user_iduser = :userId " +
-            "GROUP BY c.category ORDER BY COUNT(DISTINCT at.user_iduser) DESC " +
+            "GROUP BY c.category ORDER BY COUNT(at.user_iduser) DESC " +
             "LIMIT 1",
             nativeQuery = true)
     String findMostFrequentCategory(@Param("userId") int userId);
@@ -55,4 +55,14 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
             "LIMIT 1",
             nativeQuery = true)
     String getPopularCategoryAmongEnrolled(@Param("courseId") int courseId);
+
+    @Query(value = "SELECT c.category FROM course c " +
+            "JOIN user_attends_course at ON c.idcourse = at.course_idcourse " +
+            "JOIN user u ON at.user_iduser = u.iduser " +
+            "JOIN user_has_room ur ON u.iduser = ur.user_iduser " +
+            "WHERE ur.room_idroom = :roomId " +
+            "GROUP BY c.category " +
+            "ORDER BY COUNT(ur.user_iduser) DESC " +
+            "LIMIT 1", nativeQuery = true)
+    String getPopularCategoryInRoom(@Param("roomId") int roomId);
 }

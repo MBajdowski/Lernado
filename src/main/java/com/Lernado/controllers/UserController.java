@@ -86,6 +86,9 @@ public class UserController {
     public String editProfile(User user, MultipartFile photo, Model model){
         User existingUser = getCurrentUser();
         try {
+            if(userRepository.getByEmail(user.getEmail())!=null){
+                throw new Exception();
+            }
             existingUser.setFirstName(user.getFirstName());
             existingUser.setLastName(user.getLastName());
             existingUser.setEmail(user.getEmail());

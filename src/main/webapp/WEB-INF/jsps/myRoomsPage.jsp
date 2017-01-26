@@ -29,7 +29,8 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <h4 style="color:grey">You are not in any group</h4>
+                                <h4 style="color:grey">You are not in any room<br>
+                                <a href="${pageContext.request.contextPath}/course/advanceSearch?phrase=&category=Any&level=Any&roomChecked=true">Search for one!</a></h4>
                             </c:otherwise>
                         </c:choose>
                     </ul>

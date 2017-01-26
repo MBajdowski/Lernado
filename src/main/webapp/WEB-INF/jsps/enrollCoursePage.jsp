@@ -36,18 +36,22 @@
                             <c:choose>
                                 <c:when test="${inWishlist}">
                                     <div class="col-md-3 text-center">
-                                        <form id="myForm" class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/course/removeFromWishlist">
+                                        <form id="myForm" class="form-horizontal" role="form" method="GET"
+                                              action="${pageContext.request.contextPath}/course/removeFromWishlist">
                                             <input type="hidden" name="idCourse" value="${currentCourse.idcourse}">
-                                            <a onclick="document.getElementById('myForm').submit();"><i class="fa fa-3x fa-fw fa-heart" style="color: red"></i></a>
+                                            <a onclick="document.getElementById('myForm').submit();"><i
+                                                    class="fa fa-3x fa-fw fa-heart" style="color: red"></i></a>
                                         </form>
                                         <h4>Remove from Wishlist</h4>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
                                     <div class="col-md-3 text-center">
-                                        <form id="myForm" class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/course/addToWishlist">
+                                        <form id="myForm" class="form-horizontal" role="form" method="GET"
+                                              action="${pageContext.request.contextPath}/course/addToWishlist">
                                             <input type="hidden" name="idCourse" value="${currentCourse.idcourse}">
-                                            <a onclick="document.getElementById('myForm').submit();"><i class="fa fa-3x fa-fw fa-heart"></i></a>
+                                            <a onclick="document.getElementById('myForm').submit();"><i
+                                                    class="fa fa-3x fa-fw fa-heart"></i></a>
                                         </form>
                                         <h4>Add to Wishlist</h4>
                                     </div>
@@ -55,7 +59,8 @@
                             </c:choose>
                         </div>
                         <div class="row">
-                            <form class="form-horizontal" role="form" method="POST" action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/enroll">
+                            <form class="form-horizontal" role="form" method="POST"
+                                  action="${pageContext.request.contextPath}/course/${currentCourse.idcourse}/enroll">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-lg btn-success">Enroll for the course for
                                         ${currentCourse.price}
@@ -95,6 +100,20 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <c:if test="${currentCourse.getLessons().size()>0}">
+                        <h2>List of lessons:</h2>
+                        <ul>
+                        <c:forEach var="i" begin="0" end="${currentCourse.getLessons().size()-1}">
+                            <h3><li>Lesson ${currentCourse.getLessons().get(i).getNumber()}
+                                - ${currentCourse.getLessons().get(i).getTitle()}</li></h3>
+                        </c:forEach>
+                        </ul>
+                    </c:if>
                 </div>
             </div>
         </div>

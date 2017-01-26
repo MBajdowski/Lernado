@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="cover-image" style="background-image : url('http://www.discovertextures.com/wp-content/uploads/2015/11/wood-texture0020-e1447163908131-1024x765.jpg')"></div>
+    <div class="cover-image" style="background-image : url('${pageContext.request.contextPath}/images/wood-texture.jpg')"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">

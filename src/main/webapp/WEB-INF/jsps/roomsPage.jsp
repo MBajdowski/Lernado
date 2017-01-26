@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -29,15 +28,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <img src="${currentRoomPhoto}" class="img-responsive logo">
-                        <div class="pull-right">
-                            <form ng-show="${inRoom}" method="POST" enctype="multipart/form-data"
-                                  action="${pageContext.request.contextPath}/room/${currentRoom.idroom}/updatePhoto">
-                                <label for="photobinary" class="btn">Update photo<i
-                                        class="fa fa-2x fa-picture-o fa-fw"></i></label>
-                                <input type="file" id="photobinary" name="photoBinary" onchange="this.form.submit();"
-                                       style="display: none">
-                            </form>
-                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 pull-right">
+                        <form ng-show="${inRoom}" method="POST" enctype="multipart/form-data"
+                              action="${pageContext.request.contextPath}/room/${currentRoom.idroom}/updatePhoto">
+                            <label for="photobinary" class="btn">Update photo<i
+                                    class="fa fa-2x fa-picture-o fa-fw"></i></label>
+                            <input type="file" id="photobinary" name="photoBinary" onchange="this.form.submit();"
+                                   style="display: none">
+                        </form>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="btn" ng-show="${inRoom}" data-toggle="modal" data-target="#myStatisticsModal">Statistics<i class="fa fa-2x fa-line-chart fa-fw"></i></label>
                     </div>
                 </div>
                 <div class="row">
@@ -79,30 +83,30 @@
 
             <jsp:include page="common/leftPanel.jsp"></jsp:include>
 
-                    <c:if test="${inRoom}">
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
+            <c:if test="${inRoom}">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
                         <div class="col-md-10 roomBorder">
-                                <form method="POST" enctype="multipart/form-data"
-                                      action="${pageContext.request.contextPath}/room/upload">
-                                    <div class="margin10">
-                                        <p>Write your post here:
-                                            <input id="roomFile" name="file" type="file" value="Add new material">
-                                            <a data-toggle="modal" data-target="#myModal">Add existing material<i
-                                                    class="fa fa-paperclip" aria-hidden="true"></i></a>
-                                        </p>
-                                        <input name="description" type="text" placeholder="Your post...">
-                                        <input name="idlesson" type="hidden" value="${currentRoom.idroom}">
-                                        <button class='btn btn-primary' type="submit"/>
-                                        Send</button>
-                                    </div>
-                                </form>
-                            </div>
+                            <form method="POST" enctype="multipart/form-data"
+                                  action="${pageContext.request.contextPath}/room/upload">
+                                <div class="margin10">
+                                    <p>Write your post here:
+                                        <input id="roomFile" name="file" type="file" value="Add new material">
+                                        <a data-toggle="modal" data-target="#myModal">Add existing material<i
+                                                class="fa fa-paperclip" aria-hidden="true"></i></a>
+                                    </p>
+                                    <input name="description" type="text" placeholder="Your post...">
+                                    <input name="idlesson" type="hidden" value="${currentRoom.idroom}">
+                                    <button class='btn btn-primary' type="submit"/>
+                                    Send</button>
                                 </div>
+                            </form>
                         </div>
-                    </c:if>
-                    <br>
-                    <br>
+                    </div>
+                </div>
+            </c:if>
+            <br>
+            <br>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <c:choose>
@@ -116,8 +120,14 @@
                                                 <img src="${materials.get(i).getValue()}"
                                                      class="img-responsive img-circle">
                                             </div>
-                                            <div class="col-md-10 margin10">
+                                            <div class="col-md-8 margin10">
                                                 <h3>${materials.get(i).getKey().getCreator().firstName} ${materials.get(i).getKey().getCreator().lastName}</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="${pageContext.request.contextPath}/room/${currentRoom.idroom}/${materials.get(i).getKey().idmaterial}/removeMaterial">
+                                                <i ng-show="${inRoom} && (${materials.get(i).getKey().getCreator().iduser}==<sec:authentication property="principal.Id"/>)"
+                                                   class="-circle-o fa fa-2x fa-close fa-fw pull-right"></i>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -140,8 +150,8 @@
                             </c:forEach>
                         </c:when>
                     </c:choose>
-                    </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
@@ -225,6 +235,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="myStatisticsModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Room statistics:</h3>
+            </div>
+            <div class="modal-body">
+                <h4><i class="fa fa-1x fa-fw fa-users"></i>No. of users: ${statistics.nrOfEnrolled} </h4>
+                <h4><i class="fa fa-1x fa-fw fa-comments-o"></i>No. of messages: ${statistics.nrOfMessages} </h4>
+                <h4><i class="fa fa-1x fa-fw fa-thumbs-o-up"></i>Popular category among users: ${statistics.popularAmongEnrolled} </h4>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 <jsp:include page="common/footer.jsp"></jsp:include>
 </body>
 

@@ -2,10 +2,8 @@ package com.Lernado.controllers;
 
 import com.Lernado.beans.MaterialBean;
 import com.Lernado.beans.RoomCourseBean;
-import com.Lernado.managers.AdminRepository;
-import com.Lernado.managers.MaterialRepository;
-import com.Lernado.managers.RoomRepository;
-import com.Lernado.managers.UserRepository;
+import com.Lernado.beans.StatisticBean;
+import com.Lernado.managers.*;
 import com.Lernado.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +36,8 @@ public class RoomController {
     private UserController userController;
     @Autowired
     private MaterialRepository materialRepository;
+    @Autowired
+    private CourseRepository courseRepository;
 
 
     @RequestMapping("/myRooms")
@@ -81,9 +81,17 @@ public class RoomController {
         User currentUser = userController.getCurrentUser();
         model.addAttribute("userMaterials", currentUser.getMaterials());
         model.addAttribute("materials", materials);
+        model.addAttribute("inRoom", false);
         if(currentUser.getRooms().contains(currentRoom)){
             model.addAttribute("inRoom", true);
+            model.addAttribute("statistics", StatisticBean.builder()
+                    .nrOfEnrolled(currentRoom.getUsers()==null?0:currentRoom.getUsers().size())
+                    .nrOfMessages(currentRoom.getMaterials()==null?0:currentRoom.getMaterials().size())
+                    .popularAmongEnrolled(courseRepository.getPopularCategoryInRoom(currentRoom.getIdroom()))
+                    .build());
         }
+
+
         return "roomsPage";
     }
 
@@ -180,5 +188,17 @@ public class RoomController {
         currentRoom.setPhotoBinary(photoBinary.getBytes());
         roomRepository.save(currentRoom);
         return showRoomPage(idroom, model);
+    }
+
+    @RequestMapping("{idroom}/{idmaterial}/removeMaterial")
+    public String removeMaterial(@PathVariable("idroom") int roomId,@PathVariable("idmaterial") int materialId, Model model){
+        Room currentRoom = roomRepository.getOne(roomId);
+        Material material = materialRepository.getOne(materialId);
+        User currentUser = userController.getCurrentUser();
+        currentRoom.getMaterials().remove(material);
+        roomRepository.save(currentRoom);
+
+        model.addAttribute("userMaterials", currentUser.getMaterials());
+        return showRoomPage(roomId, model);
     }
 }

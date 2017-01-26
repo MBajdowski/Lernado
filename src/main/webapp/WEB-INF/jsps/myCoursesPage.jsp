@@ -31,7 +31,8 @@
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
-                                    <h4 style="color:grey">You don't attend for any course</h4>
+                                    <h4 style="color:grey">You don't attend for any course<br>
+                                    <a href="${pageContext.request.contextPath}/course/advanceSearch?phrase=">Search for one!</a></h4>
                                 </c:otherwise>
                             </c:choose>
                         </ul>
